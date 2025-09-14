@@ -1,37 +1,151 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Target, Mail, Phone, MapPin } from "lucide-react";
+import { Heart, Users, Target, Dumbbell, Handshake, BookOpen, Mail, Phone, MapPin, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Index = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Smooth scroll function with offset for sticky header
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Account for sticky header
+      const elementPosition = element.offsetTop - offset;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen">
+      {/* Navigation Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <nav className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="text-xl font-bold gradient-text">
+              Strength Over Struggle
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <button 
+                onClick={() => scrollToSection('hero')}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => scrollToSection('impact')}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Impact
+              </button>
+              <button 
+                onClick={() => scrollToSection('mission')}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Mission
+              </button>
+              <button 
+                onClick={() => scrollToSection('programs')}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Programs
+              </button>
+              <Button 
+                onClick={() => scrollToSection('donate')}
+                className="bg-white text-black hover:bg-white/90 rounded-full px-6"
+              >
+                Donate Now
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden text-foreground"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-white/10">
+              <div className="flex flex-col space-y-4 pt-4">
+                <button 
+                  onClick={() => scrollToSection('hero')}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Home
+                </button>
+                <button 
+                  onClick={() => scrollToSection('impact')}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Impact
+                </button>
+                <button 
+                  onClick={() => scrollToSection('mission')}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Mission
+                </button>
+                <button 
+                  onClick={() => scrollToSection('programs')}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Programs
+                </button>
+                <Button 
+                  onClick={() => scrollToSection('donate')}
+                  className="bg-white text-black hover:bg-white/90 rounded-full px-6 w-full"
+                >
+                  Donate Now
+                </Button>
+              </div>
+            </div>
+          )}
+        </nav>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url(${heroImage})`,
+            background: `radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${heroImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
           }}
         />
         
-        <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="gradient-text">Strength</span> Over{" "}
-            <span className="text-foreground">Struggle</span>
+        <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            Empowering Resilience.<br />
+            <span className="gradient-text">Overcoming Adversity.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Empowering individuals and communities to overcome life's challenges through 
-            support, resources, and unwavering hope.
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="xl" className="animate-float">
-              Get Support Now
+            <Button 
+              className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-semibold"
+              onClick={() => scrollToSection('donate')}
+            >
+              Donate Now
             </Button>
-            <Button variant="glass" size="xl">
+            <Button 
+              variant="outline" 
+              className="border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg"
+              onClick={() => scrollToSection('mission')}
+            >
               Learn Our Story
             </Button>
           </div>
@@ -39,50 +153,96 @@ const Index = () => {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-foreground/50 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Section */}
+      <section id="impact" className="py-20 px-6" style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${heroImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
+            Our Impact
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {[
+              { number: "540+", label: "Gym Membership Months Donated" },
+              { number: "4", label: "Community Partners" },
+              { number: "Growing", label: "Lives Transformed" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-white/80 font-medium text-lg">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 px-6">
+      <section id="mission" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            Our <span className="gradient-text">Mission</span>
+          </h2>
+          <div className="space-y-8 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              At Strength Over Struggle, we believe that resilience is not just about surviving life's challenges—it's about thriving through them. Our mission is to empower individuals and families with the tools, resources, and community support they need to transform adversity into strength.
+            </p>
+            <p>
+              We focus on three core pillars of wellness: mental health support that builds emotional resilience, physical wellness programs that strengthen the body and spirit, and financial literacy that creates pathways to stability and independence.
+            </p>
+            <p>
+              Every person deserves the opportunity to overcome their struggles and discover their inherent strength. Through comprehensive programs, community partnerships, and unwavering support, we're building a movement where no one faces their challenges alone.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs Section */}
+      <section id="programs" className="py-20 px-6 bg-card/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Our <span className="gradient-text">Mission</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Our <span className="gradient-text">Programs</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              We believe that everyone has the strength to overcome their struggles. 
-              Our mission is to provide the tools, community, and support needed to transform challenges into triumphs.
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Comprehensive wellness programs designed to strengthen mind, body, and financial security.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: Heart,
-                title: "Compassionate Support",
-                description: "Providing emotional and practical support to those facing life's toughest moments."
+                icon: Dumbbell,
+                title: "Physical Wellness",
+                description: "Gym memberships, fitness programs, and wellness coaching to build physical strength and mental resilience through movement and healthy habits."
               },
               {
-                icon: Users,
-                title: "Strong Community",
-                description: "Building connections between individuals who share similar struggles and victories."
+                icon: Handshake,
+                title: "Community Building",
+                description: "Support groups, mentorship programs, and community events that create lasting connections and shared experiences of growth and healing."
               },
               {
-                icon: Target,
-                title: "Focused Impact",
-                description: "Targeting resources where they're needed most to create lasting positive change."
+                icon: BookOpen,
+                title: "Life Skills",
+                description: "Financial literacy workshops, career development, and practical life skills training that create pathways to independence and stability."
               }
-            ].map((item, index) => (
-              <Card key={index} className="glass-card hover:glow-effect transition-all duration-300 group">
+            ].map((program, index) => (
+              <Card key={index} className="bg-card border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                 <CardContent className="p-8 text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <item.icon className="w-8 h-8 text-primary-foreground" />
+                    <program.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 gradient-text">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                  <h3 className="text-xl font-semibold mb-4 text-foreground">{program.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{program.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -90,102 +250,73 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section className="py-20 px-6 bg-card/30">
+      {/* Donate Section Placeholder */}
+      <section id="donate" className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            Making a <span className="gradient-text">Difference</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Join the Movement. <span className="gradient-text">Make a Difference Today.</span>
           </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {[
-              { number: "500+", label: "Lives Changed" },
-              { number: "50+", label: "Community Partners" },
-              { number: "95%", label: "Success Rate" },
-              { number: "24/7", label: "Support Available" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">{stat.number}</div>
-                <div className="text-muted-foreground font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-          
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Every day, we witness the incredible transformation that happens when people 
-            are given the right support and resources to overcome their challenges.
-          </p>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Find Your <span className="gradient-text">Strength</span>?
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Whether you're seeking support or want to help others, we're here to guide you 
-            on your journey from struggle to strength.
+            Your support helps us provide essential resources and programs to those who need them most.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button variant="hero" size="xl">
-              Get Help Today
+            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-semibold">
+              Make a Donation
             </Button>
-            <Button variant="outline" size="xl">
+            <Button variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg">
               Become a Volunteer
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16 px-6 border-t border-border/30">
+      {/* Footer */}
+      <footer className="py-16 px-6 border-t border-border/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-2xl font-bold text-center mb-12">
             <span className="gradient-text">Connect</span> With Us
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="grid md:grid-cols-3 gap-8 text-center mb-12">
             {[
               {
                 icon: Phone,
                 title: "Call Us",
                 content: "(555) 123-HOPE",
-                subtitle: "Available 24/7 for emergencies"
+                subtitle: "Available for support"
               },
               {
                 icon: Mail,
                 title: "Email Us",
-                content: "support@strengthoverstruggle.org",
+                content: "info@strengthoverstruggle.org",
                 subtitle: "We respond within 24 hours"
               },
               {
                 icon: MapPin,
-                title: "Visit Us",
-                content: "123 Hope Street, Community Center",
-                subtitle: "Open Monday - Friday, 9AM - 6PM"
+                title: "Find Us",
+                content: "Community Center",
+                subtitle: "Serving our local area"
               }
             ].map((contact, index) => (
               <div key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent mb-4">
-                  <contact.icon className="w-6 h-6 text-primary-foreground" />
+                  <contact.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2 gradient-text">{contact.title}</h3>
-                <p className="font-medium mb-1">{contact.content}</p>
+                <h3 className="font-semibold mb-2 text-foreground">{contact.title}</h3>
+                <p className="font-medium mb-1 text-foreground">{contact.content}</p>
                 <p className="text-sm text-muted-foreground">{contact.subtitle}</p>
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-12 pt-8 border-t border-border/30">
+          <div className="text-center pt-8 border-t border-border/30">
             <p className="text-muted-foreground">
-              © 2024 Strength Over Struggle. Together, we rise above our challenges.
+              © 2024 Strength Over Struggle. Empowering resilience, one person at a time.
             </p>
           </div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 };
