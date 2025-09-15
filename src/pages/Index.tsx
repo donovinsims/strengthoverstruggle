@@ -421,12 +421,73 @@ const Index = () => {
             Your support helps us provide essential resources and programs to those who need them most.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button className="rounded-md px-8 py-6 text-lg font-medium">
-              Make a Donation
-            </Button>
-            <Button variant="outline" className="rounded-md px-8 py-6 text-lg">
-              Become a Partner
+          {/* Monthly Subscription Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+            <Card className="rounded-md p-6 hover-scale transition-transform">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-2">$25</h3>
+                <p className="text-sm text-muted-foreground mb-3">per month</p>
+                <p className="text-sm mb-4">Provides 1 gym membership month</p>
+                <Button 
+                  className="rounded-md w-full" 
+                  onClick={() => window.open('https://buy.stripe.com/test_5kQ7sM8xIfxoe6T8Epa3u07', '_blank', 'noopener,noreferrer')}
+                >
+                  Subscribe Monthly
+                </Button>
+              </div>
+            </Card>
+
+            <Card className="rounded-md p-6 hover-scale transition-transform">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-2">$50</h3>
+                <p className="text-sm text-muted-foreground mb-3">per month</p>
+                <p className="text-sm mb-4">Supports 2 community workshops</p>
+                <Button 
+                  className="rounded-md w-full" 
+                  onClick={() => window.open('https://buy.stripe.com/test_4gMaEYcNYad4bYL1bXa3u06', '_blank', 'noopener,noreferrer')}
+                >
+                  Subscribe Monthly
+                </Button>
+              </div>
+            </Card>
+
+            <Card className="rounded-md p-6 hover-scale transition-transform">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-2">$100</h3>
+                <p className="text-sm text-muted-foreground mb-3">per month</p>
+                <p className="text-sm mb-4">Funds life skills program</p>
+                <Button 
+                  className="rounded-md w-full" 
+                  onClick={() => window.open('https://buy.stripe.com/test_00w3cw29kad40g307Ta3u08', '_blank', 'noopener,noreferrer')}
+                >
+                  Subscribe Monthly
+                </Button>
+              </div>
+            </Card>
+
+            <Card className="rounded-md p-6 hover-scale transition-transform">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-2">$250</h3>
+                <p className="text-sm text-muted-foreground mb-3">per month</p>
+                <p className="text-sm mb-4">Sponsors family wellness package</p>
+                <Button 
+                  className="rounded-md w-full" 
+                  onClick={() => window.open('https://buy.stripe.com/test_5kQ28s4hs3OG7IvcUFa3u04', '_blank', 'noopener,noreferrer')}
+                >
+                  Subscribe Monthly
+                </Button>
+              </div>
+            </Card>
+          </div>
+
+          {/* One-Time Payment Button */}
+          <div className="text-center">
+            <Button 
+              variant="outline" 
+              className="rounded-md px-8 py-6 text-lg"
+              onClick={() => window.open('https://donate.stripe.com/test_fZu00k7tEetk4wjg6Ra3u00', '_blank', 'noopener,noreferrer')}
+            >
+              One-Time Payment
             </Button>
           </div>
         </div>
