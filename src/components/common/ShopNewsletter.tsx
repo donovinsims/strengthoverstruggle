@@ -3,7 +3,6 @@ import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
 
 export const ShopNewsletter = () => {
   const [email, setEmail] = useState("");
@@ -17,14 +16,23 @@ export const ShopNewsletter = () => {
     setIsSubmitting(true);
     
     try {
-      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
-        body: { email }
+      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          api_key: '5qhRShC1VPSMmKrk53oi4Q'
+        })
       });
 
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Failed to subscribe`);
       }
-      
+
+      const data = await response.json();
       console.log("Shop newsletter subscription successful:", data);
       setIsSubmitted(true);
       setEmail("");

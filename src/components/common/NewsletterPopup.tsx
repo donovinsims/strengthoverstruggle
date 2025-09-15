@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface NewsletterPopupProps {
@@ -28,19 +27,23 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
     setHasError(false);
     
     try {
-      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
-        body: { email }
+      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          api_key: '5qhRShC1VPSMmKrk53oi4Q'
+        })
       });
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(error.message || 'Failed to subscribe to newsletter');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `HTTP ${response.status}: Failed to subscribe`);
       }
 
-      if (!data?.success) {
-        throw new Error(data?.error || 'Newsletter signup failed');
-      }
-      
+      const data = await response.json();
       console.log("Newsletter subscription successful:", data);
       setIsSubmitted(true);
       
