@@ -257,7 +257,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: Users,
@@ -276,11 +276,11 @@ const Index = () => {
               }
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
-                <CardContent className="p-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4">
+                <CardContent className="p-6 md:p-8">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4 md:mb-6">
                     <program.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-primary">{program.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 md:mb-4 text-primary">{program.title}</h3>
                   <p className="body-text">{program.description}</p>
                 </CardContent>
               </Card>
@@ -301,7 +301,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {[
               {
                 id: "sarah",
@@ -333,12 +333,12 @@ const Index = () => {
                 className="bg-card cursor-pointer hover-scale"
                 onClick={() => openTestimonialModal(testimonial)}
               >
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center mb-4 md:mb-6">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover mr-4"
+                      className="w-14 h-14 rounded-full object-cover mr-4"
                     />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
@@ -346,7 +346,7 @@ const Index = () => {
                     </div>
                   </div>
                   <p className="body-text italic">"{testimonial.quote}"</p>
-                  <button className="mt-4 story-link text-primary font-medium">
+                  <button className="mt-4 md:mt-6 story-link text-primary font-medium">
                     Read Full Story
                   </button>
                 </CardContent>
