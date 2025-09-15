@@ -426,7 +426,7 @@ const Index = () => {
               Make a Donation
             </Button>
             <Button variant="outline" className="rounded-md px-8 py-6 text-lg">
-              Become a Volunteer
+              Become a Partner
             </Button>
           </div>
         </div>
