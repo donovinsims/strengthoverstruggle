@@ -24,10 +24,10 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-        <nav className="max-w-7xl mx-auto px-6 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-secondary border-b border-border">
+        <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-xl font-bold gradient-text">
+            <div className="text-xl font-bold text-primary">
               Strength Over Struggle
             </div>
             
@@ -35,31 +35,31 @@ const Index = () => {
             <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={() => scrollToSection('hero')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Home
               </button>
               <button 
                 onClick={() => scrollToSection('impact')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Impact
               </button>
               <button 
                 onClick={() => scrollToSection('mission')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Mission
               </button>
               <button 
                 onClick={() => scrollToSection('programs')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Programs
               </button>
               <Button 
                 onClick={() => scrollToSection('donate')}
-                className="bg-white text-black hover:bg-white/90 rounded-full px-6"
+                className="rounded-md px-6"
               >
                 Donate Now
               </Button>
@@ -77,35 +77,35 @@ const Index = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-t border-white/10">
+            <div className="md:hidden mt-4 pb-4 border-t border-border">
               <div className="flex flex-col space-y-4 pt-4">
                 <button 
                   onClick={() => scrollToSection('hero')}
-                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 >
                   Home
                 </button>
                 <button 
                   onClick={() => scrollToSection('impact')}
-                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 >
                   Impact
                 </button>
                 <button 
                   onClick={() => scrollToSection('mission')}
-                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 >
                   Mission
                 </button>
                 <button 
                   onClick={() => scrollToSection('programs')}
-                  className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 >
                   Programs
                 </button>
                 <Button 
                   onClick={() => scrollToSection('donate')}
-                  className="bg-white text-black hover:bg-white/90 rounded-full px-6 w-full"
+                  className="rounded-md px-6 w-full"
                 >
                   Donate Now
                 </Button>
@@ -160,39 +160,36 @@ const Index = () => {
       </section>
 
       {/* Impact Section */}
-      <section id="impact" className="py-20 px-6" style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}>
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
+      <section id="impact" className="py-20 px-6 bg-secondary">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">
             Our Impact
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {[
-              { number: "540+", label: "Gym Membership Months Donated" },
-              { number: "4", label: "Community Partners" },
-              { number: "Growing", label: "Lives Transformed" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-white/80 font-medium text-lg">{stat.label}</div>
-              </div>
-            ))}
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">540+</div>
+              <div className="body-text font-medium text-lg">Gym Membership Months Donated</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">4</div>
+              <div className="body-text font-medium text-lg">Community Partners</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">Growing</div>
+              <div className="body-text font-medium text-lg">Lives Transformed</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Mission Section */}
       <section id="mission" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Our <span className="gradient-text">Mission</span>
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+            Our Mission
           </h2>
-          <div className="space-y-8 text-lg text-muted-foreground leading-relaxed">
+          <div className="space-y-8 body-text leading-relaxed max-w-4xl mx-auto">
             <p>
               At Strength Over Struggle, we believe that resilience is not just about surviving life's challenges—it's about thriving through them. Our mission is to empower individuals and families with the tools, resources, and community support they need to transform adversity into strength.
             </p>
@@ -207,13 +204,13 @@ const Index = () => {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-20 px-6 bg-card/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Our <span className="gradient-text">Programs</span>
+      <section id="programs" className="py-20 px-6 bg-secondary">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+              Our Programs
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="subtitle max-w-3xl mx-auto">
               Comprehensive wellness programs designed to strengthen mind, body, and financial security.
             </p>
           </div>
@@ -236,13 +233,13 @@ const Index = () => {
                 description: "Financial literacy workshops, career development, and practical life skills training that create pathways to independence and stability."
               }
             ].map((program, index) => (
-              <Card key={index} className="bg-card border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                <CardContent className="p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <program.icon className="w-8 h-8 text-white" />
+              <Card key={index} className="bg-card text-left">
+                <CardContent className="p-8">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-primary mb-6">
+                    <program.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 text-foreground">{program.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{program.description}</p>
+                  <h3 className="text-xl font-semibold mb-4 text-primary">{program.title}</h3>
+                  <p className="body-text">{program.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -252,19 +249,19 @@ const Index = () => {
 
       {/* Donate Section Placeholder */}
       <section id="donate" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Join the Movement. <span className="gradient-text">Make a Difference Today.</span>
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+            Join the Movement. Make a Difference Today.
           </h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="subtitle mb-8 max-w-2xl mx-auto">
             Your support helps us provide essential resources and programs to those who need them most.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-semibold">
+            <Button className="rounded-md px-8 py-6 text-lg font-medium">
               Make a Donation
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg">
+            <Button variant="outline" className="rounded-md px-8 py-6 text-lg">
               Become a Volunteer
             </Button>
           </div>
@@ -272,10 +269,10 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 border-t border-border/30">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-12">
-            <span className="gradient-text">Connect</span> With Us
+      <footer className="py-16 px-6 border-t border-border">
+        <div className="container mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-12 text-primary">
+            Connect With Us
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8 text-center mb-12">
@@ -300,18 +297,18 @@ const Index = () => {
               }
             ].map((contact, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent mb-4">
-                  <contact.icon className="w-6 h-6 text-white" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-primary mb-4">
+                  <contact.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-semibold mb-2 text-foreground">{contact.title}</h3>
-                <p className="font-medium mb-1 text-foreground">{contact.content}</p>
-                <p className="text-sm text-muted-foreground">{contact.subtitle}</p>
+                <h3 className="font-semibold mb-2 text-primary">{contact.title}</h3>
+                <p className="font-medium mb-1 text-primary">{contact.content}</p>
+                <p className="caption">{contact.subtitle}</p>
               </div>
             ))}
           </div>
           
-          <div className="text-center pt-8 border-t border-border/30">
-            <p className="text-muted-foreground">
+          <div className="text-center pt-8 border-t border-border">
+            <p className="body-text">
               © 2024 Strength Over Struggle. Empowering resilience, one person at a time.
             </p>
           </div>
