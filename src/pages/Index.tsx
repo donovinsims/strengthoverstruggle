@@ -414,81 +414,91 @@ const Index = () => {
       {/* Donate Section Placeholder */}
       <section id="donate" className="py-28 md:py-32 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
-            Join the Movement. Make a Difference Today.
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-primary">
+            Make a Difference Today.
           </h2>
-          <p className="subtitle mb-8 max-w-2xl mx-auto">
+          <p className="subtitle mb-12 max-w-2xl mx-auto">
             Your support helps us provide essential resources and programs to those who need them most.
           </p>
           
-          {/* Monthly Subscription Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
-            <Card className="rounded-md p-6 hover-scale transition-transform">
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-2">$25</h3>
-                <p className="text-sm text-muted-foreground mb-3">per month</p>
-                <p className="text-sm mb-4">Provides 1 gym membership month</p>
-                <Button 
-                  className="rounded-md w-full" 
-                  onClick={() => window.open('https://buy.stripe.com/test_5kQ7sM8xIfxoe6T8Epa3u07', '_blank', 'noopener,noreferrer')}
-                >
-                  Subscribe Monthly
-                </Button>
-              </div>
-            </Card>
+          {/* Donation Cards - 5 card layout */}
+          <div className="max-w-6xl mx-auto">
+            {/* Top row - 3 cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">$25</h3>
+                  <p className="text-sm text-muted-foreground mb-3">per month</p>
+                  <p className="text-sm mb-4">Provides 1 gym membership month</p>
+                  <Button 
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://buy.stripe.com/test_5kQ7sM8xIfxoe6T8Epa3u07', '_blank', 'noopener,noreferrer')}
+                  >
+                    Subscribe Monthly
+                  </Button>
+                </div>
+              </Card>
 
-            <Card className="rounded-md p-6 hover-scale transition-transform">
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-2">$50</h3>
-                <p className="text-sm text-muted-foreground mb-3">per month</p>
-                <p className="text-sm mb-4">Supports 2 community workshops</p>
-                <Button 
-                  className="rounded-md w-full" 
-                  onClick={() => window.open('https://buy.stripe.com/test_4gMaEYcNYad4bYL1bXa3u06', '_blank', 'noopener,noreferrer')}
-                >
-                  Subscribe Monthly
-                </Button>
-              </div>
-            </Card>
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">$50</h3>
+                  <p className="text-sm text-muted-foreground mb-3">per month</p>
+                  <p className="text-sm mb-4">Supports 2 community workshops</p>
+                  <Button 
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://buy.stripe.com/test_4gMaEYcNYad4bYL1bXa3u06', '_blank', 'noopener,noreferrer')}
+                  >
+                    Subscribe Monthly
+                  </Button>
+                </div>
+              </Card>
 
-            <Card className="rounded-md p-6 hover-scale transition-transform">
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-2">$100</h3>
-                <p className="text-sm text-muted-foreground mb-3">per month</p>
-                <p className="text-sm mb-4">Funds life skills program</p>
-                <Button 
-                  className="rounded-md w-full" 
-                  onClick={() => window.open('https://buy.stripe.com/test_00w3cw29kad40g307Ta3u08', '_blank', 'noopener,noreferrer')}
-                >
-                  Subscribe Monthly
-                </Button>
-              </div>
-            </Card>
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">$100</h3>
+                  <p className="text-sm text-muted-foreground mb-3">per month</p>
+                  <p className="text-sm mb-4">Funds life skills program</p>
+                  <Button 
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://buy.stripe.com/test_00w3cw29kad40g307Ta3u08', '_blank', 'noopener,noreferrer')}
+                  >
+                    Subscribe Monthly
+                  </Button>
+                </div>
+              </Card>
+            </div>
 
-            <Card className="rounded-md p-6 hover-scale transition-transform">
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-2">$250</h3>
-                <p className="text-sm text-muted-foreground mb-3">per month</p>
-                <p className="text-sm mb-4">Sponsors family wellness package</p>
-                <Button 
-                  className="rounded-md w-full" 
-                  onClick={() => window.open('https://buy.stripe.com/test_5kQ28s4hs3OG7IvcUFa3u04', '_blank', 'noopener,noreferrer')}
-                >
-                  Subscribe Monthly
-                </Button>
-              </div>
-            </Card>
-          </div>
+            {/* Bottom row - 2 cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">$250</h3>
+                  <p className="text-sm text-muted-foreground mb-3">per month</p>
+                  <p className="text-sm mb-4">Sponsors family wellness package</p>
+                  <Button 
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://buy.stripe.com/test_5kQ28s4hs3OG7IvcUFa3u04', '_blank', 'noopener,noreferrer')}
+                  >
+                    Subscribe Monthly
+                  </Button>
+                </div>
+              </Card>
 
-          {/* One-Time Payment Button */}
-          <div className="text-center">
-            <Button 
-              variant="outline" 
-              className="rounded-md px-8 py-6 text-lg"
-              onClick={() => window.open('https://donate.stripe.com/test_fZu00k7tEetk4wjg6Ra3u00', '_blank', 'noopener,noreferrer')}
-            >
-              One-Time Payment
-            </Button>
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">One-Time</h3>
+                  <p className="text-sm text-muted-foreground mb-3">donation</p>
+                  <p className="text-sm mb-4">Choose your amount</p>
+                  <Button 
+                    variant="outline"
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://donate.stripe.com/test_fZu00k7tEetk4wjg6Ra3u00', '_blank', 'noopener,noreferrer')}
+                  >
+                    Donate Now
+                  </Button>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
