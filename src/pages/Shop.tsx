@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Facebook, Instagram, Mail, MapPin, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import wristbandImage from "@/assets/sos-wristband.png";
 
@@ -80,21 +81,101 @@ const Shop = () => {
             </Card>
           </div>
 
-          {/* Impact Message */}
+          {/* Newsletter CTA */}
           <div className="mt-16 text-center">
             <Card className="bg-muted/50 max-w-2xl mx-auto">
               <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
+                  <Bell className="w-8 h-8 text-primary" />
+                </div>
                 <h3 className="text-2xl font-bold mb-4 text-primary">
-                  Your Purchase Makes a Difference
+                  New Products Coming Soon
                 </h3>
-                <p className="body-text">
-                  Every wristband sold directly supports our mission to empower resilience through mental, physical, and financial wellness programs. Thank you for being part of the strength over struggle movement.
+                <p className="body-text mb-6">
+                  Be the first to know when we launch new items! Join our email list to stay updated on fresh merchandise and never miss when new products are back in stock.
                 </p>
+                <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                  <Input 
+                    type="email" 
+                    placeholder="Enter your email address"
+                    className="flex-1"
+                  />
+                  <Button className="sm:w-auto">
+                    Stay Updated
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="py-16 md:py-20 px-6 border-t border-border">
+        <div className="container mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-12 text-primary">
+            Connect With Us
+          </h2>
+          
+          <div className="grid md:grid-cols-4 gap-8 text-center mb-12">
+            {[
+              {
+                icon: Facebook,
+                title: "Facebook",
+                content: "Follow Us",
+                subtitle: "Stay connected",
+                link: "https://www.facebook.com/profile.php?id=61577091357646"
+              },
+              {
+                icon: Instagram,
+                title: "Instagram",
+                content: "@_strengthoverstruggle_",
+                subtitle: "Daily updates",
+                link: "https://www.instagram.com/_strengthoverstruggle_/"
+              },
+              {
+                icon: Mail,
+                title: "Email Us",
+                content: "strengthoverstrugglenfp@gmail.com",
+                subtitle: "We respond within 24 hours",
+                link: "mailto:strengthoverstrugglenfp@gmail.com"
+              },
+              {
+                icon: MapPin,
+                title: "Find Us",
+                content: "Roscoe, Illinois",
+                subtitle: "Serving our local area"
+              }
+            ].map((contact, index) => (
+              <div key={index} className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4">
+                  <contact.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
+                </div>
+                <h3 className="font-semibold mb-2 text-primary">{contact.title}</h3>
+                {contact.link ? (
+                  <a 
+                    href={contact.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium mb-1 text-primary hover:underline block"
+                  >
+                    {contact.content}
+                  </a>
+                ) : (
+                  <p className="font-medium mb-1 text-primary">{contact.content}</p>
+                )}
+                <p className="caption">{contact.subtitle}</p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center pt-8 border-t border-border">
+            <p className="body-text">
+              © 2024 Strength Over Struggle. Empowering resilience, one person at a time.
+            </p>
+          </div>
+        </div>
+       </footer>
     </div>
   );
 };
