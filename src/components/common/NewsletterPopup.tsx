@@ -95,7 +95,7 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="border border-border"
+                        className="border-border"
                         aria-label="Email address"
                       />
                       <Button 
