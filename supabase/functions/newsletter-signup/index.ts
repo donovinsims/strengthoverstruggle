@@ -53,7 +53,7 @@ serve(async (req: Request) => {
 
     // Add subscriber to ConvertKit
     console.log('Attempting ConvertKit subscription for:', email);
-    const convertKitResponse = await fetch('https://api.convertkit.com/v3/subscribers', {
+    const convertKitResponse = await fetch('https://api.convertkit.com/v3/forms/8554123/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ serve(async (req: Request) => {
 
     if (convertKitResponse.ok) {
       const convertKitData = await convertKitResponse.json();
-      convertKitSubscriberId = convertKitData.subscriber?.id?.toString();
+      convertKitSubscriberId = convertKitData.subscription?.subscriber?.id?.toString();
       status = 'subscribed';
       console.log('ConvertKit subscription successful:', convertKitData);
     } else {
