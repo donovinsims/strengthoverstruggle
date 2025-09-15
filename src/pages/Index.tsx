@@ -260,6 +260,7 @@ const Index = () => {
             </p>
           </div>
 
+          {/* Programs grid: Intentionally 2-column on desktop to match testimonial card width and visual weight */}
           <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
               {
