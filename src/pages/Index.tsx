@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
 import { Link } from "react-router-dom";
+import heroImage from "@/assets/hero-image.jpg";
+import dylannFounderImage from "@/assets/dylann-founder.png";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -388,7 +390,7 @@ const Index = () => {
                 fullBio: "Dylann Rauch's journey to co-founding Strength Over Struggle began with her own transformation through fitness and community support. As a certified wellness coach and former program participant in similar initiatives, Dylann understands the power of combining physical activity with emotional and financial support. Her expertise in program development has been instrumental in creating our comprehensive wellness curricula that address the whole person. Dylann holds certifications in personal training, mental health first aid, and financial counseling, allowing her to bridge the gap between different aspects of wellness. Her empathetic leadership style and deep understanding of the challenges our participants face make her an invaluable advocate and mentor. Under her guidance, our programs have achieved remarkable success rates in helping individuals build lasting, positive change in their lives.",
                 email: "dylann@strengthoverstruggle.org",
                 linkedin: "https://linkedin.com/in/dylannrauch",
-                image: "/placeholder.svg"
+                image: dylannFounderImage
               }
             ].map((founder) => (
               <Card 
