@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { supabase } from "@/integrations/supabase/client";
 
 interface NewsletterPopupProps {
   isOpen: boolean;
@@ -22,24 +23,30 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log("Newsletter subscription:", {
-      email,
-      timestamp: new Date().toISOString(),
-      source: "homepage_popup"
-    });
+    try {
+      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
+        body: { email }
+      });
 
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    
-    // Auto close after success
-    setTimeout(() => {
-      onClose();
-      setEmail("");
-      setIsSubmitted(false);
-    }, 2000);
+      if (error) {
+        throw error;
+      }
+      
+      console.log("Newsletter subscription successful:", data);
+      setIsSubmitted(true);
+      
+      // Auto close after success
+      setTimeout(() => {
+        onClose();
+        setEmail("");
+        setIsSubmitted(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Newsletter signup error:', error);
+      // You could add error state handling here if needed
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

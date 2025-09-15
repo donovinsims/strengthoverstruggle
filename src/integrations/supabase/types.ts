@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      newsletter_signups: {
+        Row: {
+          convertkit_subscriber_id: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          status: string
+          subscribed_at: string
+          updated_at: string
+        }
+        Insert: {
+          convertkit_subscriber_id?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+          status?: string
+          subscribed_at?: string
+          updated_at?: string
+        }
+        Update: {
+          convertkit_subscriber_id?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          status?: string
+          subscribed_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
