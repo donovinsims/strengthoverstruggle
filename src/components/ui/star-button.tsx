@@ -51,9 +51,9 @@ interface StarButtonProps {
 
 export function StarButton({
   children,
-  lightWidth = 110,
-  duration = 3,
-  lightColor = "#FAFAFA",
+  lightWidth = 60,
+  duration = 2,
+  lightColor = "#FFFFFF",
   backgroundColor = "currentColor",
   borderWidth = 2,
   className,
@@ -85,7 +85,7 @@ export function StarButton({
       }
       ref={pathRef}
       className={cn(
-        "relative z-[3] overflow-hidden px-8 py-6 text-lg font-medium inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors disabled:pointer-events-none disabled:opacity-50 group/star-button",
+        "relative z-[3] overflow-hidden px-6 py-3 text-base font-medium inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors disabled:pointer-events-none disabled:opacity-50 group/star-button",
         className,
       )}
       onClick={onClick}

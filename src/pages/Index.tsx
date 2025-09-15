@@ -189,7 +189,7 @@ const Index = () => {
             </StarButton>
             <Button 
               variant="outline" 
-              className="border-white text-white hover:bg-white/10 rounded-md px-8 py-6 text-lg"
+              className="border-white text-white hover:bg-white/10 rounded-md px-6 py-3 text-base"
               onClick={() => scrollToSection('mission')}
             >
               Learn Our Story
@@ -426,7 +426,7 @@ const Index = () => {
             <StarButton className="bg-primary text-primary-foreground hover:opacity-90">
               Make a Donation
             </StarButton>
-            <Button variant="outline" className="rounded-md px-8 py-6 text-lg">
+            <Button variant="outline" className="rounded-md px-6 py-3 text-base">
               Become a Volunteer
             </Button>
           </div>

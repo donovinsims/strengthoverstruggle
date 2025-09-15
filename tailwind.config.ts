@@ -132,7 +132,7 @@ export default {
         "fade-in": "fade-in 0.3s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "slide-in-right": "slide-in-right 0.3s ease-out",
-        "star-btn": "star-btn var(--duration, 3s) ease-in-out infinite"
+        "star-btn": "star-btn var(--duration, 2s) linear infinite"
       },
     },
   },
