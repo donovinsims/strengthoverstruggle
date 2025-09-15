@@ -2,9 +2,25 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Zap, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { TestimonialModal } from "@/components/common/TestimonialModal";
+import { FounderModal } from "@/components/common/FounderModal";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedTestimonial, setSelectedTestimonial] = useState<any>(null);
+  const [selectedFounder, setSelectedFounder] = useState<any>(null);
+  const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
+  const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
+
+  const openTestimonialModal = (testimonial: any) => {
+    setSelectedTestimonial(testimonial);
+    setIsTestimonialModalOpen(true);
+  };
+
+  const openFounderModal = (founder: any) => {
+    setSelectedFounder(founder);
+    setIsFounderModalOpen(true);
+  };
 
   // Smooth scroll function with offset for sticky header
   const scrollToSection = (sectionId: string) => {
@@ -238,6 +254,132 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+              Stories of Transformation
+            </h2>
+            <p className="subtitle max-w-3xl mx-auto">
+              Real stories from real people whose lives have been transformed through our programs.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                id: "sarah",
+                name: "Sarah M.",
+                role: "Program Graduate",
+                quote: "This program gave me the strength I never knew I had...",
+                fullQuote: "This program gave me the strength I never knew I had. After struggling with anxiety and financial stress for years, the combination of physical wellness and life skills training helped me rebuild my confidence. The gym membership kept me active while the financial literacy workshops gave me the tools to take control of my finances. Today, I'm debt-free and stronger than ever.",
+                image: "/placeholder.svg"
+              },
+              {
+                id: "marcus",
+                name: "Marcus T.",
+                role: "Community Member",
+                quote: "The community support changed everything for me...",
+                fullQuote: "The community support changed everything for me. Coming from a difficult background, I never thought I'd find a place where people truly cared about my success. The mentorship program connected me with someone who believed in me when I didn't believe in myself. Through the life skills training, I learned how to manage money, find stable employment, and build healthy relationships.",
+                image: "/placeholder.svg"
+              },
+              {
+                id: "jennifer",
+                name: "Jennifer K.",
+                role: "Volunteer & Former Participant",
+                quote: "I went from struggling single mom to community leader...",
+                fullQuote: "I went from struggling single mom to community leader through this incredible organization. The physical wellness programs helped me manage stress and build confidence, while the financial literacy courses taught me how to budget and save for my family's future. Now I volunteer to help other families find their strength, just like I found mine.",
+                image: "/placeholder.svg"
+              }
+            ].map((testimonial) => (
+              <Card 
+                key={testimonial.id} 
+                className="bg-card cursor-pointer hover-scale"
+                onClick={() => openTestimonialModal(testimonial)}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover mr-4"
+                    />
+                    <div>
+                      <h3 className="font-semibold text-primary">{testimonial.name}</h3>
+                      <p className="caption">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="body-text italic">"{testimonial.quote}"</p>
+                  <button className="mt-4 story-link text-primary font-medium">
+                    Read Full Story
+                  </button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Founders Section */}
+      <section id="founders" className="py-20 px-6 bg-secondary">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+              Meet Our Founders
+            </h2>
+            <p className="subtitle max-w-3xl mx-auto">
+              The passionate leaders behind Strength Over Struggle, dedicated to empowering resilience in our community.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            {[
+              {
+                id: "alex",
+                name: "Alex Limberg",
+                role: "Co-Founder & Executive Director",
+                bio: "Passionate advocate for community wellness and resilience...",
+                fullBio: "Alex Limberg brings over a decade of experience in community development and nonprofit leadership to Strength Over Struggle. After witnessing firsthand how financial stress and lack of resources can devastate families, Alex dedicated his career to creating comprehensive support systems that address the root causes of struggle. With a background in social work and business administration, Alex has successfully launched multiple community programs that have served thousands of individuals and families. His vision for holistic wellness - combining mental, physical, and financial health - forms the foundation of our organization's approach. Alex believes that everyone deserves the opportunity to transform their challenges into strengths, and his leadership continues to inspire both our team and the communities we serve.",
+                email: "alex@strengthoverstruggle.org",
+                linkedin: "https://linkedin.com/in/alexlimberg",
+                image: "/placeholder.svg"
+              },
+              {
+                id: "dylann",
+                name: "Dylann Rauch",
+                role: "Co-Founder & Program Director",
+                bio: "Expert in wellness programming and community engagement...",
+                fullBio: "Dylann Rauch's journey to co-founding Strength Over Struggle began with her own transformation through fitness and community support. As a certified wellness coach and former program participant in similar initiatives, Dylann understands the power of combining physical activity with emotional and financial support. Her expertise in program development has been instrumental in creating our comprehensive wellness curricula that address the whole person. Dylann holds certifications in personal training, mental health first aid, and financial counseling, allowing her to bridge the gap between different aspects of wellness. Her empathetic leadership style and deep understanding of the challenges our participants face make her an invaluable advocate and mentor. Under her guidance, our programs have achieved remarkable success rates in helping individuals build lasting, positive change in their lives.",
+                email: "dylann@strengthoverstruggle.org",
+                linkedin: "https://linkedin.com/in/dylannrauch",
+                image: "/placeholder.svg"
+              }
+            ].map((founder) => (
+              <Card 
+                key={founder.id} 
+                className="bg-card cursor-pointer hover-scale text-center"
+                onClick={() => openFounderModal(founder)}
+              >
+                <CardContent className="p-8">
+                  <img 
+                    src={founder.image} 
+                    alt={founder.name}
+                    className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
+                  />
+                  <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
+                  <p className="caption mb-4">{founder.role}</p>
+                  <p className="body-text mb-6">"{founder.bio}"</p>
+                  <button className="story-link text-primary font-medium">
+                    Read Full Biography
+                  </button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Donate Section Placeholder */}
       <section id="donate" className="py-20 px-6">
         <div className="container mx-auto text-center">
@@ -304,8 +446,21 @@ const Index = () => {
             </p>
           </div>
         </div>
-      </footer>
-    </div>
+       </footer>
+       
+       {/* Modals */}
+       <TestimonialModal
+         isOpen={isTestimonialModalOpen}
+         onClose={() => setIsTestimonialModalOpen(false)}
+         testimonial={selectedTestimonial}
+       />
+       
+       <FounderModal
+         isOpen={isFounderModalOpen}
+         onClose={() => setIsFounderModalOpen(false)}
+         founder={selectedFounder}
+       />
+     </div>
   );
 };
 

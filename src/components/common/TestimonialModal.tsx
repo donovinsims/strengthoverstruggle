@@ -1,0 +1,88 @@
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { X } from "lucide-react";
+import { useEffect } from "react";
+
+interface TestimonialModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  testimonial: {
+    id: string;
+    name: string;
+    role: string;
+    quote: string;
+    fullQuote: string;
+    image: string;
+  } | null;
+}
+
+export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialModalProps) => {
+  // Handle ESC key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!testimonial) return null;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent 
+        className="z-60 max-w-2xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in"
+        aria-labelledby="testimonial-title"
+        aria-describedby="testimonial-content"
+      >
+        <DialogHeader className="text-left">
+          <div className="flex items-center justify-between">
+            <DialogTitle 
+              id="testimonial-title"
+              className="text-xl font-semibold text-primary"
+            >
+              {testimonial.name}'s Story
+            </DialogTitle>
+            <button
+              onClick={onClose}
+              className="text-muted-foreground hover:text-foreground transition-colors p-1"
+              aria-label="Close testimonial"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </DialogHeader>
+        
+        <div className="space-y-6">
+          <div className="flex items-center space-x-4">
+            <img 
+              src={testimonial.image} 
+              alt={testimonial.name}
+              className="w-16 h-16 rounded-full object-cover"
+            />
+            <div>
+              <h3 className="font-semibold text-primary">{testimonial.name}</h3>
+              <p className="caption">{testimonial.role}</p>
+            </div>
+          </div>
+          
+          <div id="testimonial-content">
+            <blockquote className="text-lg italic text-foreground leading-relaxed">
+              "{testimonial.fullQuote}"
+            </blockquote>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
