@@ -12,6 +12,18 @@ const Index = () => {
   const [selectedFounder, setSelectedFounder] = useState<any>(null);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const openTestimonialModal = (testimonial: any) => {
     setSelectedTestimonial(testimonial);
@@ -40,7 +52,11 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-secondary border-b border-border">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-secondary border-b border-border backdrop-blur-md' 
+          : 'bg-transparent border-transparent'
+      }`}>
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold text-primary">
