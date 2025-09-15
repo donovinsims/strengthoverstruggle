@@ -165,7 +165,7 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         id="hero" 
-        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40"
         style={{
           background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
         }}
@@ -205,9 +205,9 @@ const Index = () => {
       </section>
 
       {/* Impact Section */}
-      <section id="impact" className="py-20 px-6 bg-secondary">
+      <section id="impact" className="py-16 md:py-20 px-6 bg-secondary">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
             Our Impact
           </h2>
           
@@ -229,9 +229,9 @@ const Index = () => {
       </section>
 
       {/* Mission Section */}
-      <section id="mission" className="py-20 px-6">
+      <section id="mission" className="py-24 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
             Our Mission
           </h2>
           <div className="space-y-8 body-text leading-relaxed max-w-4xl mx-auto">
@@ -249,10 +249,10 @@ const Index = () => {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-20 px-6 bg-secondary">
+      <section id="programs" className="py-20 md:py-24 px-6 bg-secondary">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
               Our Programs
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
@@ -294,10 +294,10 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-6">
+      <section id="testimonials" className="py-24 md:py-28 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
               Real Impact Stories
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
@@ -353,10 +353,10 @@ const Index = () => {
       </section>
 
       {/* Founders Section */}
-      <section id="founders" className="py-20 px-6 bg-secondary">
+      <section id="founders" className="py-20 md:py-24 px-6 bg-secondary">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+            <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
               Meet Our Founders
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
@@ -412,9 +412,9 @@ const Index = () => {
       </section>
 
       {/* Donate Section Placeholder */}
-      <section id="donate" className="py-20 px-6">
+      <section id="donate" className="py-28 md:py-32 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 md:mb-20 text-primary">
             Join the Movement. Make a Difference Today.
           </h2>
           <p className="subtitle mb-8 max-w-2xl mx-auto">
@@ -434,7 +434,7 @@ const Index = () => {
 
 
       {/* Footer */}
-      <footer className="py-16 px-6 border-t border-border">
+      <footer className="py-16 md:py-20 px-6 border-t border-border">
         <div className="container mx-auto">
           <h2 className="text-2xl font-bold text-center mb-12 text-primary">
             Connect With Us
