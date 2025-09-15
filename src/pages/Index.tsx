@@ -144,7 +144,13 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-background">
+      <section 
+        id="hero" 
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden"
+        style={{
+          background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
+        }}
+      >
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
