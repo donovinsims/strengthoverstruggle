@@ -189,7 +189,7 @@ const Index = () => {
             </StarButton>
             <Button 
               variant="outline" 
-              className="border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg"
+              className="border-white text-white hover:bg-white/10 rounded-md px-8 py-6 text-lg"
               onClick={() => scrollToSection('mission')}
             >
               Learn Our Story

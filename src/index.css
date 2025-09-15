@@ -140,3 +140,13 @@
     @apply transition-transform duration-200 hover:scale-105;
   }
 }
+
+/* Star Button Animation */
+@keyframes star-btn {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
