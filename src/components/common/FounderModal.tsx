@@ -44,7 +44,7 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="w-[90vw] max-w-lg mx-auto max-h-[85vh] bg-card border border-border animate-scale-in flex flex-col"
+        className="w-[95vw] sm:w-[90vw] max-w-lg mx-auto max-h-[90vh] sm:max-h-[85vh] bg-card border border-border animate-scale-in flex flex-col"
         aria-labelledby="founder-title"
         aria-describedby="founder-content"
       >
@@ -66,7 +66,7 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
           </div>
         </DialogHeader>
         
-        <ScrollArea className="flex-1 pr-4">
+        <ScrollArea className="min-h-0 flex-1 h-full pr-4">
           <div className="space-y-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <img 
