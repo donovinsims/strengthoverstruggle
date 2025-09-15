@@ -6,24 +6,24 @@
 
 @layer base {
   :root {
-    /* Core Dark Minimalist colors - exact JSON specification */
-    --background: 0 0% 0%;           /* #000000 - Primary background */
-    --foreground: 0 0% 100%;         /* #FFFFFF - Primary text */
+    /* Core Pure Black Theme - High Contrast */
+    --background: 0 0% 0%;           /* #000000 - Pure black primary background */
+    --foreground: 0 0% 100%;         /* #FFFFFF - Maximum contrast white text */
 
-    --card: 0 0% 17%;                /* #2A2A2A - Card background */
+    --card: 0 0% 4%;                 /* #0A0A0A - Much darker card background */
     --card-foreground: 0 0% 100%;    /* #FFFFFF - Card text */
 
-    --popover: 0 0% 17%;             /* #2A2A2A - Popover background */
+    --popover: 0 0% 4%;              /* #0A0A0A - Darker popover background */
     --popover-foreground: 0 0% 100%; /* #FFFFFF - Popover text */
 
     --primary: 0 0% 100%;            /* #FFFFFF - Primary accent */
     --primary-foreground: 0 0% 0%;   /* #000000 - Text on primary */
 
-    --secondary: 0 0% 10%;           /* #1A1A1A - Secondary background */
-    --secondary-foreground: 0 0% 60%; /* #999999 - Secondary text */
+    --secondary: 0 0% 0%;            /* #000000 - Pure black secondary background */
+    --secondary-foreground: 0 0% 70%; /* #B3B3B3 - Softer secondary text */
 
-    --muted: 0 0% 20%;               /* #333333 - Input background */
-    --muted-foreground: 0 0% 40%;    /* #666666 - Tertiary text */
+    --muted: 0 0% 6%;                /* #0F0F0F - Subtle muted background */
+    --muted-foreground: 0 0% 50%;    /* #808080 - Softer muted text */
 
     --accent: 0 0% 100%;             /* #FFFFFF - Accent color */
     --accent-foreground: 0 0% 0%;    /* #000000 - Text on accent */
@@ -31,8 +31,8 @@
     --destructive: 0 84% 60%;        /* #EF4444 - Error color */
     --destructive-foreground: 0 0% 100%; /* White text on destructive */
 
-    --border: 0 0% 20%;              /* #333333 - Subtle borders */
-    --input: 0 0% 20%;               /* #333333 - Input backgrounds */
+    --border: 0 0% 10%;              /* #1A1A1A - Soft subtle borders */
+    --input: 0 0% 6%;                /* #0F0F0F - Darker input backgrounds */
     --ring: 0 0% 100%;               /* #FFFFFF - Focus rings */
 
     /* Typography tokens */
