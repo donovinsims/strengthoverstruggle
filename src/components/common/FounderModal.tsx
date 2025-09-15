@@ -43,7 +43,7 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="z-60 max-w-3xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in max-h-[90vh] overflow-y-auto"
+        className="max-w-3xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in max-h-[90vh] overflow-y-auto"
         aria-labelledby="founder-title"
         aria-describedby="founder-content"
       >

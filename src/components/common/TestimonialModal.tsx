@@ -41,7 +41,7 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="z-60 max-w-2xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in"
+        className="max-w-2xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in"
         aria-labelledby="testimonial-title"
         aria-describedby="testimonial-content"
       >
