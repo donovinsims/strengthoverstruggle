@@ -43,7 +43,7 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-3xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in max-h-[90vh] overflow-y-auto"
+        className="w-[95vw] max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto bg-card border border-border animate-scale-in max-h-[90vh] overflow-y-auto"
         aria-labelledby="founder-title"
         aria-describedby="founder-content"
       >
@@ -65,42 +65,42 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
           </div>
         </DialogHeader>
         
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col items-center space-y-4 text-center">
             <img 
               src={founder.image} 
               alt={founder.name}
-              className="w-32 h-32 rounded-full object-cover"
+              className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full object-cover"
             />
-            <div className="text-center sm:text-left">
-              <h3 className="text-xl font-semibold text-primary mb-2">{founder.name}</h3>
-              <p className="caption mb-4">{founder.role}</p>
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2">{founder.name}</h3>
+              <p className="caption mb-4 text-sm sm:text-base">{founder.role}</p>
               
-              <div className="flex justify-center sm:justify-start space-x-4">
+              <div className="flex justify-center space-x-4 sm:space-x-6">
                 <a
                   href={`mailto:${founder.email}`}
-                  className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
                   aria-label={`Email ${founder.name}`}
                 >
-                  <Mail size={16} strokeWidth={1.5} />
-                  <span className="text-sm">Email</span>
+                  <Mail size={14} strokeWidth={1.5} className="sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">Email</span>
                 </a>
                 <a
                   href={founder.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
                   aria-label={`${founder.name}'s LinkedIn profile`}
                 >
-                  <Linkedin size={16} strokeWidth={1.5} />
-                  <span className="text-sm">LinkedIn</span>
+                  <Linkedin size={14} strokeWidth={1.5} className="sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">LinkedIn</span>
                 </a>
               </div>
             </div>
           </div>
           
           <div id="founder-content">
-            <p className="body-text leading-relaxed">
+            <p className="body-text leading-relaxed text-sm sm:text-base">
               {founder.fullBio}
             </p>
           </div>

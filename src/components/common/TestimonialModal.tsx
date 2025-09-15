@@ -41,7 +41,7 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-2xl w-full mx-4 md:mx-auto bg-card border border-border animate-scale-in"
+        className="w-[95vw] max-w-md sm:max-w-lg md:max-w-2xl mx-auto bg-card border border-border animate-scale-in"
         aria-labelledby="testimonial-title"
         aria-describedby="testimonial-content"
       >
@@ -63,21 +63,21 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
           </div>
         </DialogHeader>
         
-        <div className="space-y-6">
-          <div className="flex items-center space-x-4">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
             <img 
               src={testimonial.image} 
               alt={testimonial.name}
-              className="w-16 h-16 rounded-full object-cover"
+              className="w-20 h-20 sm:w-16 sm:h-16 rounded-full object-cover"
             />
             <div>
-              <h3 className="font-semibold text-primary">{testimonial.name}</h3>
-              <p className="caption">{testimonial.role}</p>
+              <h3 className="font-semibold text-primary text-lg sm:text-base">{testimonial.name}</h3>
+              <p className="caption text-sm">{testimonial.role}</p>
             </div>
           </div>
           
           <div id="testimonial-content">
-            <blockquote className="text-lg italic text-foreground leading-relaxed">
+            <blockquote className="text-base sm:text-lg italic text-foreground leading-relaxed">
               "{testimonial.fullQuote}"
             </blockquote>
           </div>
