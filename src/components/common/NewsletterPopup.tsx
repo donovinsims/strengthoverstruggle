@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { X, Bell, AlertCircle } from "lucide-react";
+import { X, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useToast } from "@/hooks/use-toast";
 
 interface NewsletterPopupProps {
   isOpen: boolean;
@@ -16,71 +15,31 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    setHasError(false);
     
-    try {
-      // Add debugging
-      console.log('Attempting newsletter signup with email:', email);
-      
-      // For now, let's add proper error logging to see what's happening
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          api_key: '5qhRShC1VPSMmKrk53oi4Q'
-        })
-      });
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    console.log("Newsletter subscription:", {
+      email,
+      timestamp: new Date().toISOString(),
+      source: "homepage_popup"
+    });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('API Error Response:', errorData);
-        throw new Error(errorData.message || `HTTP ${response.status}: Failed to subscribe`);
-      }
-
-      const data = await response.json();
-      console.log("Newsletter subscription successful:", data);
-      setIsSubmitted(true);
-      
-      toast({
-        title: "Success!",
-        description: "You've been subscribed to our newsletter.",
-      });
-      
-      // Auto close after success
-      setTimeout(() => {
-        onClose();
-        setEmail("");
-        setIsSubmitted(false);
-        setHasError(false);
-      }, 2000);
-    } catch (error) {
-      console.error('Newsletter signup error:', error);
-      console.error('Error type:', error.constructor.name);
-      console.error('Error message:', error.message);
-      setHasError(true);
-      
-      toast({
-        title: "Subscription Failed",
-        description: error instanceof Error ? error.message : "Please try again in a moment.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setIsSubmitted(true);
+    setIsSubmitting(false);
+    
+    // Auto close after success
+    setTimeout(() => {
+      onClose();
+      setEmail("");
+      setIsSubmitted(false);
+    }, 2000);
   };
 
   return (
@@ -130,29 +89,19 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      {hasError && (
-                        <div className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
-                          <AlertCircle className="w-4 h-4" />
-                          <span>Subscription failed. Please try again.</span>
-                        </div>
-                      )}
                       <Input 
                         type="email" 
                         placeholder="Enter your email address"
                         value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          setHasError(false);
-                        }}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="border border-border"
                         aria-label="Email address"
-                        disabled={isSubmitting}
                       />
                       <Button 
                         type="submit" 
                         className="w-full py-6 text-lg font-medium"
-                        disabled={isSubmitting || !email.trim()}
+                        disabled={isSubmitting || !email}
                       >
                         {isSubmitting ? "Joining..." : "Join Our Mission"}
                       </Button>
