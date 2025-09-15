@@ -257,7 +257,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
                 icon: Users,
@@ -301,7 +301,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 id: "sarah",
@@ -330,7 +330,7 @@ const Index = () => {
             ].map((testimonial) => (
               <Card 
                 key={testimonial.id} 
-                className="bg-card cursor-pointer hover-scale"
+                className="bg-card cursor-pointer hover-scale min-h-[280px]"
                 onClick={() => openTestimonialModal(testimonial)}
               >
                 <CardContent className="p-6 md:p-8">
