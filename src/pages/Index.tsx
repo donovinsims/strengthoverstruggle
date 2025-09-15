@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Zap, Mail, Phone, MapPin, Menu, X } from "lucide-react";
+import { Heart, Users, Zap, Mail, MapPin, Menu, X, Facebook, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
@@ -173,8 +173,7 @@ const Index = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Empowering Resilience.<br />
-            <span className="gradient-text">Overcoming Adversity.</span>
+            <span className="gradient-text">Building Strength Over Struggle</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
             Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.
@@ -234,15 +233,9 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
             Our Mission
           </h2>
-          <div className="space-y-8 body-text leading-relaxed max-w-4xl mx-auto">
+          <div className="body-text leading-relaxed max-w-4xl mx-auto">
             <p>
-              At Strength Over Struggle, we believe that resilience is not just about surviving life's challenges—it's about thriving through them. Our mission is to empower individuals and families with the tools, resources, and community support they need to transform adversity into strength.
-            </p>
-            <p>
-              We focus on three core pillars of wellness: mental health support that builds emotional resilience, physical wellness programs that strengthen the body and spirit, and financial literacy that creates pathways to stability and independence.
-            </p>
-            <p>
-              Every person deserves the opportunity to overcome their struggles and discover their inherent strength. Through comprehensive programs, community partnerships, and unwavering support, we're building a movement where no one faces their challenges alone.
+              SOS Empowers individuals to overcome life's challenges through resilience, fitness, and community support. We are dedicated to turning adversity into strength by providing resources, education, and opportunities that inspire personal growth and healthier lifestyles.
             </p>
           </div>
         </div>
@@ -266,17 +259,17 @@ const Index = () => {
               {
                 icon: Users,
                 title: "Physical Wellness",
-                description: "Gym memberships, fitness programs, and wellness coaching to build physical strength and mental resilience through movement and healthy habits."
+                description: "Providing access to quality gym facilities and fitness programs that promote health, strength, and physical confidence."
               },
               {
                 icon: Heart,
                 title: "Community Building",
-                description: "Support groups, mentorship programs, and community events that create lasting connections and shared experiences of growth and healing."
+                description: "Creating supportive environments where youth can connect, build friendships, and develop positive peer relationships."
               },
               {
                 icon: Zap,
                 title: "Life Skills",
-                description: "Financial literacy workshops, career development, and practical life skills training that create pathways to independence and stability."
+                description: "Teaching discipline, goal-setting, perseverance, and self-confidence through structured fitness programs and mentorship."
               }
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
@@ -418,7 +411,7 @@ const Index = () => {
             Make a Difference Today.
           </h2>
           <p className="subtitle mb-12 max-w-2xl mx-auto">
-            Your support helps us provide essential resources and programs to those who need them most.
+            Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
           {/* Donation Cards - 5 card layout */}
@@ -510,24 +503,32 @@ const Index = () => {
             Connect With Us
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8 text-center mb-12">
+          <div className="grid md:grid-cols-4 gap-8 text-center mb-12">
             {[
               {
-                icon: Phone,
-                title: "Call Us",
-                content: "(555) 123-HOPE",
-                subtitle: "Available for support"
+                icon: Facebook,
+                title: "Facebook",
+                content: "Follow Us",
+                subtitle: "Stay connected",
+                link: "https://www.facebook.com/profile.php?id=61577091357646"
+              },
+              {
+                icon: Instagram,
+                title: "Instagram",
+                content: "@_strengthoverstruggle_",
+                subtitle: "Daily updates",
+                link: "https://www.instagram.com/_strengthoverstruggle_/"
               },
               {
                 icon: Mail,
                 title: "Email Us",
-                content: "info@strengthoverstruggle.org",
+                content: "strengthoverstrugglenfp@gmail.com",
                 subtitle: "We respond within 24 hours"
               },
               {
                 icon: MapPin,
                 title: "Find Us",
-                content: "Community Center",
+                content: "Roscoe, Illinois",
                 subtitle: "Serving our local area"
               }
             ].map((contact, index) => (
@@ -536,7 +537,18 @@ const Index = () => {
                   <contact.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-semibold mb-2 text-primary">{contact.title}</h3>
-                <p className="font-medium mb-1 text-primary">{contact.content}</p>
+                {contact.link ? (
+                  <a 
+                    href={contact.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium mb-1 text-primary hover:underline block"
+                  >
+                    {contact.content}
+                  </a>
+                ) : (
+                  <p className="font-medium mb-1 text-primary">{contact.content}</p>
+                )}
                 <p className="caption">{contact.subtitle}</p>
               </div>
             ))}
