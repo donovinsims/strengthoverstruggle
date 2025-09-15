@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "@/components
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
+import { subscribeToForm } from "@/lib/convertkit";
 
 interface NewsletterPopupProps {
   isOpen: boolean;
@@ -27,31 +28,7 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
     setHasError(false);
     
     try {
-      // Add debugging
-      console.log('Attempting newsletter signup with email:', email);
-      
-      // For now, let's add proper error logging to see what's happening
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          api_key: '5qhRShC1VPSMmKrk53oi4Q'
-        })
-      });
-
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('API Error Response:', errorData);
-        throw new Error(errorData.message || `HTTP ${response.status}: Failed to subscribe`);
-      }
-
-      const data = await response.json();
+      const data = await subscribeToForm(email);
       console.log("Newsletter subscription successful:", data);
       setIsSubmitted(true);
       
