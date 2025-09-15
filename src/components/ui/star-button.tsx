@@ -53,8 +53,8 @@ export function StarButton({
   children,
   lightWidth = 60,
   duration = 2,
-  lightColor = "#FFFFFF",
-  backgroundColor = "currentColor",
+  lightColor = "#FAFAFA",
+  backgroundColor = "#000000",
   borderWidth = 2,
   className,
   onClick,
@@ -85,7 +85,7 @@ export function StarButton({
       }
       ref={pathRef}
       className={cn(
-        "relative z-[3] overflow-hidden px-6 py-3 text-base font-medium inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors disabled:pointer-events-none disabled:opacity-50 group/star-button",
+        "relative z-[3] overflow-hidden px-6 py-3 text-base font-medium inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors disabled:pointer-events-none disabled:opacity-50 group/star-button bg-black",
         className,
       )}
       onClick={onClick}
@@ -102,13 +102,13 @@ export function StarButton({
         }
       />
       <div
-        className="absolute inset-0 dark:border-white/15 border-black/10 z-[4] overflow-hidden rounded-[inherit] dark:text-black text-white"
+        className="absolute inset-0 border-white/20 z-[4] overflow-hidden rounded-[inherit]"
         style={{ borderWidth: "var(--border-width)" }}
         aria-hidden="true"
       >
-        <StarBackground color={backgroundColor} />
+        <StarBackground color="#000000" />
       </div>
-      <span className="z-10 relative bg-gradient-to-t dark:from-white dark:to-neutral-500 from-black to-neutral-400 inline-block text-transparent bg-clip-text">
+      <span className="z-10 relative text-white font-medium">
         {children}
       </span>
     </button>
