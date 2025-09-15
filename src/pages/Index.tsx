@@ -7,6 +7,7 @@ import { FounderModal } from "@/components/common/FounderModal";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 import dylannFounderImage from "@/assets/dylann-founder.png";
+import alexFounderImage from "@/assets/alex-founder.jpg";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -366,7 +367,7 @@ const Index = () => {
               Meet Our Founders
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
-              The passionate leaders behind Strength Over Struggle, dedicated to empowering resilience in our community.
+              Driven by personal experience and a shared vision of empowerment through fitness and community support.
             </p>
           </div>
 
@@ -375,19 +376,19 @@ const Index = () => {
               {
                 id: "alex",
                 name: "Alex Limberg",
-                role: "Co-Founder & Executive Director",
-                bio: "Passionate advocate for community wellness and resilience...",
-                fullBio: "Alex Limberg brings over a decade of experience in community development and nonprofit leadership to Strength Over Struggle. After witnessing firsthand how financial stress and lack of resources can devastate families, Alex dedicated his career to creating comprehensive support systems that address the root causes of struggle. With a background in social work and business administration, Alex has successfully launched multiple community programs that have served thousands of individuals and families. His vision for holistic wellness - combining mental, physical, and financial health - forms the foundation of our organization's approach. Alex believes that everyone deserves the opportunity to transform their challenges into strengths, and his leadership continues to inspire both our team and the communities we serve.",
+                role: "Founder/President",
+                bio: "Detective, Swat Operator, and Fitness Fanatic. Alex Limberg is an athlete and law enforcement officer.",
+                fullBio: "Detective, Swat Operator, and Fitness Fanatic. Alex Limberg is an athlete and law enforcement officer. Through personal and professional experiences, Alex understands the impact and need for youth and young-adults to have positive support systems and healthy coping opportunities. He founded SOS to promote physical and mental health in deserving and opportunistic youth.",
                 email: "alex@strengthoverstruggle.org",
                 linkedin: "https://linkedin.com/in/alexlimberg",
-                image: "/placeholder.svg"
+                image: alexFounderImage
               },
               {
                 id: "dylann",
                 name: "Dylann Rauch",
-                role: "Co-Founder & Program Director",
-                bio: "Expert in wellness programming and community engagement...",
-                fullBio: "Dylann Rauch's journey to co-founding Strength Over Struggle began with her own transformation through fitness and community support. As a certified wellness coach and former program participant in similar initiatives, Dylann understands the power of combining physical activity with emotional and financial support. Her expertise in program development has been instrumental in creating our comprehensive wellness curricula that address the whole person. Dylann holds certifications in personal training, mental health first aid, and financial counseling, allowing her to bridge the gap between different aspects of wellness. Her empathetic leadership style and deep understanding of the challenges our participants face make her an invaluable advocate and mentor. Under her guidance, our programs have achieved remarkable success rates in helping individuals build lasting, positive change in their lives.",
+                role: "Co-Founder/Vice President",
+                bio: "Prior Professional Athlete, Child Maltreatment investigator, and Community Activist.",
+                fullBio: "Prior Professional Athlete, Child Maltreatment investigator, and Community Activist. Dylann Rauch is a prior professional quarterback, barber, and now Child Maltreatment Investigator. Dylann Rauch has multiple years of experience serving underserved youth and partnering with local schools, providing new opportunities for opportunistic youth. These activities include but are not limited to holiday community events, and sports like ice skating, self-defense classes, weight lifting, and football.",
                 email: "dylann@strengthoverstruggle.org",
                 linkedin: "https://linkedin.com/in/dylannrauch",
                 image: dylannFounderImage
