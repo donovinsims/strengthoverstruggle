@@ -71,3 +71,40 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Security Features
+
+This project implements comprehensive security best practices:
+
+### Content Security Policy (CSP)
+- Configured to prevent XSS attacks and unauthorized resource loading
+- Allows necessary resources while blocking potentially malicious content
+- Permits Stripe checkout functionality with secure domain allowlist
+
+### External Link Security
+- All external links use `rel="noopener noreferrer"` to prevent tabnabbing attacks
+- Stripe checkout links open securely without exposing window.opener
+
+### Security Headers
+- `X-Content-Type-Options: nosniff` - Prevents MIME sniffing attacks
+- `X-Frame-Options: DENY` - Blocks clickjacking attempts
+- `Referrer-Policy: strict-origin-when-cross-origin` - Controls referrer information
+- `Permissions-Policy` - Restricts access to sensitive browser features
+
+### Input Validation Framework
+- Utility functions in `src/lib/security.ts` for input sanitization
+- Email, phone, and URL validation with Zod schemas
+- Rate limiting helpers for future API implementations
+- HTML sanitization to prevent XSS attacks
+
+### Security Guidelines for Future Development
+1. Always validate and sanitize user inputs using the security utilities
+2. Use HTTPS for all external integrations
+3. Implement proper error handling without exposing sensitive information
+4. Follow the principle of least privilege for permissions
+5. Regular security audits and dependency updates
+
+### Secure External Integrations
+- Stripe checkout integration uses secure domain allowlist
+- External links properly configured with security attributes
+- No sensitive data exposed in client-side code
