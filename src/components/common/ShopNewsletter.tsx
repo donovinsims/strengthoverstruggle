@@ -3,6 +3,7 @@ import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { subscribeToForm } from "@/lib/convertkit";
 
 export const ShopNewsletter = () => {
   const [email, setEmail] = useState("");
@@ -16,23 +17,7 @@ export const ShopNewsletter = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          api_key: '5qhRShC1VPSMmKrk53oi4Q'
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Failed to subscribe`);
-      }
-
-      const data = await response.json();
+      const data = await subscribeToForm(email);
       console.log("Shop newsletter subscription successful:", data);
       setIsSubmitted(true);
       setEmail("");
