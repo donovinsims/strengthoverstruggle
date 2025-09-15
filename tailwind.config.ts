@@ -120,6 +120,10 @@ export default {
         "slide-in-right": {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0)" }
+        },
+        "star-btn": {
+          "0%": { "offset-distance": "0%" },
+          "100%": { "offset-distance": "100%" }
         }
       },
       animation: {
@@ -128,6 +132,7 @@ export default {
         "fade-in": "fade-in 0.3s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "slide-in-right": "slide-in-right 0.3s ease-out",
+        "star-btn": "star-btn var(--duration, 3s) ease-in-out infinite"
       },
     },
   },

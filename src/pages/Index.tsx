@@ -4,6 +4,7 @@ import { Heart, Users, Zap, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
+import { StarButton } from "@/components/ui/star-button";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 import dylannFounderImage from "@/assets/dylann-founder.png";
@@ -180,12 +181,12 @@ const Index = () => {
             Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-semibold"
+            <StarButton 
+              className="bg-white text-black hover:bg-white/90 font-semibold"
               onClick={() => scrollToSection('donate')}
             >
               Donate Now
-            </Button>
+            </StarButton>
             <Button 
               variant="outline" 
               className="border-white text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg"
@@ -422,9 +423,9 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button className="rounded-md px-8 py-6 text-lg font-medium">
+            <StarButton className="bg-primary text-primary-foreground hover:opacity-90">
               Make a Donation
-            </Button>
+            </StarButton>
             <Button variant="outline" className="rounded-md px-8 py-6 text-lg">
               Become a Volunteer
             </Button>
