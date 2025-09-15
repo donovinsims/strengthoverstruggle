@@ -4,7 +4,7 @@ import { Heart, Users, Zap, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
-import wristbandImage from "@/assets/sos-wristband.png";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,12 +73,12 @@ const Index = () => {
               >
                 Programs
               </button>
-              <button 
-                onClick={() => scrollToSection('shop')}
+              <Link 
+                to="/shop"
                 className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Shop
-              </button>
+              </Link>
               <Button 
                 onClick={() => scrollToSection('donate')}
                 className="rounded-md px-6"
@@ -125,12 +125,12 @@ const Index = () => {
                 >
                   Programs
                 </button>
-                <button 
-                  onClick={() => scrollToSection('shop')}
+                <Link 
+                  to="/shop"
                   className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 >
                   Shop
-                </button>
+                </Link>
                 <Button 
                   onClick={() => scrollToSection('donate')}
                   className="rounded-md px-6 w-full"
@@ -414,53 +414,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Shop Section */}
-      <section id="shop" className="py-20 px-6 bg-muted/50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
-              Support Our Mission
-            </h2>
-            <p className="subtitle mb-8 max-w-2xl mx-auto">
-              Get your SOS Wristband and wear your strength while supporting our cause.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <Card className="bg-card max-w-md w-full">
-              <CardContent className="p-8">
-                <div className="aspect-square mb-6 bg-muted rounded-lg overflow-hidden">
-                  <img 
-                    src={wristbandImage} 
-                    alt="SOS Wristband - White silicone wristband with 'I GET TO' text"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-primary text-center">
-                  SOS Wristband
-                </h3>
-                
-                <p className="body-text text-center mb-6">
-                  Wear your strength. Support the mission. This comfortable silicone wristband reminds you of your resilience every day.
-                </p>
-                
-                <div className="text-center mb-6">
-                  <span className="text-3xl font-bold text-primary">$4.56</span>
-                  <span className="body-text ml-2">USD</span>
-                </div>
-                
-                <Button 
-                  className="w-full rounded-md py-6 text-lg font-medium"
-                  onClick={() => window.open('https://buy.stripe.com/test_7sYfZi6pAbh85Anf2Na3u01', '_blank')}
-                >
-                  Buy Now
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="py-16 px-6 border-t border-border">
