@@ -31,7 +31,7 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
       console.log('Attempting newsletter signup with email:', email);
       
       // For now, let's add proper error logging to see what's happening
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
+      const response = await fetch('https://api.convertkit.com/v3/forms/8554123/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
