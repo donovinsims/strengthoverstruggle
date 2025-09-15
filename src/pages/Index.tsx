@@ -526,7 +526,8 @@ const Index = () => {
                 icon: Mail,
                 title: "Email Us",
                 content: "strengthoverstrugglenfp@gmail.com",
-                subtitle: "We respond within 24 hours"
+                subtitle: "We respond within 24 hours",
+                link: "mailto:strengthoverstrugglenfp@gmail.com"
               },
               {
                 icon: MapPin,
