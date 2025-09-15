@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Target, Dumbbell, Handshake, BookOpen, Mail, Phone, MapPin, Menu, X } from "lucide-react";
+import { Heart, Users, Zap, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import heroImage from "@/assets/hero-image.jpg";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -116,15 +115,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            background: `radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-background">
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -218,25 +209,25 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: Dumbbell,
+                icon: Users,
                 title: "Physical Wellness",
                 description: "Gym memberships, fitness programs, and wellness coaching to build physical strength and mental resilience through movement and healthy habits."
               },
               {
-                icon: Handshake,
+                icon: Heart,
                 title: "Community Building",
                 description: "Support groups, mentorship programs, and community events that create lasting connections and shared experiences of growth and healing."
               },
               {
-                icon: BookOpen,
+                icon: Zap,
                 title: "Life Skills",
                 description: "Financial literacy workshops, career development, and practical life skills training that create pathways to independence and stability."
               }
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
                 <CardContent className="p-8">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-primary mb-6">
-                    <program.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-6">
+                    <program.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-4 text-primary">{program.title}</h3>
                   <p className="body-text">{program.description}</p>
@@ -297,8 +288,8 @@ const Index = () => {
               }
             ].map((contact, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-primary mb-4">
-                  <contact.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4">
+                  <contact.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-semibold mb-2 text-primary">{contact.title}</h3>
                 <p className="font-medium mb-1 text-primary">{contact.content}</p>
