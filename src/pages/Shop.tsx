@@ -83,7 +83,7 @@ const Shop = () => {
 
           {/* Newsletter CTA */}
           <div className="mt-16 text-center">
-            <Card className="bg-muted/50 max-w-2xl mx-auto">
+            <Card className="bg-muted/50 max-w-lg mx-auto">
               <CardContent className="p-8">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
                   <Bell className="w-8 h-8 text-primary" />
