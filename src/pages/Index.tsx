@@ -276,11 +276,11 @@ const Index = () => {
               }
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
-                <CardContent className="p-8">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-6">
+                <CardContent className="p-6">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4">
                     <program.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 text-primary">{program.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">{program.title}</h3>
                   <p className="body-text">{program.description}</p>
                 </CardContent>
               </Card>
