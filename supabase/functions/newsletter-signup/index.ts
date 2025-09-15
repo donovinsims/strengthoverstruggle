@@ -28,11 +28,14 @@ serve(async (req: Request) => {
     );
 
     // Check if email already exists
-    const { data: existingSignup } = await supabase
+    const { data: existingSignup, error: selectError } = await supabase
       .from('newsletter_signups')
       .select('id, status')
       .eq('email', email)
-      .single();
+      .maybeSingle();
+
+    // Log the check result
+    console.log('Existing signup check:', { existingSignup, selectError });
 
     if (existingSignup) {
       console.log('Email already exists:', email);
@@ -49,6 +52,7 @@ serve(async (req: Request) => {
     }
 
     // Add subscriber to ConvertKit
+    console.log('Attempting ConvertKit subscription for:', email);
     const convertKitResponse = await fetch('https://api.convertkit.com/v3/subscribers', {
       method: 'POST',
       headers: {
@@ -60,6 +64,8 @@ serve(async (req: Request) => {
         first_name: name || '',
       }),
     });
+
+    console.log('ConvertKit response status:', convertKitResponse.status);
 
     let convertKitSubscriberId = null;
     let status = 'pending';
