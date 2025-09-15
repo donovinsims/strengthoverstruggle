@@ -306,22 +306,22 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              {
-                id: "markhi",
-                name: "Markhi Thompson",
-                role: "2024 Class President and Gym Membership Recipient, Beloit Fresh Start",
-                quote: "I graduated in the 2024 class at Beloit Fresh Start. I was one of the recipients of a donated gym and boxing membership...",
-                fullQuote: "I graduated in the 2024 class at Beloit Fresh Start. I was one of the recipients of a donated gym and boxing membership with some other members in Beloit Fresh Start in 2024. I would say it made a big impact in all areas of students' lives. I was seeing kids I never had seen outside of school at the gym, allowing students to bond more and get work in at the same time. I personally was doing boxing and in the gym prior to receiving the donated memberships but found that it can get expensive… very expensive. It would be amazing if this could be an ongoing thing for all kids in Beloit instead of just Beloit Fresh Start students. It would make a big impact. I've seen it personally, and I think it will motivate the youth to take care of themselves and build themselves. The gym teaches discipline, character, consistency, confidence, and many more things. That was one of the best experiences I had with boxing, teaching kids combat the right way and how to keep themselves safe. It's not just a free membership it's a new way of living and meeting new people with the same mindset. Me personally, I am still consistent in the gym today, and receiving a donated membership definitely made me want to pay for it after my donated membership was over. I really think this would be good for the youth as a whole and should be done way more. This program also keeps kids in the gym and out the streets or out of trouble somewhere they can call a safe place. I would love to be given the opportunity to play a role in this and help my community.",
-                image: "/placeholder.svg"
-              },
-              {
-                id: "elena",
-                name: "Elena Henry",
-                role: "Youth Development Program Manager, Beloit Fresh Start", 
-                quote: "As an educator, I am always looking for opportunities that go beyond the classroom to support the physical and well-being of my students...",
-                fullQuote: "As an educator, I am always looking for opportunities that go beyond the classroom to support the physical and well-being of my students. The opportunity provided through Alex Limberg and Dylann Rauch's non-profit – offering gym memberships to local youth – was truly impactful within my program. Over the last couple of years, we had about 60 students participate, and the feedback was overwhelmingly positive. They not only enjoyed having a safe and structured place to exercise, but many also expressed how it helped them build confidence, relieve stress and develop healthier routines. For some, it was their first time stepping into a gym environment, and it opened their eyes to a new way of investing in themselves. From my perspective, this program filled a crucial gap in our community, especially for students who may not have the resources or support systems to pursue fitness on their own. I fully support this initiative and believe it deserves the backing of any organization committed to youth development, health, and community engagement.",
-                image: "/placeholder.svg"
-              }
+               {
+                 id: "markhi",
+                 name: "Markhi Thompson",
+                 role: "2024 Class President and Gym Membership Recipient, Beloit Fresh Start",
+                 quote: "I received a donated gym and boxing membership that truly impacted us students. I saw classmates bonding and working hard together at the gym—people I'd never seen outside of school...",
+                 fullQuote: "I received a donated gym and boxing membership that truly impacted us students. I saw classmates bonding and working hard together at the gym—people I'd never seen outside of school.\n\nI was already into boxing and the gym, but memberships get expensive. This program motivates youth to stay healthy, teaches discipline, character, confidence, and gives kids a safe place off the streets.\n\nFor me, it wasn't just a free membership—it sparked a lifestyle. I'm still in the gym today, now paying for my own membership. This should happen more for all Beloit youth.",
+                 image: "/placeholder.svg"
+               },
+               {
+                 id: "elena",
+                 name: "Elena Henry",
+                 role: "Youth Development Program Manager, Beloit Fresh Start", 
+                 quote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space...",
+                 fullQuote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space to exercise, relieve stress, and build confidence.\n\nFor many, it was their first gym experience—opening their eyes to healthy routines. This program fills a crucial gap for students without resources or support and deserves strong backing for youth health and community engagement.",
+                 image: "/placeholder.svg"
+               }
             ].map((testimonial) => (
               <Card 
                 key={testimonial.id} 
