@@ -98,9 +98,9 @@ const Shop = () => {
                   <Input 
                     type="email" 
                     placeholder="Enter your email address"
-                    className="flex-1"
+                    className="flex-1 border border-border"
                   />
-                  <Button className="sm:w-auto">
+                  <Button className="sm:w-auto py-6 text-lg font-medium">
                     Stay Updated
                   </Button>
                 </div>
