@@ -21,7 +21,7 @@ const Shop = () => {
       </header>
 
       {/* Main Content */}
-      <main className="py-20 px-6">
+      <main className="py-12 px-6">
         <div className="container mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-16">
@@ -36,8 +36,8 @@ const Shop = () => {
           {/* Product Section */}
           <div className="flex justify-center">
             <Card className="bg-card max-w-lg w-full">
-              <CardContent className="p-8">
-                <div className="aspect-square mb-6 bg-muted rounded-lg overflow-hidden">
+              <CardContent className="p-6">
+                <div className="aspect-[4/3] mb-4 bg-muted rounded-lg overflow-hidden">
                   <img 
                     src={wristbandImage} 
                     alt="SOS Wristband - White silicone wristband with 'I GET TO' text"
