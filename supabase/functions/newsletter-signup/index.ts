@@ -53,13 +53,13 @@ serve(async (req: Request) => {
 
     // Add subscriber to ConvertKit
     console.log('Attempting ConvertKit subscription for:', email);
-    const convertKitResponse = await fetch('https://api.convertkit.com/v3/subscribers', {
+    const convertKitResponse = await fetch(`https://api.convertkit.com/v3/forms/${Deno.env.get('CONVERTKIT_FORM_ID')}/subscribe`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({
-        api_key: Deno.env.get('CONVERTKIT_API_KEY'),
+      body: new URLSearchParams({
+        api_key: Deno.env.get('CONVERTKIT_API_KEY') || '',
         email: email,
         first_name: name || '',
       }),
@@ -72,7 +72,7 @@ serve(async (req: Request) => {
 
     if (convertKitResponse.ok) {
       const convertKitData = await convertKitResponse.json();
-      convertKitSubscriberId = convertKitData.subscriber?.id?.toString();
+      convertKitSubscriberId = convertKitData.subscription?.subscriber?.id?.toString();
       status = 'subscribed';
       console.log('ConvertKit subscription successful:', convertKitData);
     } else {

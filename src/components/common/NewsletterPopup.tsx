@@ -27,27 +27,19 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
     setHasError(false);
     
     try {
-      // Add debugging
-      console.log('Attempting newsletter signup with email:', email);
-      
-      // For now, let's add proper error logging to see what's happening
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
+      const response = await fetch(`https://api.convertkit.com/v3/forms/${import.meta.env.VITE_CONVERTKIT_FORM_ID}/subscribe`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           email: email.trim(),
-          api_key: '5qhRShC1VPSMmKrk53oi4Q'
+          api_key: import.meta.env.VITE_CONVERTKIT_API_KEY || ''
         })
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.error('API Error Response:', errorData);
         throw new Error(errorData.message || `HTTP ${response.status}: Failed to subscribe`);
       }
 

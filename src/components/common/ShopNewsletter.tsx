@@ -16,14 +16,14 @@ export const ShopNewsletter = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://api.convertkit.com/v3/subscribers', {
+      const response = await fetch(`https://api.convertkit.com/v3/forms/${import.meta.env.VITE_CONVERTKIT_FORM_ID}/subscribe`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           email: email.trim(),
-          api_key: '5qhRShC1VPSMmKrk53oi4Q'
+          api_key: import.meta.env.VITE_CONVERTKIT_API_KEY || ''
         })
       });
 
