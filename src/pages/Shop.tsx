@@ -3,9 +3,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Facebook, Instagram, Mail, MapPin, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import wristbandImage from "@/assets/sos-wristband.png";
 
 const Shop = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -98,7 +103,7 @@ const Shop = () => {
                   <Input 
                     type="email" 
                     placeholder="Enter your email address"
-                    className="flex-1 border-border"
+                    className="flex-1 border border-border"
                   />
                   <Button className="sm:w-auto py-6 text-lg font-medium">
                     Stay Updated
