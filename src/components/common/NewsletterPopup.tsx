@@ -27,6 +27,10 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
     setHasError(false);
     
     try {
+      // Add debugging
+      console.log('Attempting newsletter signup with email:', email);
+      
+      // For now, let's add proper error logging to see what's happening
       const response = await fetch('https://api.convertkit.com/v3/subscribers', {
         method: 'POST',
         headers: {
@@ -38,8 +42,12 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
         })
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        console.error('API Error Response:', errorData);
         throw new Error(errorData.message || `HTTP ${response.status}: Failed to subscribe`);
       }
 
@@ -61,6 +69,8 @@ export const NewsletterPopup = ({ isOpen, onClose }: NewsletterPopupProps) => {
       }, 2000);
     } catch (error) {
       console.error('Newsletter signup error:', error);
+      console.error('Error type:', error.constructor.name);
+      console.error('Error message:', error.message);
       setHasError(true);
       
       toast({
