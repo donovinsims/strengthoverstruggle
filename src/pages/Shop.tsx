@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ArrowLeft, Facebook, Instagram, Mail, MapPin, Bell } from "lucide-react";
+import { ArrowLeft, Facebook, Instagram, Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import wristbandImage from "@/assets/sos-wristband.png";
@@ -86,32 +85,6 @@ const Shop = () => {
             </Card>
           </div>
 
-          {/* Newsletter CTA */}
-          <div className="mt-16 text-center">
-            <Card className="bg-muted/50 max-w-lg mx-auto">
-              <CardContent className="p-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-                  <Bell className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-primary">
-                  New Products Coming Soon
-                </h3>
-                <p className="body-text mb-6">
-                  Be the first to know when we launch new items! Join our email list to stay updated on fresh merchandise and never miss when new products are back in stock.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                  <Input 
-                    type="email" 
-                    placeholder="Enter your email address"
-                    className="flex-1 border border-border"
-                  />
-                  <Button className="sm:w-auto py-6 text-lg font-medium">
-                    Stay Updated
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </main>
 

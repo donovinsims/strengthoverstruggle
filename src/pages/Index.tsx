@@ -4,7 +4,7 @@ import { Heart, Users, Zap, Mail, MapPin, Menu, X, Facebook, Instagram } from "l
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
-import { NewsletterPopup } from "@/components/common/NewsletterPopup";
+
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 import dylannFounderImage from "@/assets/dylann-founder.png";
@@ -16,44 +16,18 @@ const Index = () => {
   const [selectedFounder, setSelectedFounder] = useState<any>(null);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
-  const [isNewsletterPopupOpen, setIsNewsletterPopupOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hasShownNewsletter, setHasShownNewsletter] = useState(false);
 
-  // Track scroll position and newsletter popup trigger
+  // Track scroll position
   useEffect(() => {
-    // Check if newsletter popup was already shown this session
-    const newsletterShown = sessionStorage.getItem('newsletter-popup-shown');
-    if (newsletterShown) {
-      setHasShownNewsletter(true);
-    }
-
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 50);
-
-      // Newsletter popup trigger logic
-      if (!hasShownNewsletter && !newsletterShown) {
-        const impactSection = document.getElementById('impact');
-        const programsSection = document.getElementById('programs');
-        
-        if (impactSection && programsSection) {
-          const impactBottom = impactSection.offsetTop + impactSection.offsetHeight;
-          const programsTop = programsSection.offsetTop;
-          const triggerPoint = impactBottom + ((programsTop - impactBottom) * 0.3);
-          
-          if (scrollTop > triggerPoint) {
-            setIsNewsletterPopupOpen(true);
-            setHasShownNewsletter(true);
-            sessionStorage.setItem('newsletter-popup-shown', 'true');
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasShownNewsletter]);
+  }, []);
 
   const openTestimonialModal = (testimonial: any) => {
     setSelectedTestimonial(testimonial);
@@ -606,10 +580,6 @@ const Index = () => {
         founder={selectedFounder}
       />
 
-      <NewsletterPopup 
-        isOpen={isNewsletterPopupOpen} 
-        onClose={() => setIsNewsletterPopupOpen(false)}
-      />
      </div>
   );
 };
