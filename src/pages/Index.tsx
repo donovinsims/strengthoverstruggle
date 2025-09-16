@@ -7,7 +7,7 @@ import { FounderModal } from "@/components/common/FounderModal";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
-import dylannFounderImage from "@/assets/dylann-founder.png";
+import dylannFounderImage from "@/assets/dylann-founder-new.jpg";
 import alexFounderImage from "@/assets/alex-founder.jpg";
 
 const Index = () => {
