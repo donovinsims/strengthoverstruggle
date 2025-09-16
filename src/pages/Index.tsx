@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 import dylannFounderImage from "@/assets/dylann-founder-new.jpg";
 import alexFounderImage from "@/assets/alex-founder.jpg";
+import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -361,7 +362,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {[
               {
                 id: "alex",
@@ -372,6 +373,16 @@ const Index = () => {
                 email: "alex@strengthoverstruggle.org",
                 linkedin: "https://linkedin.com/in/alexlimberg",
                 image: alexFounderImage
+              },
+              {
+                id: "vanessa",
+                name: "Vanessa Tellez",
+                role: "Co-Founder/Treasurer",
+                bio: "Financial strategist and community advocate dedicated to empowering youth through fiscal responsibility and wellness programs.",
+                fullBio: "Financial strategist and community advocate dedicated to empowering youth through fiscal responsibility and wellness programs. Vanessa brings her expertise in financial management and her passion for community service to ensure Strength Over Struggle operates efficiently and maximizes impact. Her commitment to transparency and accountability helps the organization maintain trust with donors and effectively allocate resources to programs that transform lives.",
+                email: "vanessa@strengthoverstruggle.org",
+                linkedin: "https://linkedin.com/in/vanessatellez",
+                image: vanessaFounderImage
               },
               {
                 id: "dylann",
