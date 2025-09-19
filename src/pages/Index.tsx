@@ -11,6 +11,7 @@ import dylannFounderImage from "@/assets/dylann-founder-new.jpg";
 import alexFounderImage from "@/assets/alex-founder.jpg";
 import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
 import markhiThompsonImage from "@/assets/markhi-thompson.png";
+import elenaHenryImage from "@/assets/elena-henry.png";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -320,7 +321,7 @@ const Index = () => {
                  role: "Youth Development Program Manager, Beloit Fresh Start", 
                  quote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space...",
                  fullQuote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space to exercise, relieve stress, and build confidence.\n\nFor many, it was their first gym experience—opening their eyes to healthy routines. This program fills a crucial gap for students without resources or support and deserves strong backing for youth health and community engagement.",
-                 image: "/placeholder.svg"
+                 image: elenaHenryImage
                }
             ].map((testimonial) => (
               <Card 
