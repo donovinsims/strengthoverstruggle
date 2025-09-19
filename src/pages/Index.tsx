@@ -378,8 +378,8 @@ const Index = () => {
                 id: "vanessa",
                 name: "Vanessa Tellez",
                 role: "Co-Founder/Treasurer",
-                bio: "Financial strategist and community advocate dedicated to empowering youth through fiscal responsibility and wellness programs.",
-                fullBio: "Financial strategist and community advocate dedicated to empowering youth through fiscal responsibility and wellness programs. Vanessa brings her expertise in financial management and her passion for community service to ensure Strength Over Struggle operates efficiently and maximizes impact. Her commitment to transparency and accountability helps the organization maintain trust with donors and effectively allocate resources to programs that transform lives.",
+                bio: "Registered Nurse, athlete, and youth wellness advocate pursuing a Doctorate of Nursing Practice.",
+                fullBio: "Vanessa Tellez, a Registered Nurse, athlete, and youth wellness advocate, is an experienced emergency room nurse pursuing a Doctorate of Nursing Practice to become a Nurse Practitioner. With a strong background in clinical care and community service, she emphasizes the vital link between physical health, mental wellness, and accessible support.\n\nFitness has been transformative in Vanessa's life, inspiring her to run local 5Ks and participate in community events that support homeless youth and raise awareness for meaningful causes. Her passion for health extends beyond the hospital, as she works to create opportunities for young people to thrive physically, mentally, and emotionally.",
                 email: "vanessa@strengthoverstruggle.org",
                 linkedin: "https://linkedin.com/in/vanessatellez",
                 image: vanessaFounderImage
