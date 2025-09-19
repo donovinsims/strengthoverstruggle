@@ -10,6 +10,7 @@ import heroImage from "@/assets/hero-image.jpg";
 import dylannFounderImage from "@/assets/dylann-founder-new.jpg";
 import alexFounderImage from "@/assets/alex-founder.jpg";
 import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
+import markhiThompsonImage from "@/assets/markhi-thompson.png";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -311,7 +312,7 @@ const Index = () => {
                  role: "2024 Class President and Gym Membership Recipient, Beloit Fresh Start",
                  quote: "I received a donated gym and boxing membership that truly impacted us students. I saw classmates bonding and working hard together at the gym—people I'd never seen outside of school...",
                  fullQuote: "I received a donated gym and boxing membership that truly impacted us students. I saw classmates bonding and working hard together at the gym—people I'd never seen outside of school.\n\nI was already into boxing and the gym, but memberships get expensive. This program motivates youth to stay healthy, teaches discipline, character, confidence, and gives kids a safe place off the streets.\n\nFor me, it wasn't just a free membership—it sparked a lifestyle. I'm still in the gym today, now paying for my own membership. This should happen more for all Beloit youth.",
-                 image: "/placeholder.svg"
+                  image: markhiThompsonImage
                },
                {
                  id: "elena",
