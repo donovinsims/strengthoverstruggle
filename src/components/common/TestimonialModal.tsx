@@ -42,7 +42,7 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="w-[95vw] sm:w-[90vw] max-w-lg mx-auto max-h-[90vh] sm:max-h-[85vh] bg-card border border-border animate-scale-in flex flex-col rounded-md"
+        className="w-[95vw] sm:w-[90vw] max-w-lg mx-auto max-h-[90vh] sm:max-h-[85vh] bg-card border border-border animate-scale-in flex flex-col rounded-md overflow-hidden"
         aria-labelledby="testimonial-title"
         aria-describedby="testimonial-content"
       >
@@ -64,8 +64,8 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
           </div>
         </DialogHeader>
         
-        <ScrollArea className="min-h-0 flex-1 h-full pr-4">
-          <div className="space-y-6">
+        <ScrollArea className="flex-1 overflow-y-auto pr-4">
+          <div className="space-y-6 pb-4">
             <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
               <img 
                 src={testimonial.image} 
