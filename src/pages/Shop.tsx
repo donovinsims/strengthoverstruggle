@@ -65,15 +65,9 @@ const Shop = () => {
                 
                 <Button 
                   className="w-full rounded-md py-6 text-lg font-medium"
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = 'https://buy.stripe.com/test_7sYfZi6pAbh85Anf2Na3u01';
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.click();
-                  }}
+                  disabled
                 >
-                  Buy Now
+                  Coming Soon
                 </Button>
 
                 <div className="mt-6 text-center">
