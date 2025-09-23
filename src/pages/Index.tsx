@@ -435,9 +435,8 @@ const Index = () => {
           <div className="max-w-lg mx-auto">
             <Card className="rounded-md p-6 hover-scale transition-transform">
               <div className="text-center">
-                <h3 className="text-3xl font-bold mb-2">One-Time</h3>
-                <p className="text-sm text-muted-foreground mb-3">donation</p>
-                <p className="text-sm mb-4">Custom amount for immediate impact</p>
+                <h3 className="text-2xl md:text-3xl font-bold mb-2">One-Time Donation</h3>
+                <p className="text-sm text-muted-foreground mb-4">Custom amount for immediate impact</p>
                 <Button
                   className="rounded-md w-full" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
