@@ -476,7 +476,7 @@ const Index = () => {
               {
                 icon: Mail,
                 title: "Email Us",
-                content: "strengthoverstrugglenfp@gmail.com",
+                content: "Email us",
                 subtitle: "We respond within 24 hours",
                 link: "mailto:strengthoverstrugglenfp@gmail.com"
               },
