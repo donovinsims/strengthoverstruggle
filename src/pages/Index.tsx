@@ -431,69 +431,21 @@ const Index = () => {
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
-          {/* Donation Cards - 5 card layout */}
-          <div className="max-w-6xl mx-auto">
-            {/* Top row - 3 cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">One-Time</h3>
-                  <p className="text-sm text-muted-foreground mb-3">donation</p>
-                  <p className="text-sm mb-4">Custom amount for immediate impact</p>
-                  <Button
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
-                  >
-                    Donate Now
-                  </Button>
-                </div>
-              </Card>
-
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">$25</h3>
-                  <p className="text-sm text-muted-foreground mb-3">per month</p>
-                  <p className="text-sm mb-4">Half of average gym membership</p>
-                  <Button
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://buy.stripe.com/test_5kQ7sM8xIfxoe6T8Epa3u07', '_blank', 'noopener,noreferrer')}
-                  >
-                    Subscribe Monthly
-                  </Button>
-                </div>
-              </Card>
-
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">$50</h3>
-                  <p className="text-sm text-muted-foreground mb-3">per month</p>
-                  <p className="text-sm mb-4">U.S Average monthly gym membership (2025)</p>
-                  <Button 
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://buy.stripe.com/test_4gMaEYcNYad4bYL1bXa3u06', '_blank', 'noopener,noreferrer')}
-                  >
-                    Subscribe Monthly
-                  </Button>
-                </div>
-              </Card>
-            </div>
-
-            {/* Bottom row - 1 card */}
-            <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">$100</h3>
-                  <p className="text-sm text-muted-foreground mb-3">per month</p>
-                  <p className="text-sm mb-4">Helps 2 kids access monthly wellness programs</p>
-                  <Button
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://buy.stripe.com/test_00w3cw29kad40g307Ta3u08', '_blank', 'noopener,noreferrer')}
-                  >
-                    Subscribe Monthly
-                  </Button>
-                </div>
-              </Card>
-            </div>
+          {/* Donation Cards - single card layout */}
+          <div className="max-w-lg mx-auto">
+            <Card className="rounded-md p-6 hover-scale transition-transform">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-2">One-Time</h3>
+                <p className="text-sm text-muted-foreground mb-3">donation</p>
+                <p className="text-sm mb-4">Custom amount for immediate impact</p>
+                <Button
+                  className="rounded-md w-full" 
+                  onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+                >
+                  Donate Now
+                </Button>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
