@@ -437,6 +437,20 @@ const Index = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
               <Card className="rounded-md p-6 hover-scale transition-transform">
                 <div className="text-center">
+                  <h3 className="text-3xl font-bold mb-2">One-Time</h3>
+                  <p className="text-sm text-muted-foreground mb-3">donation</p>
+                  <p className="text-sm mb-4">Custom amount for immediate impact</p>
+                  <Button
+                    className="rounded-md w-full" 
+                    onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+                  >
+                    Donate Now
+                  </Button>
+                </div>
+              </Card>
+
+              <Card className="rounded-md p-6 hover-scale transition-transform">
+                <div className="text-center">
                   <h3 className="text-3xl font-bold mb-2">$25</h3>
                   <p className="text-sm text-muted-foreground mb-3">per month</p>
                   <p className="text-sm mb-4">Half of average gym membership</p>
@@ -462,7 +476,10 @@ const Index = () => {
                   </Button>
                 </div>
               </Card>
+            </div>
 
+            {/* Bottom row - 2 cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <Card className="rounded-md p-6 hover-scale transition-transform">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold mb-2">$100</h3>
@@ -476,10 +493,7 @@ const Index = () => {
                   </Button>
                 </div>
               </Card>
-            </div>
 
-            {/* Bottom row - 2 cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <Card className="rounded-md p-6 hover-scale transition-transform">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold mb-2">$250</h3>
@@ -490,20 +504,6 @@ const Index = () => {
                     onClick={() => window.open('https://buy.stripe.com/test_5kQ28s4hs3OG7IvcUFa3u04', '_blank', 'noopener,noreferrer')}
                   >
                     Subscribe Monthly
-                  </Button>
-                </div>
-              </Card>
-
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">One-Time</h3>
-                  <p className="text-sm text-muted-foreground mb-3">donation</p>
-                  <p className="text-sm mb-4">Custom amount for immediate impact</p>
-                  <Button
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://donate.stripe.com/test_fZu00k7tEetk4wjg6Ra3u00', '_blank', 'noopener,noreferrer')}
-                  >
-                    Donate Now
                   </Button>
                 </div>
               </Card>
