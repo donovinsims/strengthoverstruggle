@@ -103,7 +103,7 @@ const Index = () => {
                 Shop
               </Link>
               <Button 
-                onClick={() => scrollToSection('donate')}
+                onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 className="rounded-md px-6"
               >
                 Donate Now
@@ -155,7 +155,7 @@ const Index = () => {
                   Shop
                 </Link>
                 <Button 
-                  onClick={() => scrollToSection('donate')}
+                  onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                   className="rounded-md px-6 w-full"
                 >
                   Donate Now
@@ -188,7 +188,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="bg-white text-black hover:bg-white/90 rounded-md px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
-              onClick={() => scrollToSection('donate')}
+              onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
             >
               Donate Now
             </Button>
