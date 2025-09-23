@@ -478,8 +478,8 @@ const Index = () => {
               </Card>
             </div>
 
-            {/* Bottom row - 2 cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {/* Bottom row - 1 card */}
+            <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
               <Card className="rounded-md p-6 hover-scale transition-transform">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold mb-2">$100</h3>
@@ -488,20 +488,6 @@ const Index = () => {
                   <Button
                     className="rounded-md w-full" 
                     onClick={() => window.open('https://buy.stripe.com/test_00w3cw29kad40g307Ta3u08', '_blank', 'noopener,noreferrer')}
-                  >
-                    Subscribe Monthly
-                  </Button>
-                </div>
-              </Card>
-
-              <Card className="rounded-md p-6 hover-scale transition-transform">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold mb-2">$250</h3>
-                  <p className="text-sm text-muted-foreground mb-3">per month</p>
-                  <p className="text-sm mb-4">Supports 5 kids with comprehensive wellness resources</p>
-                  <Button
-                    className="rounded-md w-full" 
-                    onClick={() => window.open('https://buy.stripe.com/test_5kQ28s4hs3OG7IvcUFa3u04', '_blank', 'noopener,noreferrer')}
                   >
                     Subscribe Monthly
                   </Button>
