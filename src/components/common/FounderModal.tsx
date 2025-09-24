@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { X, Mail, Linkedin } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect } from "react";
 
 interface FounderModalProps {
@@ -12,8 +12,7 @@ interface FounderModalProps {
     role: string;
     bio: string;
     fullBio: string;
-    email: string;
-    linkedin: string;
+    instagram: string;
     image: string;
   } | null;
 }
@@ -78,26 +77,19 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
                 <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2">{founder.name}</h3>
                 <p className="caption mb-4 text-sm sm:text-base">{founder.role}</p>
                 
-                <div className="flex justify-center space-x-4 sm:space-x-6">
-                  <a
-                    href={`mailto:${founder.email}`}
-                    className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
-                    aria-label={`Email ${founder.name}`}
-                  >
-                    <Mail size={14} strokeWidth={1.5} className="sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm">Email</span>
-                  </a>
-                  <a
-                    href={founder.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
-                    aria-label={`${founder.name}'s LinkedIn profile`}
-                  >
-                    <Linkedin size={14} strokeWidth={1.5} className="sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm">LinkedIn</span>
-                  </a>
-                </div>
+                {founder.instagram && (
+                  <div className="flex justify-center">
+                    <a
+                      href={founder.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
+                      aria-label={`${founder.name}'s Instagram profile`}
+                    >
+                      <span className="text-xs sm:text-sm">Instagram</span>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
             
