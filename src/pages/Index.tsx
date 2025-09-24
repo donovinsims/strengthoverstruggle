@@ -72,30 +72,12 @@ const Index = () => {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection('hero')}
-                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('impact')}
-                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              >
-                Impact
-              </button>
-              <button 
-                onClick={() => scrollToSection('mission')}
+              <Link 
+                to="/story"
                 className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
                 Mission
-              </button>
-              <button 
-                onClick={() => scrollToSection('programs')}
-                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              >
-                Programs
-              </button>
+              </Link>
               <Link 
                 to="/shop"
                 className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
@@ -124,33 +106,17 @@ const Index = () => {
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-border">
               <div className="flex flex-col space-y-4 pt-4">
-                <button 
-                  onClick={() => scrollToSection('hero')}
+                <Link 
+                  to="/story"
                   className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                >
-                  Home
-                </button>
-                <button 
-                  onClick={() => scrollToSection('impact')}
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                >
-                  Impact
-                </button>
-                <button 
-                  onClick={() => scrollToSection('mission')}
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Mission
-                </button>
-                <button 
-                  onClick={() => scrollToSection('programs')}
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                >
-                  Programs
-                </button>
+                </Link>
                 <Link 
                   to="/shop"
                   className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Shop
                 </Link>
@@ -240,10 +206,15 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
             Our Mission
           </h2>
-          <div className="body-text leading-relaxed max-w-4xl mx-auto">
+          <div className="body-text leading-relaxed max-w-4xl mx-auto mb-8">
             <p>
               SOS Empowers individuals to overcome life's challenges through resilience, fitness, and community support. We are dedicated to turning adversity into strength by providing resources, education, and opportunities that inspire personal growth and healthier lifestyles.
             </p>
+          </div>
+          <div className="text-center">
+            <Link to="/story" className="story-link text-primary font-medium hover:text-primary/80 transition-colors">
+              Read Our Story
+            </Link>
           </div>
         </div>
       </section>
