@@ -400,6 +400,12 @@ const Index = () => {
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
+          <div className="text-center mb-6">
+            <p className="text-sm text-muted-foreground font-medium">
+              Strength Over Struggle is a 501(c)(3) nonprofit organization. Your donations are tax-deductible.
+            </p>
+          </div>
+          
           {/* Donation Cards - single card layout */}
           <div className="max-w-lg mx-auto">
             <Card className="rounded-md p-6 hover-scale transition-transform">
@@ -479,8 +485,11 @@ const Index = () => {
           </div>
           
           <div className="text-center pt-8 border-t border-border">
-            <p className="body-text">
+            <p className="body-text mb-2">
               © 2024 Strength Over Struggle. Empowering resilience, one person at a time.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              501(c)(3) Nonprofit Organization • Tax-Deductible Donations
             </p>
           </div>
         </div>
