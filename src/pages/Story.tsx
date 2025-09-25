@@ -73,7 +73,7 @@ const Story = () => {
           <div className="text-center mt-12">
             <Link to="/">
               <Button className="rounded-md px-8">
-                Learn About Our Mission
+                Return Home
               </Button>
             </Link>
           </div>

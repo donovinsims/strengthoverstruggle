@@ -4,6 +4,7 @@ import { Heart, Users, Zap, Mail, MapPin, Menu, X, Facebook, Instagram } from "l
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
+import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -76,7 +77,7 @@ const Index = () => {
                 to="/story"
                 className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
               >
-                Mission
+                Our Story
               </Link>
               <Link 
                 to="/shop"
@@ -111,7 +112,7 @@ const Index = () => {
                   className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Mission
+                  Our Story
                 </Link>
                 <Link 
                   to="/shop"
@@ -497,6 +498,9 @@ const Index = () => {
         onClose={() => setIsFounderModalOpen(false)}
         founder={selectedFounder}
       />
+
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup />
 
      </div>
   );
