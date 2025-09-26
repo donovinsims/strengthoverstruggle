@@ -205,7 +205,7 @@ const Index = () => {
       <section id="mission" className="py-24 md:py-28 px-6">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-            Our Mission
+            Our Story
           </h2>
           <div className="body-text leading-relaxed max-w-4xl mx-auto mb-8">
             <p>
@@ -214,7 +214,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <Link to="/story" className="story-link text-primary font-medium hover:text-primary/80 transition-colors">
-              Read Our Story
+              Read More
             </Link>
           </div>
         </div>
