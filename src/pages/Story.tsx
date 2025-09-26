@@ -43,7 +43,7 @@ const Story = () => {
               </p>
 
               <p>
-                After nearly half an hour of conversation, it became painfully clear that he had nowhere to turn. No guardians. No family to stay with. No friends to call. When I suggested cooling off at the local YMCA, he explained that it wasn't an option—he didn't have a membership.
+                After nearly half an hour of conversation, it became painfully clear that he had nowhere to turn. No guardians, no family to stay with, no friends to call. When I suggested cooling off at the local YMCA, he explained that it wasn't an option, he didn't have a membership.
               </p>
 
               <p>
@@ -55,11 +55,11 @@ const Story = () => {
               </p>
 
               <p>
-                That experience changed me. It showed me that if we truly want to keep young men and women off the streets, we must create outlets—healthy, safe spaces where they can go when life feels overwhelming. I couldn't give someone more family or friends, but I could help provide an outlet. For me, and for many others, that outlet is the gym.
+                That experience changed me. It showed me that if we truly want to keep young men and women off the streets, we must create outlets, healthy, safe spaces where they can go when life feels overwhelming. I couldn't give someone more family or friends, but I could help provide an outlet. For me, and for many others, that outlet is the gym.
               </p>
 
               <p>
-                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym access—540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
+                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym access, 540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
               </p>
 
               <p>
