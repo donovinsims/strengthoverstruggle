@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Header } from "@/components/common/Header";
+import { Footer } from "@/components/common/Footer";
 
 const Story = () => {
   // Scroll to top when component mounts
@@ -11,22 +12,11 @@ const Story = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header with back button */}
-      <header className="border-b border-border">
-        <div className="container mx-auto px-6 py-4">
-          <Link 
-            to="/" 
-            className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
-          >
-            <ArrowLeft size={20} />
-            <span>Back to Home</span>
-          </Link>
-        </div>
-      </header>
+      <Header showDonateButton={false} />
 
       {/* Main content */}
-      <main className="py-16 md:py-24 px-6">
-        <div className="container mx-auto max-w-4xl">
+      <main className="py-24 md:py-28 px-6">
+        <div className="container mx-auto max-w-4xl animate-fade-in">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
               Our Story
@@ -36,7 +26,7 @@ const Story = () => {
             </p>
           </div>
 
-          <div className="prose prose-lg max-w-none">
+          <div className="max-w-none">
             <div className="body-text leading-relaxed space-y-8">
               <p>
                 In the winter of 2021, while serving as a new patrol officer, I was dispatched to what was supposed to be a routine family disturbance. A young man was struggling to manage his situation, and my partner and I were focused on preventing it from escalating into an arrest.
@@ -85,6 +75,8 @@ const Story = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };

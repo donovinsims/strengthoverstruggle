@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Zap, Mail, MapPin, Menu, X, Facebook, Instagram } from "lucide-react";
+import { Heart, Users, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
 import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
+import { Header } from "@/components/common/Header";
+import { Footer } from "@/components/common/Footer";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -15,23 +17,10 @@ import markhiThompsonImage from "@/assets/markhi-thompson.png";
 import elenaHenryImage from "@/assets/elena-henry.png";
 
 const Index = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<any>(null);
   const [selectedFounder, setSelectedFounder] = useState<any>(null);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // Track scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const openTestimonialModal = (testimonial: any) => {
     setSelectedTestimonial(testimonial);
@@ -54,84 +43,11 @@ const Index = () => {
         behavior: 'smooth'
       });
     }
-    setIsMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen">
-      {/* Navigation Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-secondary border-b border-border backdrop-blur-md' 
-          : 'bg-transparent border-transparent'
-      }`}>
-        <nav className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-primary">
-              SOS
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link 
-                to="/story"
-                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              >
-                Our Story
-              </Link>
-              <Link 
-                to="/shop"
-                className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              >
-                Shop
-              </Link>
-              <Button 
-                onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
-                className="rounded-md px-6"
-              >
-                Donate Now
-              </Button>
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden text-foreground"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-t border-border">
-              <div className="flex flex-col space-y-4 pt-4">
-                <Link 
-                  to="/story"
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Our Story
-                </Link>
-                <Link 
-                  to="/shop"
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Shop
-                </Link>
-                <Button 
-                  onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
-                  className="rounded-md px-6 w-full"
-                >
-                  Donate Now
-                </Button>
-              </div>
-            </div>
-          )}
-        </nav>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section 
@@ -425,75 +341,7 @@ const Index = () => {
       </section>
 
 
-      {/* Footer */}
-      <footer className="py-16 md:py-20 px-6 border-t border-border">
-        <div className="container mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-12 text-primary">
-            Connect With Us
-          </h2>
-          
-          <div className="grid md:grid-cols-4 gap-8 text-center mb-12">
-            {[
-              {
-                icon: Facebook,
-                title: "Facebook",
-                content: "Follow Us",
-                subtitle: "Stay connected",
-                link: "https://www.facebook.com/profile.php?id=61577091357646"
-              },
-              {
-                icon: Instagram,
-                title: "Instagram",
-                content: "@_strengthoverstruggle_",
-                subtitle: "Daily updates",
-                link: "https://www.instagram.com/_strengthoverstruggle_/"
-              },
-              {
-                icon: Mail,
-                title: "Email Us",
-                content: "Email us",
-                subtitle: "We respond within 24 hours",
-                link: "mailto:strengthoverstrugglenfp@gmail.com"
-              },
-              {
-                icon: MapPin,
-                title: "Find Us",
-                content: "Roscoe, Illinois",
-                subtitle: "Serving our local area"
-              }
-            ].map((contact, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4">
-                  <contact.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-semibold mb-2 text-primary">{contact.title}</h3>
-                {contact.link ? (
-                  <a 
-                    href={contact.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="font-medium mb-1 text-primary hover:underline block"
-                  >
-                    {contact.content}
-                  </a>
-                ) : (
-                  <p className="font-medium mb-1 text-primary">{contact.content}</p>
-                )}
-                <p className="caption">{contact.subtitle}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center pt-8 border-t border-border">
-            <p className="body-text mb-2">
-              © 2024 Strength Over Struggle. Empowering resilience, one person at a time.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              501(c)(3) Nonprofit Organization • Tax-Deductible Donations
-            </p>
-          </div>
-        </div>
-       </footer>
+      <Footer />
        
        {/* Modals */}
       <TestimonialModal 
