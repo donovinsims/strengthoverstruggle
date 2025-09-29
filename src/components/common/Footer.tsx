@@ -55,12 +55,12 @@ export const Footer = () => {
                   href={info.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="body-text hover:text-primary transition-colors"
+                  className="body-text hover:text-primary transition-colors break-words block"
                 >
                   {info.content}
                 </a>
               ) : (
-                <p className="body-text">{info.content}</p>
+                <p className="body-text break-words">{info.content}</p>
               )}
             </div>
           ))}
