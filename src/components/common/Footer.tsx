@@ -57,7 +57,14 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   className="body-text hover:text-primary transition-colors break-words block"
                 >
-                  {info.content}
+                  {info.title === "Email Us" ? (
+                    <>
+                      <span className="lg:hidden">{info.content}</span>
+                      <span className="hidden lg:inline">Email</span>
+                    </>
+                  ) : (
+                    info.content
+                  )}
                 </a>
               ) : (
                 <p className="body-text break-words">{info.content}</p>
