@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const contactInfo = [
@@ -72,6 +73,28 @@ export const Footer = () => {
             </div>
           ))}
         </div>
+
+        {/* Quick Links */}
+        <nav className="flex flex-wrap justify-center gap-6 mb-8" aria-label="Footer navigation">
+          <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            Home
+          </Link>
+          <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            About
+          </Link>
+          <Link to="/programs" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            Programs
+          </Link>
+          <Link to="/story" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            Our Story
+          </Link>
+          <Link to="/shop" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            Shop
+          </Link>
+          <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            Contact
+          </Link>
+        </nav>
 
         <div className="text-center pt-8 border-t border-border">
           <p className="body-text mb-2">

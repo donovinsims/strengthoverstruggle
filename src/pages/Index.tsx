@@ -47,6 +47,31 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Structured Data for SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NonprofitOrganization",
+          "name": "Strength Over Struggle",
+          "alternateName": "SOS",
+          "url": "https://strength-over-struggle.com",
+          "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/x7EeFRySlnOFmFxHHeksmS7IHhS2/uploads/1758597657699-sos_logo.jpeg",
+          "description": "Empowering individuals to overcome life's challenges through resilience, fitness, and community support.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Roscoe",
+            "addressRegion": "IL",
+            "addressCountry": "US"
+          },
+          "email": "strengthoverstrugglenfp@gmail.com",
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61577091357646",
+            "https://www.instagram.com/_strengthoverstruggle_/"
+          ],
+          "nonprofitStatus": "501(c)(3)"
+        })}
+      </script>
+
       <Header />
 
       {/* Hero Section */}
@@ -57,12 +82,17 @@ const Index = () => {
           background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
         }}
       >
+        <img 
+          src={heroImage} 
+          alt="Strength Over Struggle - Empowering youth through fitness and community programs"
+          className="absolute inset-0 w-full h-full object-cover opacity-0"
+          aria-hidden="true"
+        />
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="gradient-text">
-              Building Strength<br />
-              Over Struggle
+              Strength Over Struggle: Transforming Adversity into Growth
             </span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -97,7 +127,7 @@ const Index = () => {
       <section id="impact" className="py-16 md:py-20 px-6 bg-secondary">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-            Our Impact
+            Our Impact in Communities
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -121,7 +151,7 @@ const Index = () => {
       <section id="mission" className="py-24 md:py-28 px-6">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-            Our Story
+            Our Mission: Building Resilience Through Wellness
           </h2>
           <div className="body-text leading-relaxed max-w-4xl mx-auto mb-8">
             <p>
@@ -141,7 +171,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-              Our Programs
+              Youth Wellness Programs
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
               Comprehensive wellness programs designed to strengthen mind, body, and financial security.
@@ -169,7 +199,7 @@ const Index = () => {
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
                 <CardContent className="p-6 md:p-8">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4 md:mb-6">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4 md:mb-6" aria-hidden="true">
                     <program.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-3 md:mb-4 text-primary">{program.title}</h3>
@@ -186,7 +216,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-              Real Impact Stories
+              Success Stories: Real Lives Transformed
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
               See how access to fitness and mentorship is transforming lives in our communities
@@ -221,7 +251,7 @@ const Index = () => {
                   <div className="flex items-center mb-4 md:mb-6">
                     <img 
                       src={testimonial.image} 
-                      alt={testimonial.name}
+                      alt={`${testimonial.name} - ${testimonial.role}`}
                       className="w-14 h-14 rounded-full object-cover mr-4"
                     />
                     <div>
@@ -245,7 +275,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
-              Meet Our Founders
+              Leadership: Meet Our Founders
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
               Driven by personal experience and a shared vision of empowerment through fitness and community support.
@@ -290,7 +320,7 @@ const Index = () => {
                 <CardContent className="p-8">
                   <img 
                     src={founder.image} 
-                    alt={founder.name}
+                    alt={`${founder.name} - ${founder.role} of Strength Over Struggle`}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                   />
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
@@ -310,7 +340,7 @@ const Index = () => {
       <section id="donate" className="py-28 md:py-32 px-6">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-primary">
-            Make a Difference Today.
+            Support Our Mission: Donate Today
           </h2>
           <p className="subtitle mb-12 max-w-2xl mx-auto">
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
