@@ -40,7 +40,7 @@ const Story = () => {
             }
           },
           "datePublished": "2021-01-01",
-          "description": "The journey from a tragic encounter to a nonprofit that has provided over 540 months of gym access to youth in need."
+          "description": "The journey from a tragic encounter to a nonprofit that has provided over 540 months of gym memberships to youth in need."
         }}
       />
       <Header showDonateButton={false} />
@@ -80,7 +80,7 @@ const Story = () => {
               </p>
 
               <p>
-                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym access, 540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
+                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym memberships, 540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
               </p>
 
               <p>
