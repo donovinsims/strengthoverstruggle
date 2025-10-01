@@ -66,7 +66,7 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              className="px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
+              className="px-8 py-6 text-lg font-semibold"
               onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
             >
               Donate Now
@@ -92,7 +92,7 @@ const Index = () => {
       {/* Impact Section */}
       <section id="impact" className="py-16 md:py-20 px-6 bg-background">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
             Our Impact
           </h2>
           
@@ -116,7 +116,7 @@ const Index = () => {
       {/* Mission Section */}
       <section id="mission" className="py-24 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
             Our Story
           </h2>
           <div className="body-text leading-relaxed max-w-4xl mx-auto mb-8">
@@ -136,7 +136,7 @@ const Index = () => {
       <section id="programs" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
               Our Programs
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
@@ -181,7 +181,7 @@ const Index = () => {
       <section id="testimonials" className="py-24 md:py-28 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
               Real Impact Stories
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
@@ -240,7 +240,7 @@ const Index = () => {
       <section id="founders" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
               Meet Our Founders
             </h2>
             <p className="subtitle max-w-3xl mx-auto">
