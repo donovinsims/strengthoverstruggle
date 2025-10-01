@@ -316,13 +316,13 @@ const Index = () => {
           </p>
           
           {/* Donation Cards - single card layout */}
-          <div className="max-w-lg mx-auto">
-            <Card className="rounded-md p-10 hover-scale transition-transform">
-              <div className="text-center">
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">One-Time Donation</h3>
-                <p className="text-sm text-muted-foreground mb-6">Custom amount for immediate impact</p>
+          <div className="max-w-2xl mx-auto">
+            <Card className="rounded-md p-12 md:p-16 hover-scale transition-transform">
+              <div className="text-center space-y-8">
+                <h3 className="text-3xl md:text-4xl font-bold">One-Time Donation</h3>
+                <p className="text-base md:text-lg text-muted-foreground">Custom amount for immediate impact</p>
                 <Button
-                  className="rounded-md w-full" 
+                  className="rounded-md w-full py-6 text-lg" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 >
                   Donate Now
@@ -331,7 +331,7 @@ const Index = () => {
             </Card>
           </div>
           
-          <div className="text-center mt-6">
+          <div className="text-center mt-8">
             <p className="text-sm text-muted-foreground font-medium">
               Strength Over Struggle is a 501(c)(3) nonprofit organization. Your donations are tax-deductible.
             </p>
