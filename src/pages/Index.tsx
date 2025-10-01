@@ -306,7 +306,7 @@ const Index = () => {
       {/* FAQ Section */}
       <FAQSection />
 
-      {/* Donate Section Placeholder */}
+      {/* Donate Section */}
       <section id="donate" className="py-20 md:py-28 px-6">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
@@ -316,17 +316,25 @@ const Index = () => {
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
-          {/* Donation Cards - single card layout */}
-          <div className="max-w-2xl mx-auto">
-            <Card className="rounded-md p-6 md:p-8 lg:p-12 hover-scale transition-transform">
-              <div className="text-center space-y-6 md:space-y-8">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">One-Time Donation</h3>
-                <p className="text-sm md:text-base lg:text-lg text-muted-foreground">Custom amount for immediate impact</p>
+          {/* Donation Card */}
+          <div className="max-w-[600px] mx-auto">
+            <Card className="rounded-[16px] pt-9 pb-7 px-6 shadow-[0_4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.2)] bg-[#FAFAFA] dark:bg-card border-[1.5px]">
+              <div className="flex flex-col items-center">
+                <h3 className="font-manrope font-bold text-[32px] md:text-[48px] leading-[1.2] text-[hsl(var(--text-primary))] mb-3 md:mb-4">
+                  One-Time Donation
+                </h3>
+                <p className="font-inter font-normal text-[18px] leading-[1.5] text-[#545454] dark:text-[#888888] mb-1">
+                  Custom amount for immediate impact
+                </p>
+                <p className="font-inter font-normal text-[14px] leading-[1.5] text-[#888888] dark:text-[#666666] mb-6">
+                  Secure • Tax-deductible • Fast
+                </p>
                 <Button
                   size="lg"
-                  className="rounded-md w-full md:w-auto md:px-12 text-base md:text-lg" 
+                  className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold flex items-center justify-center gap-2" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 >
+                  <Heart className="w-5 h-5" fill="currentColor" />
                   Donate Now
                 </Button>
               </div>
