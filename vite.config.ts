@@ -16,15 +16,13 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize chunk splitting for better caching and smaller initial bundle
+    // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
         manualChunks: {
-          // Core React vendor chunk
+          // Vendor chunks for better caching
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // UI library chunk - split by usage frequency
           'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-slot'],
-          // Icons chunk - deferred loading
           'icons': ['lucide-react'],
         },
         // Add content hash to filenames for cache busting
@@ -35,9 +33,7 @@ export default defineConfig(({ mode }) => ({
     },
     // Increase chunk size warning limit (after optimization, we expect larger but fewer chunks)
     chunkSizeWarningLimit: 1000,
-    // Use esbuild for minification with tree shaking enabled
+    // Use esbuild for minification (faster than terser, no extra dependency needed)
     minify: 'esbuild',
-    // Enable tree shaking and drop console in production
-    target: 'es2015',
   },
 }));
