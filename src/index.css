@@ -17,17 +17,17 @@
     --popover: 0 0% 100%;            /* #FFFFFF - Popover background */
     --popover-foreground: 0 0% 0%;   /* #000000 - Popover text */
 
-    /* Primary buttons: White bg, black text in light mode */
-    --primary: 0 0% 100%;            /* #FFFFFF - White button */
-    --primary-foreground: 0 0% 7%;   /* #121212 - Black text */
-    --primary-border: 0 0% 86%;      /* #DBDBDB - Light border */
-    --primary-hover: 0 0% 94%;       /* #F0F0F0 - Off-white hover */
+    /* Primary buttons: Black bg, white text in light mode */
+    --primary: 0 0% 7%;              /* #121212 - Black button */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --primary-border: 0 0% 7%;       /* #121212 - Black border */
+    --primary-hover: 0 0% 15%;       /* #262626 - Dark gray hover */
 
-    /* Secondary buttons: Dark bg, white text in light mode */
-    --secondary: 0 0% 9%;            /* #171717 - Dark gray button */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF - White text */
-    --secondary-border: 0 0% 15%;    /* #262626 - Dark border */
-    --secondary-hover: 0 0% 15%;     /* #262626 - Hover */
+    /* Secondary buttons: White bg, black text in light mode */
+    --secondary: 0 0% 100%;          /* #FFFFFF - White button */
+    --secondary-foreground: 0 0% 7%; /* #121212 - Black text */
+    --secondary-border: 0 0% 86%;    /* #DBDBDB - Light border */
+    --secondary-hover: 0 0% 94%;     /* #F0F0F0 - Off-white hover */
 
     --muted: 0 0% 94%;               /* #F0F0F0 - Very light gray */
     --muted-foreground: 0 0% 33%;    /* #545454 - Medium gray */

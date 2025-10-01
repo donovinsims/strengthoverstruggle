@@ -66,14 +66,14 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              className="bg-white text-black hover:bg-white/90 rounded-md px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
+              className="px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
               onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
             >
               Donate Now
             </Button>
             <Button 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/10 rounded-md px-8 py-6 text-lg"
+              variant="secondary" 
+              className="px-8 py-6 text-lg"
               onClick={() => scrollToSection('mission')}
             >
               Learn Our Story
@@ -83,8 +83,8 @@ const Index = () => {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-foreground/50 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -165,8 +165,8 @@ const Index = () => {
             ].map((program, index) => (
               <Card key={index} className="bg-card text-left">
                 <CardContent className="p-6 md:p-8">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-muted mb-4 md:mb-6">
-                    <program.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-[12px] bg-[hsl(var(--icon-container))] hover:bg-[hsl(var(--icon-container-hover))] transition-colors duration-200 mb-4 md:mb-6">
+                    <program.icon className="w-6 h-6 text-[hsl(var(--icon-color))] group-hover:text-[hsl(var(--icon-color-hover))] transition-colors duration-200" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-3 md:mb-4 text-primary">{program.title}</h3>
                   <p className="body-text">{program.description}</p>
