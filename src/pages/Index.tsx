@@ -91,7 +91,10 @@ const Index = () => {
                 try {
                   window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer');
                 } catch (error) {
-                  console.error('Failed to open donation page:', error);
+                  // Silent error handling in production for performance
+                  if (process.env.NODE_ENV === 'development') {
+                    console.error('Failed to open donation page:', error);
+                  }
                 }
               }}
               aria-label="Make a donation to Strength Over Struggle"
