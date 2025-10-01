@@ -41,18 +41,6 @@ export const Header = ({
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link 
-              to="/about"
-              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-            >
-              About
-            </Link>
-            <Link 
-              to="/programs"
-              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-            >
-              Programs
-            </Link>
-            <Link 
               to="/story"
               className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
             >
@@ -63,12 +51,6 @@ export const Header = ({
               className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
             >
               Shop
-            </Link>
-            <Link 
-              to="/contact"
-              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-            >
-              Contact
             </Link>
             {showDonateButton && (
               <Button 
@@ -95,20 +77,6 @@ export const Header = ({
           <div className="md:hidden mt-4 pb-4 border-t border-border animate-fade-in">
             <div className="flex flex-col space-y-4 pt-4">
               <Link 
-                to="/about"
-                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                to="/programs"
-                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Programs
-              </Link>
-              <Link 
                 to="/story"
                 className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
                 onClick={() => setIsMenuOpen(false)}
@@ -121,13 +89,6 @@ export const Header = ({
                 onClick={() => setIsMenuOpen(false)}
               >
                 Shop
-              </Link>
-              <Link 
-                to="/contact"
-                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
               </Link>
               {showDonateButton && (
                 <Button 
