@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Zap } from "lucide-react";
-import { useState, useEffect } from "react";
-import { TestimonialModal } from "@/components/common/TestimonialModal";
-import { FounderModal } from "@/components/common/FounderModal";
-import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { SEO } from "@/components/common/SEO";
 import { StructuredData } from "@/components/common/StructuredData";
+
+// Lazy load modal components - only loaded when needed
+const TestimonialModal = lazy(() => import("@/components/common/TestimonialModal").then(m => ({ default: m.TestimonialModal })));
+const FounderModal = lazy(() => import("@/components/common/FounderModal").then(m => ({ default: m.FounderModal })));
+const ExitIntentPopup = lazy(() => import("@/components/common/ExitIntentPopup").then(m => ({ default: m.ExitIntentPopup })));
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -351,21 +353,23 @@ const Index = () => {
 
       <Footer />
        
-       {/* Modals */}
-      <TestimonialModal 
-        isOpen={isTestimonialModalOpen} 
-        onClose={() => setIsTestimonialModalOpen(false)}
-        testimonial={selectedTestimonial}
-      />
-      
-      <FounderModal 
-        isOpen={isFounderModalOpen} 
-        onClose={() => setIsFounderModalOpen(false)}
-        founder={selectedFounder}
-      />
+       {/* Lazy-loaded modals with Suspense - only loaded when opened */}
+      <Suspense fallback={null}>
+        <TestimonialModal 
+          isOpen={isTestimonialModalOpen} 
+          onClose={() => setIsTestimonialModalOpen(false)}
+          testimonial={selectedTestimonial}
+        />
+        
+        <FounderModal 
+          isOpen={isFounderModalOpen} 
+          onClose={() => setIsFounderModalOpen(false)}
+          founder={selectedFounder}
+        />
 
-      {/* Exit Intent Popup */}
-      <ExitIntentPopup />
+        {/* Exit Intent Popup */}
+        <ExitIntentPopup />
+      </Suspense>
 
      </div>
   );
