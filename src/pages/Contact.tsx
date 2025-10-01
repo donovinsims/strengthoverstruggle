@@ -336,30 +336,30 @@ export default function Contact() {
                         Message
                       </FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Tell us more about your inquiry..."
-                          className="font-inter text-[14px] md:text-[15px] min-h-[120px] resize-none"
-                          maxLength={1000}
-                          {...field}
-                          onChange={(e) => {
-                            field.onChange(e);
-                            setMessageLength(e.target.value.length);
-                          }}
-                        />
+                        <div className="relative">
+                          <Textarea
+                            placeholder="Tell us more about your inquiry..."
+                            className="font-inter text-[14px] md:text-[15px] min-h-[120px] resize-none"
+                            maxLength={1000}
+                            {...field}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              setMessageLength(e.target.value.length);
+                            }}
+                          />
+                          <p className="absolute bottom-3 right-4 text-xs text-[hsl(var(--text-secondary))] font-inter pointer-events-none">
+                            {messageLength}/1000
+                          </p>
+                        </div>
                       </FormControl>
-                      <div className="flex justify-between items-center">
-                        <FormMessage className="flex items-center gap-1 text-red-500">
-                          {form.formState.errors.message && (
-                            <>
-                              <AlertCircle className="w-4 h-4" />
-                              <span>{form.formState.errors.message.message}</span>
-                            </>
-                          )}
-                        </FormMessage>
-                        <p className="text-xs text-[hsl(var(--text-secondary))] font-inter">
-                          {messageLength}/1000
-                        </p>
-                      </div>
+                      <FormMessage className="flex items-center gap-1 text-red-500">
+                        {form.formState.errors.message && (
+                          <>
+                            <AlertCircle className="w-4 h-4" />
+                            <span>{form.formState.errors.message.message}</span>
+                          </>
+                        )}
+                      </FormMessage>
                     </FormItem>
                   )}
                 />
