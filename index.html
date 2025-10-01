@@ -7,17 +7,28 @@
     <meta name="description" content="Join Strength Over Struggle to find resources, support, and mentorship that help you overcome challenges and build resilience. Empower your journey today.">
     <meta name="author" content="Strength Over Struggle Team" />
     
+    <!-- Critical inline CSS for above-the-fold content -->
+    <style>
+      /* Critical above-the-fold styles to prevent render blocking */
+      body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#121212;color:#fff}
+      #root{min-height:100vh}
+      .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(125% 125% at 50% 90%,#000 40%,rgba(255,255,255,.15) 100%)}
+    </style>
+    
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://storage.googleapis.com">
+    <link rel="preconnect" href="https://buy.stripe.com">
+    <link rel="dns-prefetch" href="https://checkout.stripe.com">
     
-    <!-- Preload critical fonts -->
+    <!-- Preload critical fonts with font-display swap -->
     <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
     
-    <!-- Load fonts with font-display swap -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Load fonts async with font-display swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -45,6 +56,6 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>

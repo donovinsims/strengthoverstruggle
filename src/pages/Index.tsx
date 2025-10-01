@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Zap } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
-import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { SEO } from "@/components/common/SEO";
@@ -17,6 +16,9 @@ import alexFounderImage from "@/assets/alex-founder.jpg";
 import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
 import markhiThompsonImage from "@/assets/markhi-thompson.png";
 import elenaHenryImage from "@/assets/elena-henry.png";
+
+// Lazy load non-critical components to reduce initial bundle
+const ExitIntentPopup = lazy(() => import("@/components/common/ExitIntentPopup").then(m => ({ default: m.ExitIntentPopup })));
 
 const Index = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<any>(null);
@@ -58,11 +60,13 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         id="hero" 
-        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40"
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40 hero-section"
         style={{
           background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
         }}
       >
+        {/* Preload critical LCP image */}
+        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -233,6 +237,8 @@ const Index = () => {
                       alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
                       className="w-14 h-14 rounded-full object-cover mr-4"
                       loading="lazy"
+                      width="56"
+                      height="56"
                     />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
@@ -303,6 +309,8 @@ const Index = () => {
                     alt={`${founder.name}, ${founder.role} of Strength Over Struggle nonprofit organization`}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                     loading="lazy"
+                    width="128"
+                    height="128"
                   />
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
                   <p className="caption mb-4">{founder.role}</p>
@@ -368,8 +376,10 @@ const Index = () => {
         founder={selectedFounder}
       />
 
-      {/* Exit Intent Popup */}
-      <ExitIntentPopup />
+      {/* Exit Intent Popup - Lazy loaded */}
+      <Suspense fallback={null}>
+        <ExitIntentPopup />
+      </Suspense>
 
      </div>
   );

@@ -15,15 +15,29 @@ export const Header = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Track scroll position
+  // Use Intersection Observer to prevent forced reflows
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
+    const sentinel = document.createElement('div');
+    sentinel.style.position = 'absolute';
+    sentinel.style.top = '50px';
+    sentinel.style.height = '1px';
+    sentinel.style.width = '100%';
+    sentinel.style.pointerEvents = 'none';
+    document.body.appendChild(sentinel);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsScrolled(!entry.isIntersecting);
+      },
+      { threshold: [0, 1] }
+    );
+
+    observer.observe(sentinel);
+
+    return () => {
+      observer.disconnect();
+      document.body.removeChild(sentinel);
+    };
   }, []);
 
   return (
