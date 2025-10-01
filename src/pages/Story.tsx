@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Header } from "@/components/common/Header";
@@ -66,9 +67,32 @@ const Story = () => {
             </div>
           </div>
 
+          {/* Donation Section */}
+          <div className="mt-16 max-w-2xl mx-auto">
+            <Card className="rounded-[16px] p-8 md:p-12 hover-scale transition-transform">
+              <div className="text-center space-y-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-primary">One-Time Donation</h3>
+                <p className="text-base md:text-lg text-muted-foreground">Custom amount for immediate impact</p>
+                <Button
+                  size="lg"
+                  className="rounded-[10px] w-full md:w-auto md:px-12 text-base md:text-lg" 
+                  onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+                >
+                  Donate Now
+                </Button>
+              </div>
+            </Card>
+            
+            <div className="text-center mt-6 px-4">
+              <p className="text-sm text-muted-foreground">
+                Strength Over Struggle is a 501(c)(3) nonprofit organization. Your donations are tax-deductible.
+              </p>
+            </div>
+          </div>
+
           <div className="text-center mt-12">
             <Link to="/">
-              <Button className="rounded-md px-8">
+              <Button className="rounded-[10px] px-8">
                 Return Home
               </Button>
             </Link>
