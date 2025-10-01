@@ -6,6 +6,18 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+interface ContactFormData {
+  name: string;
+  business_name?: string;
+  phone: string;
+  email: string;
+  reason: string;
+  message?: string;
+  website_url?: string;
+  form_render_time?: number;
+  submission_time?: number;
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -13,59 +25,29 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-    const convertKitApiKey = Deno.env.get('CONVERTKIT_API_KEY');
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    const data: ContactFormData = await req.json();
     
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    // Extract IP address for rate limiting
+    const ipAddress = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    
+    console.log('Contact form submission received from IP:', ipAddress);
 
-    const { 
-      name, 
-      business_name, 
-      phone, 
-      email, 
-      reason, 
-      message,
-      website_url,
-      form_render_time,
-      submission_time
-    } = await req.json();
-
-    // Get IP address for rate limiting
-    const ipAddress = req.headers.get('x-forwarded-for') || 
-                     req.headers.get('x-real-ip') || 
-                     'unknown';
-
-    console.log('Contact form submission attempt from IP:', ipAddress);
-
-    // 1. Honeypot validation (silent rejection)
-    if (website_url && website_url.trim() !== '') {
-      console.log('Honeypot triggered, rejecting silently');
-      return new Response(
-        JSON.stringify({ error: 'Invalid submission' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // 2. Time-based validation (bot protection)
-    if (form_render_time && submission_time) {
-      const timeDiff = (submission_time - form_render_time) / 1000;
-      if (timeDiff < 3) {
-        console.log('Submission too fast, likely a bot');
-        return new Response(
-          JSON.stringify({ error: 'Invalid submission' }),
-          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
-    }
-
-    // 3. Rate limiting (3 submissions per IP per hour)
+    // 1. Check rate limit: 3 submissions per IP per hour
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-    const { count } = await supabase
+    const { count, error: countError } = await supabaseClient
       .from('contact_submissions')
       .select('id', { count: 'exact', head: true })
       .eq('ip_address', ipAddress)
       .gte('created_at', oneHourAgo);
+
+    if (countError) {
+      console.error('Error checking rate limit:', countError);
+    }
 
     if (count && count >= 3) {
       console.log('Rate limit exceeded for IP:', ipAddress);
@@ -75,31 +57,63 @@ serve(async (req) => {
       );
     }
 
-    // 4. Server-side validation
-    const errors: string[] = [];
-
-    // Validate name
-    const trimmedName = name?.trim();
-    if (!trimmedName || trimmedName.length < 2 || trimmedName.length > 100) {
-      errors.push('Name must be between 2 and 100 characters');
-    }
-    if (trimmedName && !/^[a-zA-Z\s'-]+$/.test(trimmedName)) {
-      errors.push('Name contains invalid characters');
+    // 2. Validate honeypot field (spam bot detection)
+    if (data.website_url && data.website_url.length > 0) {
+      console.log('Honeypot triggered - potential bot submission');
+      return new Response(
+        JSON.stringify({ error: 'Invalid submission' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
-    // Validate email
-    const trimmedEmail = email?.trim().toLowerCase();
-    if (!trimmedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
-      errors.push('Invalid email address');
+    // 3. Time-based validation (bot protection)
+    if (data.form_render_time && data.submission_time) {
+      const timeDiff = (data.submission_time - data.form_render_time) / 1000;
+      if (timeDiff < 3) {
+        console.log('Form submitted too quickly - potential bot');
+        return new Response(
+          JSON.stringify({ error: 'Invalid submission' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
-    // Validate phone (NANP format)
-    if (!phone || !/^\(\d{3}\) \d{3}-\d{4}$/.test(phone)) {
-      errors.push('Invalid phone number format');
+    // 4. Server-side validation and sanitization
+    const sanitizedName = data.name.trim().slice(0, 100);
+    const sanitizedBusinessName = data.business_name?.trim().slice(0, 150) || null;
+    const sanitizedEmail = data.email.trim().toLowerCase().slice(0, 255);
+    const sanitizedPhone = data.phone.trim();
+    const sanitizedReason = data.reason.trim();
+    const sanitizedMessage = data.message?.trim().slice(0, 1000) || null;
+
+    // Validate required fields
+    if (!sanitizedName || sanitizedName.length < 2) {
+      return new Response(
+        JSON.stringify({ error: 'Name must be at least 2 characters' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
-    // Validate reason
-    const validReasons = [
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(sanitizedEmail)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid email address' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate phone format (NANP)
+    const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+    if (!phoneRegex.test(sanitizedPhone)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid phone number format' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate reason is in allowed list
+    const allowedReasons = [
       'Donation Inquiry',
       'Gym Partnership',
       'Corporate Sponsorship',
@@ -107,108 +121,96 @@ serve(async (req) => {
       'General Questions',
       'Other'
     ];
-    if (!reason || !validReasons.includes(reason)) {
-      errors.push('Invalid reason for contact');
-    }
-
-    // Validate business name (optional)
-    const trimmedBusinessName = business_name?.trim();
-    if (trimmedBusinessName && trimmedBusinessName.length > 150) {
-      errors.push('Business name must be less than 150 characters');
-    }
-
-    // Validate message (optional)
-    const trimmedMessage = message?.trim();
-    if (trimmedMessage && trimmedMessage.length > 1000) {
-      errors.push('Message must be less than 1000 characters');
-    }
-
-    if (errors.length > 0) {
-      console.log('Validation errors:', errors);
+    if (!allowedReasons.includes(sanitizedReason)) {
       return new Response(
-        JSON.stringify({ error: errors.join(', ') }),
+        JSON.stringify({ error: 'Invalid reason for contact' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     // 5. Insert into database
-    const { data: submission, error: dbError } = await supabase
+    const { data: submission, error: insertError } = await supabaseClient
       .from('contact_submissions')
       .insert({
-        name: trimmedName,
-        business_name: trimmedBusinessName || null,
-        phone: phone,
-        email: trimmedEmail,
-        reason: reason,
-        message: trimmedMessage || null,
+        name: sanitizedName,
+        business_name: sanitizedBusinessName,
+        phone: sanitizedPhone,
+        email: sanitizedEmail,
+        reason: sanitizedReason,
+        message: sanitizedMessage,
         ip_address: ipAddress,
         status: 'new',
       })
       .select()
       .single();
 
-    if (dbError) {
-      console.error('Database error:', dbError);
-      throw new Error('Failed to save submission');
+    if (insertError) {
+      console.error('Database insertion error:', insertError);
+      return new Response(
+        JSON.stringify({ error: 'Failed to submit form. Please try again.' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
-    console.log('Submission saved successfully:', submission.id);
+    console.log('Contact submission saved:', submission.id);
 
-    // 6. ConvertKit integration (optional, don't fail submission if it fails)
+    // 6. ConvertKit API v4 Integration
+    const convertKitApiKey = Deno.env.get('CONVERTKIT_API_KEY');
     if (convertKitApiKey) {
       try {
-        // Create/update subscriber in ConvertKit
-        const subscriberResponse = await fetch('https://api.convertkit.com/v3/subscribers', {
+        // Create or update subscriber in ConvertKit
+        const kitResponse = await fetch('https://api.convertkit.com/v4/subscribers', {
           method: 'POST',
           headers: {
+            'Authorization': `Bearer ${convertKitApiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            api_key: convertKitApiKey,
-            email: trimmedEmail,
-            first_name: trimmedName.split(' ')[0],
+            email_address: sanitizedEmail,
+            first_name: sanitizedName.split(' ')[0],
+            state: 'active',
             fields: {
-              reason: reason,
-              message: trimmedMessage || '',
-              business_name: trimmedBusinessName || '',
+              reason: sanitizedReason,
+              message: sanitizedMessage || '',
+              phone: sanitizedPhone,
+              business_name: sanitizedBusinessName || '',
             },
           }),
         });
 
-        if (subscriberResponse.ok) {
-          console.log('ConvertKit subscriber created/updated');
+        if (kitResponse.ok) {
+          const kitData = await kitResponse.json();
+          console.log('ConvertKit subscriber created/updated:', kitData.subscriber?.id);
+          
+          // Note: Tag and automation would be configured in ConvertKit dashboard
+          // The automation can be triggered when a subscriber is added or based on specific criteria
         } else {
-          const errorText = await subscriberResponse.text();
+          const errorText = await kitResponse.text();
           console.error('ConvertKit API error:', errorText);
+          // Don't fail the submission if ConvertKit fails
         }
-      } catch (convertKitError) {
-        console.error('ConvertKit integration error:', convertKitError);
+      } catch (kitError) {
+        console.error('ConvertKit integration error:', kitError);
         // Don't fail the submission if ConvertKit fails
       }
+    } else {
+      console.warn('CONVERTKIT_API_KEY not configured');
     }
 
     // 7. Return success
     return new Response(
       JSON.stringify({ 
-        success: true,
-        message: 'Thank you for contacting us! We will respond within 24-48 hours.'
+        success: true, 
+        message: 'Thank you for contacting us! We will respond within 24-48 hours.' 
       }),
-      { 
-        status: 200, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
-  } catch (error) {
-    console.error('Unexpected error:', error);
+  } catch (error: any) {
+    console.error('Contact form submission error:', error);
     return new Response(
-      JSON.stringify({ 
-        error: 'An unexpected error occurred. Please try again or email us directly at contact@strengthoverstruggle.org.' 
-      }),
-      { 
-        status: 500, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
+      JSON.stringify({ error: error.message || 'An unexpected error occurred' }),
+      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
