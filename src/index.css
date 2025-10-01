@@ -67,7 +67,7 @@
 @layer base {
   html {
     @apply scroll-smooth;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
   * {
@@ -78,14 +78,10 @@
     @apply bg-background text-foreground;
     background: hsl(var(--background));
     min-height: 100vh;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
   }
 
   /* Typography system - exact JSON specification */
-  h1, h2, h3 {
-    font-family: 'Manrope', system-ui, sans-serif;
-  }
-
   h1 {
     font-size: 2.5rem;
     font-weight: 700;

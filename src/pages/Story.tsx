@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { SEO } from "@/components/common/SEO";
-import { StructuredData } from "@/components/common/StructuredData";
 
 const Story = () => {
   // Scroll to top when component mounts
@@ -14,35 +12,6 @@ const Story = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
-        title="Our Story – Strength Over Struggle | Why We Exist"
-        description="Learn the powerful story behind Strength Over Struggle, from a tragic encounter to a mission that has provided 540+ months of gym access to youth in need."
-        keywords="nonprofit story, youth empowerment mission, gym membership charity, community support, strength over struggle story, dylann rauch"
-        canonical="https://strength-over-struggle.com/story"
-        ogType="article"
-      />
-      <StructuredData 
-        type="article"
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": "Our Story – Why Strength Over Struggle Exists",
-          "author": {
-            "@type": "Person",
-            "name": "Dylann Rauch"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Strength Over Struggle",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://storage.googleapis.com/gpt-engineer-file-uploads/x7EeFRySlnOFmFxHHeksmS7IHhS2/uploads/1758597657699-sos_logo.jpeg"
-            }
-          },
-          "datePublished": "2021-01-01",
-          "description": "The journey from a tragic encounter to a nonprofit that has provided over 540 months of gym memberships to youth in need."
-        }}
-      />
       <Header showDonateButton={false} />
 
       {/* Main content */}
@@ -80,7 +49,7 @@ const Story = () => {
               </p>
 
               <p>
-                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym memberships, 540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
+                With the support of friends, family, and the community, I launched a fundraiser to provide gym memberships for young adults in need. The response was overwhelming. In just two years, we provided over 540 months of gym access, 540 months of growth, safety, and belonging. Inspired by this impact, we knew it was time to build something bigger.
               </p>
 
               <p>

@@ -7,8 +7,6 @@ import { FounderModal } from "@/components/common/FounderModal";
 import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { SEO } from "@/components/common/SEO";
-import { StructuredData } from "@/components/common/StructuredData";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -49,10 +47,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <SEO 
-        canonical="https://strength-over-struggle.com"
-      />
-      <StructuredData type="nonprofit" />
       <Header />
 
       {/* Hero Section */}
@@ -108,7 +102,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">540+</div>
-              <div className="body-text font-medium text-lg">Months of Gym Memberships Donated</div>
+              <div className="body-text font-medium text-lg">Gym Membership Months Donated</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">4</div>
@@ -226,9 +220,8 @@ const Index = () => {
                   <div className="flex items-center mb-4 md:mb-6">
                     <img 
                       src={testimonial.image} 
-                      alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
+                      alt={testimonial.name}
                       className="w-14 h-14 rounded-full object-cover mr-4"
-                      loading="lazy"
                     />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
@@ -296,9 +289,8 @@ const Index = () => {
                 <CardContent className="p-8">
                   <img 
                     src={founder.image} 
-                    alt={`${founder.name}, ${founder.role} of Strength Over Struggle nonprofit organization`}
+                    alt={founder.name}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
-                    loading="lazy"
                   />
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
                   <p className="caption mb-4">{founder.role}</p>
