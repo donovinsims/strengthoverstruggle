@@ -17,8 +17,8 @@ export const Footer = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "strengthoverstrugglenfp@gmail.com",
-      link: "mailto:strengthoverstrugglenfp@gmail.com"
+      content: "contact@strength-over-struggle.com",
+      link: "mailto:contact@strength-over-struggle.com"
     },
     {
       icon: MapPin,
