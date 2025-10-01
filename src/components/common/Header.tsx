@@ -53,6 +53,12 @@ export const Header = ({
             >
               Shop
             </Link>
+            <Link 
+              to="/contact"
+              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+            >
+              Contact
+            </Link>
             <ThemeToggle />
             {showDonateButton && (
               <Button 
@@ -91,6 +97,13 @@ export const Header = ({
                 onClick={() => setIsMenuOpen(false)}
               >
                 Shop
+              </Link>
+              <Link 
+                to="/contact"
+                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
               </Link>
               <div className="flex items-center justify-between">
                 <span className="text-secondary-foreground">Theme</span>
