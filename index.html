@@ -15,19 +15,22 @@
       .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(125% 125% at 50% 90%,#000 40%,rgba(255,255,255,.15) 100%)}
     </style>
     
-    <!-- Preconnect to external domains -->
+    <!-- Preconnect to external domains (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://storage.googleapis.com">
     <link rel="preconnect" href="https://buy.stripe.com">
     <link rel="dns-prefetch" href="https://checkout.stripe.com">
     
-    <!-- Preload critical fonts with font-display swap -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Load fonts async with font-display swap -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <!-- Load fonts asynchronously via JavaScript to prevent render blocking -->
+    <script>
+      (function(){
+        var link=document.createElement('link');
+        link.rel='stylesheet';
+        link.href='https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap';
+        document.head.appendChild(link);
+      })();
+    </script>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
     
     <!-- PWA Manifest -->
