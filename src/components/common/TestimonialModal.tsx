@@ -42,7 +42,7 @@ export const TestimonialModal = ({ isOpen, onClose, testimonial }: TestimonialMo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="w-[95vw] max-w-[400px] sm:max-w-2xl mx-auto max-h-[90vh] sm:max-h-[85vh] bg-card border-none shadow-[0px_8px_24px_rgba(0,0,0,0.18)] dark:shadow-[0px_8px_32px_rgba(0,0,0,0.4)] flex flex-col rounded-[16px] overflow-hidden p-4 sm:p-10"
+        className="w-[95vw] max-w-[400px] sm:max-w-2xl mx-auto max-h-[90vh] sm:max-h-[85vh] bg-card border border-border shadow-[0px_8px_24px_rgba(0,0,0,0.18)] dark:shadow-[0px_8px_32px_rgba(0,0,0,0.4)] flex flex-col rounded-[16px] overflow-hidden p-4 sm:p-10"
         aria-labelledby="testimonial-title"
         aria-describedby="testimonial-content"
       >
