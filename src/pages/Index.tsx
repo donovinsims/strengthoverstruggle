@@ -90,7 +90,7 @@ const Index = () => {
       </section>
 
       {/* Impact Section */}
-      <section id="impact" className="py-16 md:py-20 px-6 bg-secondary">
+      <section id="impact" className="py-16 md:py-20 px-6 bg-background">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
             Our Impact
@@ -133,7 +133,7 @@ const Index = () => {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-20 md:py-24 px-6 bg-secondary">
+      <section id="programs" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
@@ -237,7 +237,7 @@ const Index = () => {
       </section>
 
       {/* Founders Section */}
-      <section id="founders" className="py-20 md:py-24 px-6 bg-secondary">
+      <section id="founders" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-primary">
