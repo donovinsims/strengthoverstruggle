@@ -6,40 +6,55 @@
 
 @layer base {
   :root {
-    /* Core Pure Black Theme - High Contrast */
-    --background: 0 0% 0%;           /* #000000 - Pure black primary background */
-    --foreground: 0 0% 100%;         /* #FFFFFF - Maximum contrast white text */
+    /* Light Mode - Design System Specifications */
+    --background: 0 0% 98%;          /* #FAFAFA - Off-white background */
+    --foreground: 0 0% 0%;           /* #000000 - Black text */
 
-    --card: 0 0% 4%;                 /* #0A0A0A - Much darker card background */
-    --card-foreground: 0 0% 100%;    /* #FFFFFF - Card text */
+    --card: 0 0% 100%;               /* #FFFFFF - White cards */
+    --card-foreground: 0 0% 0%;      /* #000000 - Card text */
+    --card-border: 0 0% 88%;         /* #E0E0E0 - Light gray borders */
 
-    --popover: 0 0% 4%;              /* #0A0A0A - Darker popover background */
-    --popover-foreground: 0 0% 100%; /* #FFFFFF - Popover text */
+    --popover: 0 0% 100%;            /* #FFFFFF - Popover background */
+    --popover-foreground: 0 0% 0%;   /* #000000 - Popover text */
 
-    --primary: 0 0% 100%;            /* #FFFFFF - Primary accent */
-    --primary-foreground: 0 0% 0%;   /* #000000 - Text on primary */
+    /* Primary buttons: Black bg, white text in light mode */
+    --primary: 0 0% 7%;              /* #121212 - Black button */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --primary-hover: 0 0% 15%;       /* #262626 - Dark gray hover */
 
-    --secondary: 0 0% 0%;            /* #000000 - Pure black secondary background */
-    --secondary-foreground: 0 0% 70%; /* #B3B3B3 - Softer secondary text */
+    /* Secondary buttons: White bg, black text in light mode */
+    --secondary: 0 0% 100%;          /* #FFFFFF - White button */
+    --secondary-foreground: 0 0% 7%; /* #121212 - Black text */
+    --secondary-border: 0 0% 86%;    /* #DBDBDB - Light border */
+    --secondary-hover: 0 0% 94%;     /* #F0F0F0 - Off-white hover */
 
-    --muted: 0 0% 6%;                /* #0F0F0F - Subtle muted background */
-    --muted-foreground: 0 0% 50%;    /* #808080 - Softer muted text */
+    --muted: 0 0% 94%;               /* #F0F0F0 - Very light gray */
+    --muted-foreground: 0 0% 33%;    /* #545454 - Medium gray */
 
-    --accent: 0 0% 100%;             /* #FFFFFF - Accent color */
-    --accent-foreground: 0 0% 0%;    /* #000000 - Text on accent */
+    --accent: 0 0% 94%;              /* #F0F0F0 - Light gray accent */
+    --accent-foreground: 0 0% 0%;    /* #000000 - Black text */
 
     --destructive: 0 84% 60%;        /* #EF4444 - Error color */
     --destructive-foreground: 0 0% 100%; /* White text on destructive */
 
-    --border: 0 0% 10%;              /* #1A1A1A - Soft subtle borders */
-    --input: 0 0% 6%;                /* #0F0F0F - Darker input backgrounds */
-    --ring: 0 0% 100%;               /* #FFFFFF - Focus rings */
+    --border: 0 0% 88%;              /* #E0E0E0 - Light gray borders */
+    --input: 0 0% 100%;              /* #FFFFFF - White input background */
+    --ring: 0 0% 0%;                 /* #000000 - Black focus ring */
 
-    /* Typography tokens */
-    --text-primary: 0 0% 100%;       /* #FFFFFF */
-    --text-secondary: 0 0% 60%;      /* #999999 */
-    --text-tertiary: 0 0% 40%;       /* #666666 */
-    --text-placeholder: 0 0% 47%;    /* #777777 */
+    /* Typography tokens - Light Mode */
+    --text-primary: 0 0% 0%;         /* #000000 - Main headings */
+    --text-secondary: 0 0% 33%;      /* #545454 - Body/descriptions */
+    --text-tertiary: 0 0% 53%;       /* #888888 - Icons/placeholders */
+
+    /* Icon containers */
+    --icon-container: 0 0% 88%;      /* #E0E0E0 - Light gray */
+    --icon-container-hover: 0 0% 82%; /* #D1D1D1 - Darker on hover */
+    --icon-color: 0 0% 53%;          /* #888888 - Gray icons */
+    --icon-color-hover: 0 0% 0%;     /* #000000 - Black on hover */
+
+    /* Mission section icons */
+    --mission-icon-bg: 0 0% 94%;     /* #F0F0F0 - Very light gray */
+    --mission-icon-color: 0 0% 33%;  /* #555555 - Dark gray icons */
 
     /* Spacing system - 8px base */
     --spacing-xs: 8px;
@@ -51,75 +66,167 @@
     --spacing-3xl: 96px;
 
     /* Border radius system */
-    --radius: 0.5rem;                /* 8px - sm */
-    --radius-md: 0.75rem;            /* 12px - md */
+    --radius-button: 10px;           /* Buttons */
+    --radius-card: 12px;             /* Cards, mission icon containers */
+    --radius-input: 10px;            /* Form inputs */
+    --radius-modal: 16px;            /* Modals */
+    --radius-toggle: 8px;            /* Theme toggle buttons */
+
+    /* Border widths */
+    --border-card: 1.5px;            /* Cards */
+    --border-button: 1px;            /* Buttons, inputs, header, footer */
 
     /* Motion system */
-    --duration-fast: 120ms;
-    --duration-normal: 200ms;
-    --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --duration-fast: 200ms;          /* Color/background transitions */
+    --duration-normal: 300ms;        /* Modal open/close, accordions */
+    --easing-standard: ease;
 
     /* Container system */
     --container-max-width: 768px;
+  }
+
+  .dark {
+    /* Dark Mode - Design System Specifications */
+    --background: 0 0% 9%;           /* #171717 - Very dark gray background */
+    --foreground: 0 0% 100%;         /* #FFFFFF - White text */
+
+    --card: 0 0% 7%;                 /* #121212 - Almost black cards */
+    --card-foreground: 0 0% 100%;    /* #FFFFFF - Card text */
+    --card-border: 0 0% 15%;         /* #262626 - Dark gray borders */
+
+    --popover: 0 0% 7%;              /* #121212 - Popover background */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF - Popover text */
+
+    /* Primary buttons FLIPPED: White bg, black text in dark mode */
+    --primary: 0 0% 100%;            /* #FFFFFF - White button */
+    --primary-foreground: 0 0% 7%;   /* #121212 - Black text */
+    --primary-hover: 0 0% 94%;       /* #F0F0F0 - Off-white hover */
+
+    /* Secondary buttons FLIPPED: Dark bg, white text in dark mode */
+    --secondary: 0 0% 9%;            /* #171717 - Dark gray button */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF - White text */
+    --secondary-border: 0 0% 15%;    /* #262626 - Dark border */
+    --secondary-hover: 0 0% 15%;     /* #262626 - Lighter gray hover */
+
+    --muted: 0 0% 13%;               /* #212121 - Dark background */
+    --muted-foreground: 0 0% 53%;    /* #888888 - Light gray */
+
+    --accent: 0 0% 13%;              /* #212121 - Dark gray accent */
+    --accent-foreground: 0 0% 100%;  /* #FFFFFF - White text */
+
+    --destructive: 0 84% 60%;        /* #EF4444 - Error color */
+    --destructive-foreground: 0 0% 100%; /* White text on destructive */
+
+    --border: 0 0% 15%;              /* #262626 - Dark gray borders */
+    --input: 0 0% 7%;                /* #121212 - Dark input background */
+    --ring: 0 0% 100%;               /* #FFFFFF - White focus ring */
+
+    /* Typography tokens - Dark Mode */
+    --text-primary: 0 0% 100%;       /* #FFFFFF - Main headings */
+    --text-secondary: 0 0% 53%;      /* #888888 - Body/descriptions */
+    --text-tertiary: 0 0% 53%;       /* #888888 - Icons/placeholders */
+
+    /* Icon containers */
+    --icon-container: 0 0% 13%;      /* #212121 - Dark containers */
+    --icon-container-hover: 0 0% 13%; /* #212121 - Same on hover */
+    --icon-color: 0 0% 53%;          /* #888888 - Gray icons */
+    --icon-color-hover: 0 0% 100%;   /* #FFFFFF - White on hover */
+
+    /* Mission section icons */
+    --mission-icon-bg: 0 0% 13%;     /* #212121 - Dark background */
+    --mission-icon-color: 0 0% 53%;  /* #888888 - Gray icons */
   }
 }
 
 @layer base {
   html {
     @apply scroll-smooth;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   
   * {
     @apply border-border;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
 
   body {
     @apply bg-background text-foreground;
     background: hsl(var(--background));
     min-height: 100vh;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* Typography system - exact JSON specification */
+  /* Typography system - Design System Specifications */
   h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -2.5px;
     color: hsl(var(--text-primary));
   }
 
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: 40px;
+      letter-spacing: -2px;
+    }
+  }
+
   h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
     color: hsl(var(--text-primary));
   }
 
   h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.4;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
     color: hsl(var(--text-primary));
   }
 
+  @media (min-width: 1200px) {
+    h3 {
+      font-size: 18px;
+    }
+  }
+
   .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     font-size: 1.25rem;
-    font-weight: 400;
     line-height: 1.5;
     color: hsl(var(--text-secondary));
   }
 
   .body-text {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
     color: hsl(var(--text-secondary));
   }
 
+  @media (min-width: 1200px) {
+    .body-text {
+      font-size: 15px;
+    }
+  }
+
+  .body-text strong {
+    font-weight: 700;
+  }
+
   .caption {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     font-size: 0.875rem;
-    font-weight: 400;
     line-height: 1.4;
     color: hsl(var(--text-tertiary));
   }

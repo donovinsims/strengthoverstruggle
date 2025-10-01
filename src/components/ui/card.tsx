@@ -3,7 +3,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("rounded-lg bg-card text-card-foreground border border-[#222222]", className)} {...props} />
+  <div 
+    ref={ref} 
+    className={cn(
+      "rounded-[12px] bg-card text-card-foreground border-[1.5px] border-[hsl(var(--card-border))] transition-colors duration-200", 
+      className
+    )} 
+    {...props} 
+  />
 ));
 Card.displayName = "Card";
 
@@ -16,14 +23,14 @@ CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-2xl font-semibold leading-none tracking-tight", className)} {...props} />
+    <h3 ref={ref} className={cn("font-manrope font-bold text-[20px] leading-[1.5] tracking-[-0.2px] text-[hsl(var(--text-primary))]", className)} {...props} />
   ),
 );
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+    <p ref={ref} className={cn("font-inter font-medium text-[15px] leading-[1.5] text-[hsl(var(--text-secondary))]", className)} {...props} />
   ),
 );
 CardDescription.displayName = "CardDescription";

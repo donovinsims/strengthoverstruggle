@@ -17,6 +17,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        manrope: ['Manrope', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -63,9 +67,14 @@ export default {
         },
       },
       borderRadius: {
-        lg: "var(--radius-md)",
-        md: "var(--radius)",
-        sm: "var(--radius)",
+        lg: "var(--radius-card)",
+        md: "var(--radius-card)",
+        sm: "var(--radius-button)",
+        button: "var(--radius-button)",
+        card: "var(--radius-card)",
+        input: "var(--radius-input)",
+        modal: "var(--radius-modal)",
+        toggle: "var(--radius-toggle)",
       },
       spacing: {
         xs: "var(--spacing-xs)",
