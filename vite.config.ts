@@ -15,4 +15,31 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Optimize chunk splitting for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks for better caching
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-slot'],
+          'icons': ['lucide-react'],
+        },
+        // Add content hash to filenames for cache busting
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      },
+    },
+    // Increase chunk size warning limit (after optimization, we expect larger but fewer chunks)
+    chunkSizeWarningLimit: 1000,
+    // Enable minification
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production',
+      },
+    },
+  },
 }));
