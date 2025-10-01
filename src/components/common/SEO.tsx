@@ -7,6 +7,9 @@ interface SEOProps {
   canonical?: string;
   ogImage?: string;
   ogType?: string;
+  ogUrl?: string;
+  author?: string;
+  twitterSite?: string;
 }
 
 export const SEO = ({
@@ -15,7 +18,10 @@ export const SEO = ({
   keywords = 'nonprofit, youth empowerment, gym memberships, mental wellness, physical fitness, resilience, community support, 501c3, strength over struggle',
   canonical,
   ogImage = 'https://i.postimg.cc/DyxDRNj3/Xnapper-2025-09-22-22-21-28-8-FDA45-A1-B44F-4-A3-F-8671-9-CE5-F90-C0-CD0.png',
-  ogType = 'website'
+  ogType = 'website',
+  ogUrl,
+  author = 'Strength Over Struggle Team',
+  twitterSite = '@strengthoverstruggle'
 }: SEOProps) => {
   useEffect(() => {
     // Update title
@@ -36,17 +42,24 @@ export const SEO = ({
       }
     };
 
-    // Update meta description
+    // Update meta description and author
     updateMetaTag('description', description, true);
     updateMetaTag('keywords', keywords, true);
+    updateMetaTag('author', author, true);
 
     // Update Open Graph tags
     updateMetaTag('og:title', title);
     updateMetaTag('og:description', description);
     updateMetaTag('og:type', ogType);
     updateMetaTag('og:image', ogImage);
+    updateMetaTag('og:site_name', 'Strength Over Struggle');
+    if (ogUrl) {
+      updateMetaTag('og:url', ogUrl);
+    }
 
     // Update Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image', true);
+    updateMetaTag('twitter:site', twitterSite, true);
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', ogImage);
@@ -64,7 +77,7 @@ export const SEO = ({
         document.head.appendChild(linkElement);
       }
     }
-  }, [title, description, keywords, canonical, ogImage, ogType]);
+  }, [title, description, keywords, canonical, ogImage, ogType, ogUrl, author, twitterSite]);
 
   return null;
 };

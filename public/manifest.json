@@ -1,0 +1,37 @@
+{
+  "name": "Strength Over Struggle",
+  "short_name": "SOS",
+  "description": "Empowering resilience through mental, physical, and financial wellness programs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://storage.googleapis.com/gpt-engineer-file-uploads/x7EeFRySlnOFmFxHHeksmS7IHhS2/uploads/1758597657699-sos_logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://storage.googleapis.com/gpt-engineer-file-uploads/x7EeFRySlnOFmFxHHeksmS7IHhS2/uploads/1758597657699-sos_logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle", "education"],
+  "shortcuts": [
+    {
+      "name": "Donate",
+      "url": "/#donate",
+      "description": "Make a donation to support our mission"
+    },
+    {
+      "name": "Shop",
+      "url": "/shop",
+      "description": "Browse our merchandise"
+    }
+  ]
+}

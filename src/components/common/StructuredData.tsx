@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 interface StructuredDataProps {
-  type: 'organization' | 'nonprofit' | 'article';
+  type: 'organization' | 'nonprofit' | 'article' | 'faq' | 'breadcrumb';
   data?: any;
 }
 
@@ -47,6 +47,43 @@ export const StructuredData = ({ type, data }: StructuredDataProps) => {
       };
     } else if (type === 'article' && data) {
       structuredData = data;
+    } else if (type === 'faq') {
+      structuredData = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": data || [
+          {
+            "@type": "Question",
+            "name": "How does my donation help?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your donation directly funds gym memberships, mental wellness resources, and life skills programs for youth and young adults in need."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my donation tax-deductible?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Strength Over Struggle is a registered 501(c)(3) nonprofit organization, making all donations tax-deductible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I set up a recurring donation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely! We offer monthly recurring donation options to provide sustained support for our programs."
+            }
+          }
+        ]
+      };
+    } else if (type === 'breadcrumb' && data) {
+      structuredData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": data
+      };
     }
 
     const script = document.createElement('script');
