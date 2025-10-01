@@ -331,10 +331,9 @@ const Index = () => {
                 </p>
                 <Button
                   size="lg"
-                  className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold flex items-center justify-center gap-2" 
+                  className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 >
-                  <Heart className="w-5 h-5" fill="currentColor" />
                   Donate Now
                 </Button>
               </div>

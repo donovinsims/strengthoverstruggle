@@ -1,30 +1,21 @@
-import { Facebook, Instagram, Mail, MapPin } from "lucide-react";
+import { Facebook, Instagram, Mail } from "lucide-react";
 
 export const Footer = () => {
   const contactInfo = [
     {
       icon: Facebook,
       title: "Facebook",
-      content: "Follow Us",
       link: "https://www.facebook.com/profile.php?id=61577091357646"
     },
     {
       icon: Instagram,
       title: "Instagram",
-      content: "@_strengthoverstruggle_",
       link: "https://www.instagram.com/_strengthoverstruggle_/"
     },
     {
       icon: Mail,
       title: "Email Us",
-      content: "contact@strength-over-struggle.com",
       link: "mailto:contact@strength-over-struggle.com"
-    },
-    {
-      icon: MapPin,
-      title: "Find Us",
-      content: "Roscoe, Illinois",
-      link: null
     }
   ];
 
@@ -40,36 +31,20 @@ export const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12 max-w-3xl mx-auto">
           {contactInfo.map((info, index) => (
-            <div
+            <a
               key={index}
-              className="text-center group hover-scale"
+              href={info.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center group hover-scale cursor-pointer"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-4 group-hover:bg-primary/10 transition-colors">
                 <info.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
-              <h3 className="font-semibold text-primary mb-2">{info.title}</h3>
-              {info.link ? (
-                <a
-                  href={info.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="body-text hover:text-primary transition-colors break-words block"
-                >
-                  {info.title === "Email Us" ? (
-                    <>
-                      <span className="lg:hidden">{info.content}</span>
-                      <span className="hidden lg:inline">Email</span>
-                    </>
-                  ) : (
-                    info.content
-                  )}
-                </a>
-              ) : (
-                <p className="body-text break-words">{info.content}</p>
-              )}
-            </div>
+              <h3 className="font-semibold text-primary group-hover:text-primary/80 transition-colors">{info.title}</h3>
+            </a>
           ))}
         </div>
 
