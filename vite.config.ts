@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize chunk splitting for better caching
+    // Optimize chunk splitting for better caching and mobile performance
     rollupOptions: {
       output: {
         manualChunks: (id) => {
@@ -33,6 +33,10 @@ export default defineConfig(({ mode }) => ({
             }
             return 'vendor';
           }
+          // Separate modals into their own chunk
+          if (id.includes('Modal.tsx') || id.includes('ExitIntentPopup')) {
+            return 'modals';
+          }
         },
         // Add content hash to filenames for cache busting
         assetFileNames: 'assets/[name].[hash][extname]',
@@ -47,5 +51,12 @@ export default defineConfig(({ mode }) => ({
     // Enable advanced tree-shaking
     target: 'esnext',
     cssCodeSplit: true,
+    // Enable source maps only in development
+    sourcemap: false,
+  },
+  // Optimize dependencies for better tree-shaking
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@radix-ui/react-dialog', '@radix-ui/react-scroll-area'],
   },
 }));

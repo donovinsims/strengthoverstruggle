@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Zap } from "lucide-react";
 import { useState, useEffect, lazy, Suspense } from "react";
-import { TestimonialModal } from "@/components/common/TestimonialModal";
-import { FounderModal } from "@/components/common/FounderModal";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { SEO } from "@/components/common/SEO";
@@ -17,7 +15,9 @@ import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
 import markhiThompsonImage from "@/assets/markhi-thompson.png";
 import elenaHenryImage from "@/assets/elena-henry.png";
 
-// Lazy load non-critical components to reduce initial bundle
+// Lazy load ALL non-critical components for maximum bundle reduction
+const TestimonialModal = lazy(() => import("@/components/common/TestimonialModal").then(m => ({ default: m.TestimonialModal })));
+const FounderModal = lazy(() => import("@/components/common/FounderModal").then(m => ({ default: m.FounderModal })));
 const ExitIntentPopup = lazy(() => import("@/components/common/ExitIntentPopup").then(m => ({ default: m.ExitIntentPopup })));
 
 const Index = () => {
@@ -247,14 +247,15 @@ const Index = () => {
               >
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-center mb-4 md:mb-6">
-                    <img 
-                      src={testimonial.image} 
-                      alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
-                      className="w-14 h-14 rounded-full object-cover mr-4"
-                      loading="lazy"
-                      width="56"
-                      height="56"
-                    />
+                  <img 
+                    src={testimonial.image} 
+                    alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
+                    className="w-14 h-14 rounded-full object-cover mr-4"
+                    loading="lazy"
+                    decoding="async"
+                    width="56"
+                    height="56"
+                  />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
                       <p className="caption">{testimonial.role}</p>
@@ -327,6 +328,7 @@ const Index = () => {
                     alt={`${founder.name}, ${founder.role} of Strength Over Struggle nonprofit organization`}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                     loading="lazy"
+                    decoding="async"
                     width="128"
                     height="128"
                   />
@@ -384,18 +386,22 @@ const Index = () => {
 
       <Footer />
        
-       {/* Modals */}
-      <TestimonialModal 
-        isOpen={isTestimonialModalOpen} 
-        onClose={() => setIsTestimonialModalOpen(false)}
-        testimonial={selectedTestimonial}
-      />
+       {/* Modals - Lazy loaded for performance */}
+      <Suspense fallback={null}>
+        <TestimonialModal 
+          isOpen={isTestimonialModalOpen} 
+          onClose={() => setIsTestimonialModalOpen(false)}
+          testimonial={selectedTestimonial}
+        />
+      </Suspense>
       
-      <FounderModal 
-        isOpen={isFounderModalOpen} 
-        onClose={() => setIsFounderModalOpen(false)}
-        founder={selectedFounder}
-      />
+      <Suspense fallback={null}>
+        <FounderModal 
+          isOpen={isFounderModalOpen} 
+          onClose={() => setIsFounderModalOpen(false)}
+          founder={selectedFounder}
+        />
+      </Suspense>
 
       {/* Exit Intent Popup - Lazy loaded */}
       <Suspense fallback={null}>

@@ -7,25 +7,34 @@
     <meta name="description" content="Join Strength Over Struggle to find resources, support, and mentorship that help you overcome challenges and build resilience. Empower your journey today.">
     <meta name="author" content="Strength Over Struggle Team" />
     
-    <!-- Critical inline CSS for above-the-fold content -->
+    <!-- Critical inline CSS for above-the-fold content - EXPANDED -->
     <style>
       /* Critical above-the-fold styles to prevent render blocking */
-      body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#121212;color:#fff}
+      *{box-sizing:border-box;margin:0;padding:0}
+      body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:#000;color:#fff;min-height:100vh}
       #root{min-height:100vh}
       .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(125% 125% at 50% 90%,#000 40%,rgba(255,255,255,.15) 100%)}
+      h1{font-family:Manrope,system-ui,sans-serif;font-size:2.5rem;font-weight:700;line-height:1.2;color:#fff;margin-bottom:1.5rem}
+      .gradient-text{background:linear-gradient(135deg,#fff 0%,#999 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      button{font-family:Inter,system-ui,sans-serif;font-weight:600;border:none;cursor:pointer;transition:opacity .2s,transform .2s}
+      .btn-primary{background:#fff;color:#000;padding:1.5rem 2rem;border-radius:.5rem;font-size:1.125rem}
+      .btn-outline{background:transparent;color:#fff;border:2px solid #fff;padding:1.5rem 2rem;border-radius:.5rem;font-size:1.125rem}
+      @media(max-width:768px){h1{font-size:2rem}}
     </style>
     
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://storage.googleapis.com">
-    <link rel="dns-prefetch" href="https://buy.stripe.com">
-    <link rel="dns-prefetch" href="https://checkout.stripe.com">
+    <!-- Preload critical LCP image -->
+    <link rel="preload" as="image" href="/src/assets/hero-image.jpg" fetchpriority="high">
     
-    <!-- Preload critical fonts with font-display swap for optimal performance -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null;">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap"></noscript>
+    <!-- Preconnect only to critical origins -->
+    <link rel="preconnect" href="https://buy.stripe.com">
+    
+    <!-- Pure CSS font loading with font-display: swap for zero render blocking -->
+    <style>
+      @font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Manrope';font-style:normal;font-weight:800;font-display:swap;src:url(https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk6jFO_F87jxeN7B.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      @font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiA.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    </style>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -53,15 +62,15 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
     
-    <!-- Register Service Worker for advanced caching -->
+    <!-- Register Service Worker for advanced caching - deferred for performance -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {
-            // Silent fail - service worker is a progressive enhancement
-          });
+          setTimeout(() => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+          }, 2000);
         });
       }
     </script>
