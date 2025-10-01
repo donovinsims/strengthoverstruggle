@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Zap } from "lucide-react";
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect } from "react";
+import { TestimonialModal } from "@/components/common/TestimonialModal";
+import { FounderModal } from "@/components/common/FounderModal";
+import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { SEO } from "@/components/common/SEO";
@@ -14,11 +17,6 @@ import alexFounderImage from "@/assets/alex-founder.jpg";
 import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
 import markhiThompsonImage from "@/assets/markhi-thompson.png";
 import elenaHenryImage from "@/assets/elena-henry.png";
-
-// Lazy load ALL non-critical components for maximum bundle reduction
-const TestimonialModal = lazy(() => import("@/components/common/TestimonialModal").then(m => ({ default: m.TestimonialModal })));
-const FounderModal = lazy(() => import("@/components/common/FounderModal").then(m => ({ default: m.FounderModal })));
-const ExitIntentPopup = lazy(() => import("@/components/common/ExitIntentPopup").then(m => ({ default: m.ExitIntentPopup })));
 
 const Index = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<any>(null);
@@ -61,19 +59,10 @@ const Index = () => {
       <section 
         id="hero" 
         className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40"
+        style={{
+          background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
+        }}
       >
-        {/* Optimized hero background image for LCP */}
-        <img 
-          src={heroImage} 
-          alt="" 
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-          fetchPriority="high"
-          loading="eager"
-          width="1920"
-          height="1080"
-          style={{ filter: 'blur(8px)' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black" aria-hidden="true"></div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -87,17 +76,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="bg-white text-black hover:bg-white/90 rounded-md px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
-              onClick={() => {
-                try {
-                  window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer');
-                } catch (error) {
-                  // Silent error handling in production for performance
-                  if (process.env.NODE_ENV === 'development') {
-                    console.error('Failed to open donation page:', error);
-                  }
-                }
-              }}
-              aria-label="Make a donation to Strength Over Struggle"
+              onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
             >
               Donate Now
             </Button>
@@ -105,7 +84,6 @@ const Index = () => {
               variant="outline" 
               className="border-white text-white hover:bg-white/10 rounded-md px-8 py-6 text-lg"
               onClick={() => scrollToSection('mission')}
-              aria-label="Navigate to our mission and story section"
             >
               Learn Our Story
             </Button>
@@ -156,12 +134,8 @@ const Index = () => {
             </p>
           </div>
           <div className="text-center">
-            <Link 
-              to="/story" 
-              className="story-link text-primary font-medium hover:text-primary/80 transition-colors"
-              aria-label="Read the complete story about Strength Over Struggle's mission, impact, and how we empower communities"
-            >
-              Learn about our mission and impact
+            <Link to="/story" className="story-link text-primary font-medium hover:text-primary/80 transition-colors">
+              Read More
             </Link>
           </div>
         </div>
@@ -250,26 +224,20 @@ const Index = () => {
               >
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-center mb-4 md:mb-6">
-                  <img 
-                    src={testimonial.image} 
-                    alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
-                    className="w-14 h-14 rounded-full object-cover mr-4"
-                    loading="lazy"
-                    decoding="async"
-                    width="56"
-                    height="56"
-                  />
+                    <img 
+                      src={testimonial.image} 
+                      alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
+                      className="w-14 h-14 rounded-full object-cover mr-4"
+                      loading="lazy"
+                    />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
                       <p className="caption">{testimonial.role}</p>
                     </div>
                   </div>
                   <p className="body-text italic">"{testimonial.quote}"</p>
-                  <button 
-                    className="mt-4 md:mt-6 story-link text-primary font-medium"
-                    aria-label={`Read ${testimonial.name}'s full testimonial about their experience with Strength Over Struggle`}
-                  >
-                    Read {testimonial.name}'s Full Story
+                  <button className="mt-4 md:mt-6 story-link text-primary font-medium">
+                    Read Full Story
                   </button>
                 </CardContent>
               </Card>
@@ -331,18 +299,12 @@ const Index = () => {
                     alt={`${founder.name}, ${founder.role} of Strength Over Struggle nonprofit organization`}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                     loading="lazy"
-                    decoding="async"
-                    width="128"
-                    height="128"
                   />
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
                   <p className="caption mb-4">{founder.role}</p>
                   <p className="body-text mb-6">"{founder.bio}"</p>
-                  <button 
-                    className="story-link text-primary font-medium"
-                    aria-label={`Read ${founder.name}'s full biography and background as ${founder.role} of Strength Over Struggle`}
-                  >
-                    Read {founder.name}'s Full Biography
+                  <button className="story-link text-primary font-medium">
+                    Read Full Biography
                   </button>
                 </CardContent>
               </Card>
@@ -389,27 +351,21 @@ const Index = () => {
 
       <Footer />
        
-       {/* Modals - Lazy loaded for performance */}
-      <Suspense fallback={null}>
-        <TestimonialModal 
-          isOpen={isTestimonialModalOpen} 
-          onClose={() => setIsTestimonialModalOpen(false)}
-          testimonial={selectedTestimonial}
-        />
-      </Suspense>
+       {/* Modals */}
+      <TestimonialModal 
+        isOpen={isTestimonialModalOpen} 
+        onClose={() => setIsTestimonialModalOpen(false)}
+        testimonial={selectedTestimonial}
+      />
       
-      <Suspense fallback={null}>
-        <FounderModal 
-          isOpen={isFounderModalOpen} 
-          onClose={() => setIsFounderModalOpen(false)}
-          founder={selectedFounder}
-        />
-      </Suspense>
+      <FounderModal 
+        isOpen={isFounderModalOpen} 
+        onClose={() => setIsFounderModalOpen(false)}
+        founder={selectedFounder}
+      />
 
-      {/* Exit Intent Popup - Lazy loaded */}
-      <Suspense fallback={null}>
-        <ExitIntentPopup />
-      </Suspense>
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup />
 
      </div>
   );

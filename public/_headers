@@ -1,22 +1,15 @@
-# Caching headers for static assets (optimized for 100% Lighthouse)
+# Caching headers for static assets (1,577 KiB savings)
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache self-hosted fonts for 1 year
-/fonts/*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache legacy font formats
+# Cache fonts for 1 year
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
 /*.woff
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache images for 1 year (self-hosted and assets)
-/images/*
-  Cache-Control: public, max-age=31536000, immutable
-
+# Cache images for 1 year
 /*.jpg
   Cache-Control: public, max-age=31536000, immutable
 

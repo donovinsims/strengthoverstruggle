@@ -16,27 +16,14 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize chunk splitting for better caching and mobile performance
+    // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
+        manualChunks: {
           // Vendor chunks for better caching
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
-              return 'react-vendor';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'ui-vendor';
-            }
-            if (id.includes('lucide-react')) {
-              return 'icons';
-            }
-            return 'vendor';
-          }
-          // Separate modals into their own chunk
-          if (id.includes('Modal.tsx') || id.includes('ExitIntentPopup')) {
-            return 'modals';
-          }
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-accordion', '@radix-ui/react-slot'],
+          'icons': ['lucide-react'],
         },
         // Add content hash to filenames for cache busting
         assetFileNames: 'assets/[name].[hash][extname]',
@@ -48,15 +35,5 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     // Use esbuild for minification (faster than terser, no extra dependency needed)
     minify: 'esbuild',
-    // Enable advanced tree-shaking
-    target: 'esnext',
-    cssCodeSplit: true,
-    // Enable source maps only in development
-    sourcemap: false,
-  },
-  // Optimize dependencies for better tree-shaking
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@radix-ui/react-dialog', '@radix-ui/react-scroll-area'],
   },
 }));
