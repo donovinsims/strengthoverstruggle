@@ -60,13 +60,20 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         id="hero" 
-        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40 hero-section"
-        style={{
-          background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
-        }}
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40"
       >
-        {/* Preload critical LCP image */}
-        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
+        {/* Optimized hero background image for LCP */}
+        <img 
+          src={heroImage} 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          fetchPriority="high"
+          loading="eager"
+          width="1920"
+          height="1080"
+          style={{ filter: 'blur(8px)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black" aria-hidden="true"></div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -80,7 +87,14 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="bg-white text-black hover:bg-white/90 rounded-md px-8 py-6 text-lg font-semibold animate-pulse hover:scale-105 transition-transform"
-              onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+              onClick={() => {
+                try {
+                  window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer');
+                } catch (error) {
+                  console.error('Failed to open donation page:', error);
+                }
+              }}
+              aria-label="Make a donation to Strength Over Struggle"
             >
               Donate Now
             </Button>
@@ -88,6 +102,7 @@ const Index = () => {
               variant="outline" 
               className="border-white text-white hover:bg-white/10 rounded-md px-8 py-6 text-lg"
               onClick={() => scrollToSection('mission')}
+              aria-label="Navigate to our mission and story section"
             >
               Learn Our Story
             </Button>
@@ -141,9 +156,9 @@ const Index = () => {
             <Link 
               to="/story" 
               className="story-link text-primary font-medium hover:text-primary/80 transition-colors"
-              aria-label="Read the full story about Strength Over Struggle's mission and impact"
+              aria-label="Read the complete story about Strength Over Struggle's mission, impact, and how we empower communities"
             >
-              Read More
+              Learn about our mission and impact
             </Link>
           </div>
         </div>
@@ -246,8 +261,11 @@ const Index = () => {
                     </div>
                   </div>
                   <p className="body-text italic">"{testimonial.quote}"</p>
-                  <button className="mt-4 md:mt-6 story-link text-primary font-medium">
-                    Read Full Story
+                  <button 
+                    className="mt-4 md:mt-6 story-link text-primary font-medium"
+                    aria-label={`Read ${testimonial.name}'s full testimonial about their experience with Strength Over Struggle`}
+                  >
+                    Read {testimonial.name}'s Full Story
                   </button>
                 </CardContent>
               </Card>
@@ -315,8 +333,11 @@ const Index = () => {
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
                   <p className="caption mb-4">{founder.role}</p>
                   <p className="body-text mb-6">"{founder.bio}"</p>
-                  <button className="story-link text-primary font-medium">
-                    Read Full Biography
+                  <button 
+                    className="story-link text-primary font-medium"
+                    aria-label={`Read ${founder.name}'s full biography and background as ${founder.role} of Strength Over Struggle`}
+                  >
+                    Read {founder.name}'s Full Biography
                   </button>
                 </CardContent>
               </Card>

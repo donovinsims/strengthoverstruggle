@@ -15,23 +15,17 @@
       .hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(125% 125% at 50% 90%,#000 40%,rgba(255,255,255,.15) 100%)}
     </style>
     
-    <!-- Preconnect to external domains (non-blocking) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://storage.googleapis.com">
-    <link rel="preconnect" href="https://buy.stripe.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
+    <link rel="dns-prefetch" href="https://buy.stripe.com">
     <link rel="dns-prefetch" href="https://checkout.stripe.com">
     
-    <!-- Load fonts asynchronously via JavaScript to prevent render blocking -->
-    <script>
-      (function(){
-        var link=document.createElement('link');
-        link.rel='stylesheet';
-        link.href='https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap';
-        document.head.appendChild(link);
-      })();
-    </script>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Preload critical fonts with font-display swap for optimal performance -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap" media="print" onload="this.media='all';this.onload=null;">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500&display=swap"></noscript>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -59,6 +53,17 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx" defer></script>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Register Service Worker for advanced caching -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {
+            // Silent fail - service worker is a progressive enhancement
+          });
+        });
+      }
+    </script>
   </body>
 </html>

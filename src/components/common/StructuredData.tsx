@@ -12,38 +12,53 @@ export const StructuredData = ({ type, data }: StructuredDataProps) => {
     if (type === 'organization' || type === 'nonprofit') {
       structuredData = {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "NGO",
         "name": "Strength Over Struggle",
-        "alternateName": "SOS",
+        "alternateName": "SOS Empowerment",
         "url": "https://strength-over-struggle.com",
         "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/x7EeFRySlnOFmFxHHeksmS7IHhS2/uploads/1758597657699-sos_logo.jpeg",
-        "description": "Empowering resilience through mental, physical, and financial wellness programs. A 501(c)(3) nonprofit organization transforming challenges into opportunities.",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "contact@strength-over-struggle.com",
-          "contactType": "Customer Service"
-        },
-        "sameAs": [
-          "https://www.instagram.com/strengthoverstruggle",
-          "https://www.facebook.com/strengthoverstruggle"
-        ],
+        "description": "Empowering individuals to overcome life's challenges through resilience, fitness, and community support. We provide gym memberships, life skills programs, and mentorship to transform adversity into strength.",
+        "foundingDate": "2020",
         "address": {
           "@type": "PostalAddress",
-          "addressCountry": "US"
+          "addressCountry": "US",
+          "addressRegion": "Wisconsin"
         },
-        "nonprofitStatus": "501(c)(3)",
-        "foundingDate": "2021",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Donor Relations",
+          "email": "strengthoverstruggle23@gmail.com"
+        },
+        "sameAs": [
+          "https://www.instagram.com/strength_over_struggle_org/"
+        ],
         "founder": [
           {
             "@type": "Person",
-            "name": "Dylann Rauch"
+            "name": "Alex Limberg",
+            "jobTitle": "Founder and President",
+            "description": "Detective, SWAT Operator, and Fitness Advocate"
           },
           {
             "@type": "Person",
-            "name": "Alex Limberg"
+            "name": "Dylann Rauch",
+            "jobTitle": "Co-Founder and Vice President",
+            "description": "Former Professional Athlete and Child Maltreatment Investigator"
+          },
+          {
+            "@type": "Person",
+            "name": "Vanessa Tellez",
+            "jobTitle": "Co-Founder and Treasurer",
+            "description": "Registered Nurse and Youth Wellness Advocate"
           }
         ],
-        "mission": "To empower youth and young adults through access to physical fitness, mental wellness resources, and life skills development programs."
+        "nonprofitStatus": "Nonprofit501c3",
+        "mission": "Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.",
+        "knowsAbout": ["Youth Empowerment", "Physical Fitness", "Mental Wellness", "Community Support", "Life Skills Development"],
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Wisconsin, United States"
+        }
       };
     } else if (type === 'article' && data) {
       structuredData = data;
