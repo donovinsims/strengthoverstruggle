@@ -323,19 +323,19 @@ const Index = () => {
                 <h3 className="font-manrope font-bold text-[32px] md:text-[48px] leading-[1.2] text-[hsl(var(--text-primary))] mb-3 md:mb-4">
                   One-Time Donation
                 </h3>
-                <p className="font-inter font-normal text-[18px] leading-[1.5] text-[#545454] dark:text-[#888888] mb-1">
+                <p className="font-inter font-normal text-[18px] leading-[1.5] text-[#545454] dark:text-[#888888] mb-6">
                   Custom amount for immediate impact
-                </p>
-                <p className="font-inter font-normal text-[14px] leading-[1.5] text-[#888888] dark:text-[#666666] mb-6">
-                  Secure • Tax-deductible • Fast
                 </p>
                 <Button
                   size="lg"
-                  className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold" 
+                  className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold mb-3" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 >
                   Donate Now
                 </Button>
+                <p className="font-inter font-normal text-[13px] leading-[1.5] text-[#888888] dark:text-[#666666]">
+                  Secure checkout powered by Stripe
+                </p>
               </div>
             </Card>
           </div>
