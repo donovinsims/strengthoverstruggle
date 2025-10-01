@@ -339,7 +339,7 @@ export default function Contact() {
                         <div className="relative">
                           <Textarea
                             placeholder="Tell us more about your inquiry..."
-                            className="font-inter text-[14px] md:text-[15px] min-h-[120px] resize-none"
+                            className="font-inter text-[14px] md:text-[15px] min-h-[120px] resize-y"
                             maxLength={1000}
                             {...field}
                             onChange={(e) => {
