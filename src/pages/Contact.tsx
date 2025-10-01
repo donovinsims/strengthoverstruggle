@@ -152,15 +152,17 @@ export default function Contact() {
             </div>
           )}
 
-          <Card className="p-6 md:p-9 shadow-lg">
-            <div className="text-center mb-8">
-              <h1 className="font-manrope font-bold text-[28px] md:text-[28px] leading-[1.2] tracking-[-0.5px] text-[hsl(var(--text-primary))] mb-4">
-                Connect With Us
-              </h1>
-              <p className="font-inter font-medium text-[16px] md:text-[18px] leading-[1.5] text-[hsl(var(--text-secondary))] max-w-[540px] mx-auto">
-                Whether you're interested in partnering with us, making a donation, or have questions about our mission, we'd love to hear from you. Fill out the form below and we'll get back to you soon.
-              </p>
-            </div>
+          {/* Page Title and Description - Outside Card */}
+          <div className="text-center mb-8">
+            <h1 className="font-manrope font-extrabold text-[32px] md:text-[48px] leading-[1.1] tracking-[-2px] md:tracking-[-2.5px] text-[hsl(var(--text-primary))] mb-4">
+              Connect With Us
+            </h1>
+            <p className="font-inter font-normal text-[18px] leading-[1.6] text-[#545454] dark:text-[#888888] max-w-[800px] mx-auto mb-8">
+              Whether you're interested in partnering with us, making a donation, or have questions about our mission, we'd love to hear from you. Fill out the form below and we'll get back to you within 24-48 hours.
+            </p>
+          </div>
+
+          <Card className="p-6 md:p-8 shadow-md">
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
