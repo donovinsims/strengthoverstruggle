@@ -9,10 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary: Black bg + white text in light mode, flips to white bg + black text in dark mode
-        default: "bg-primary text-primary-foreground border border-primary hover:bg-[hsl(var(--primary-hover))] rounded-[10px]",
+        // Primary: White bg + black text with light border
+        default: "bg-primary text-primary-foreground border border-[hsl(var(--primary-border))] hover:bg-[hsl(var(--primary-hover))] rounded-[10px]",
         
-        // Secondary: White bg + black text in light mode, flips to dark bg + white text in dark mode
+        // Secondary: Dark bg + white text with dark border
         secondary: "bg-secondary text-secondary-foreground border border-[hsl(var(--secondary-border))] hover:bg-[hsl(var(--secondary-hover))] rounded-[10px]",
         
         destructive: "bg-destructive text-destructive-foreground border border-destructive hover:bg-destructive/90 rounded-[10px]",

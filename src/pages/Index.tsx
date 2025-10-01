@@ -52,10 +52,7 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         id="hero" 
-        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40"
-        style={{
-          background: 'radial-gradient(125% 125% at 50% 90%, #000000 40%, rgba(255,255,255,0.15) 100%)',
-        }}
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40 bg-background"
       >
         
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">

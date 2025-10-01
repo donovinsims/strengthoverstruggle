@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface HeaderProps {
   showDonateButton?: boolean;
@@ -52,6 +53,7 @@ export const Header = ({
             >
               Shop
             </Link>
+            <ThemeToggle />
             {showDonateButton && (
               <Button 
                 onClick={onDonateClick}
@@ -90,6 +92,10 @@ export const Header = ({
               >
                 Shop
               </Link>
+              <div className="flex items-center justify-between">
+                <span className="text-secondary-foreground">Theme</span>
+                <ThemeToggle />
+              </div>
               {showDonateButton && (
                 <Button 
                   onClick={() => {
