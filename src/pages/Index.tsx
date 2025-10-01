@@ -309,10 +309,10 @@ const Index = () => {
       {/* Donate Section Placeholder */}
       <section id="donate" className="py-20 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 lg:mb-12 text-primary">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
             Make a Difference Today.
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
