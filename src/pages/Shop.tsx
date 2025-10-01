@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
+import { SEO } from "@/components/common/SEO";
 import wristbandImage from "@/assets/sos-wristband.png";
 
 const Shop = () => {
@@ -13,6 +14,13 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Shop – Strength Over Struggle | Support Our Mission"
+        description="Get your SOS Wristband and support our mission. Every purchase helps empower youth through gym memberships and wellness programs. 501(c)(3) nonprofit."
+        keywords="nonprofit shop, charity merchandise, SOS wristband, support youth programs, gym membership donations, strength over struggle merchandise"
+        canonical="https://strength-over-struggle.com/shop"
+        ogType="product"
+      />
       <Header />
 
       {/* Main Content */}
@@ -35,8 +43,9 @@ const Shop = () => {
                 <div className="aspect-[4/3] mb-4 bg-muted rounded-lg overflow-hidden">
                   <img 
                     src={wristbandImage} 
-                    alt="SOS Wristband - White silicone wristband with 'I GET TO' text"
+                    alt="Strength Over Struggle wristband - White silicone motivational wristband with 'I GET TO' text supporting youth wellness programs"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 

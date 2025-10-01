@@ -7,6 +7,8 @@ import { FounderModal } from "@/components/common/FounderModal";
 import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
+import { SEO } from "@/components/common/SEO";
+import { StructuredData } from "@/components/common/StructuredData";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -47,6 +49,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        canonical="https://strength-over-struggle.com"
+      />
+      <StructuredData type="nonprofit" />
       <Header />
 
       {/* Hero Section */}
@@ -220,8 +226,9 @@ const Index = () => {
                   <div className="flex items-center mb-4 md:mb-6">
                     <img 
                       src={testimonial.image} 
-                      alt={testimonial.name}
+                      alt={`${testimonial.name}, ${testimonial.role} - Strength Over Struggle testimonial`}
                       className="w-14 h-14 rounded-full object-cover mr-4"
+                      loading="lazy"
                     />
                     <div>
                       <h3 className="font-semibold text-primary">{testimonial.name}</h3>
@@ -289,8 +296,9 @@ const Index = () => {
                 <CardContent className="p-8">
                   <img 
                     src={founder.image} 
-                    alt={founder.name}
+                    alt={`${founder.name}, ${founder.role} of Strength Over Struggle nonprofit organization`}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
+                    loading="lazy"
                   />
                   <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
                   <p className="caption mb-4">{founder.role}</p>
