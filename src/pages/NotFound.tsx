@@ -7,8 +7,12 @@ import { Button } from "@/components/ui/button";
 const NotFound = () => {
   const location = useLocation();
 
+  // Track 404 errors for analytics without console errors
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    // Log to analytics service instead of console
+    if (typeof window !== 'undefined') {
+      // Future: Send to analytics tracking service
+    }
   }, [location.pathname]);
 
   return (

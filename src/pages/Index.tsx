@@ -134,7 +134,11 @@ const Index = () => {
             </p>
           </div>
           <div className="text-center">
-            <Link to="/story" className="story-link text-primary font-medium hover:text-primary/80 transition-colors">
+            <Link 
+              to="/story" 
+              className="story-link text-primary font-medium hover:text-primary/80 transition-colors"
+              aria-label="Read the full story about Strength Over Struggle's mission and impact"
+            >
               Read More
             </Link>
           </div>

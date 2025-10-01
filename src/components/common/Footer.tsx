@@ -55,6 +55,7 @@ export const Footer = () => {
                   href={info.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${info.title}: ${info.content}`}
                   className="body-text hover:text-primary transition-colors break-words block"
                 >
                   {info.title === "Email Us" ? (
