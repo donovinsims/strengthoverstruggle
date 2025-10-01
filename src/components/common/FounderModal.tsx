@@ -67,34 +67,32 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
         
         <ScrollArea className="flex-1 overflow-y-auto pr-4">
           <div className="space-y-6 pb-4">
-            <div className="flex flex-col items-center space-y-4 text-center">
+            <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
               <img 
                 src={founder.image} 
                 alt={founder.name}
-                className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover flex-shrink-0"
+                className="w-20 h-20 sm:w-16 sm:h-16 rounded-full object-cover flex-shrink-0"
               />
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2">{founder.name}</h3>
-                <p className="caption mb-4 text-sm sm:text-base">{founder.role}</p>
+                <h3 className="font-semibold text-primary text-lg sm:text-base">{founder.name}</h3>
+                <p className="caption text-sm">{founder.role}</p>
                 
                 {founder.instagram && (
-                  <div className="flex justify-center">
-                    <a
-                      href={founder.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-1 sm:space-x-2 text-primary hover:text-primary/80 transition-colors"
-                      aria-label={`${founder.name}'s Instagram profile`}
-                    >
-                      <span className="text-xs sm:text-sm">Instagram</span>
-                    </a>
-                  </div>
+                  <a
+                    href={founder.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-xs mt-1"
+                    aria-label={`${founder.name}'s Instagram profile`}
+                  >
+                    <span>Instagram</span>
+                  </a>
                 )}
               </div>
             </div>
             
             <div id="founder-content">
-              <p className="body-text leading-relaxed text-sm sm:text-base whitespace-pre-line">
+              <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">
                 {founder.fullBio}
               </p>
             </div>
