@@ -306,23 +306,24 @@ const Index = () => {
       </section>
 
       {/* Donate Section Placeholder */}
-      <section id="donate" className="py-28 md:py-32 px-6">
+      <section id="donate" className="py-20 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-primary">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 lg:mb-12 text-primary">
             Make a Difference Today.
           </h2>
-          <p className="subtitle mb-12 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           
           {/* Donation Cards - single card layout */}
           <div className="max-w-2xl mx-auto">
-            <Card className="rounded-md p-12 md:p-16 hover-scale transition-transform">
-              <div className="text-center space-y-8">
-                <h3 className="text-3xl md:text-4xl font-bold">One-Time Donation</h3>
-                <p className="text-base md:text-lg text-muted-foreground">Custom amount for immediate impact</p>
+            <Card className="rounded-md p-6 md:p-8 lg:p-12 hover-scale transition-transform">
+              <div className="text-center space-y-6 md:space-y-8">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">One-Time Donation</h3>
+                <p className="text-sm md:text-base lg:text-lg text-muted-foreground">Custom amount for immediate impact</p>
                 <Button
-                  className="rounded-md w-full py-6 text-lg" 
+                  size="lg"
+                  className="rounded-md w-full md:w-auto md:px-12 text-base md:text-lg" 
                   onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
                 >
                   Donate Now
@@ -331,8 +332,8 @@ const Index = () => {
             </Card>
           </div>
           
-          <div className="text-center mt-8">
-            <p className="text-sm text-muted-foreground font-medium">
+          <div className="text-center mt-6 md:mt-8 px-4">
+            <p className="text-xs md:text-sm text-muted-foreground font-medium">
               Strength Over Struggle is a 501(c)(3) nonprofit organization. Your donations are tax-deductible.
             </p>
           </div>
