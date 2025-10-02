@@ -23,12 +23,29 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
 
-    const resend = new Resend(Deno.env.get('RESEND_API_KEY') ?? '');
+    if (!supabaseUrl || !serviceRoleKey) {
+      console.error('Missing required Supabase environment variables');
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error. Please contact support.' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!resendApiKey) {
+      console.error('Missing RESEND_API_KEY environment variable');
+      return new Response(
+        JSON.stringify({ error: 'Email service is temporarily unavailable. Please try again later.' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const supabaseClient = createClient(supabaseUrl, serviceRoleKey);
+
+    const resend = new Resend(resendApiKey);
     const data: ContactFormData = await req.json();
     
     console.log('=== CONTACT FORM SUBMISSION START ===');
