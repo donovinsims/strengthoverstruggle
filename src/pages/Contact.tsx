@@ -75,11 +75,11 @@ export default function Contact() {
     }
 
     try {
-      const { data: result, error } = await supabase.functions.invoke('submit-contact-form', {
+      const { data: result, error } = await supabase.functions.invoke('submit-contact', {
         body: {
-          ...data,
-          form_render_time: formRenderTime,
-          submission_time: submissionTime,
+          name: data.name,
+          email: data.email,
+          message: data.message || '',
         },
       });
 
