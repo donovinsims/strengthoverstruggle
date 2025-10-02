@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
-import { Resend } from "npm:resend@2.0.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -155,81 +154,47 @@ serve(async (req) => {
 
     console.log('Contact submission saved:', submission.id);
 
-    // 6. Send email notification via Resend
-    const resendApiKey = Deno.env.get('RESEND_API_KEY');
-    if (resendApiKey) {
+    // 6. ConvertKit API v4 Integration
+    const convertKitApiKey = Deno.env.get('CONVERTKIT_API_KEY');
+    if (convertKitApiKey) {
       try {
-        const resend = new Resend(resendApiKey);
-        
-        const emailHtml = `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #121212; border-bottom: 2px solid #121212; padding-bottom: 10px;">
-              New Contact Form Submission
-            </h2>
-            
-            <div style="margin: 20px 0;">
-              <h3 style="color: #545454; font-size: 16px; margin-bottom: 15px;">Contact Details:</h3>
-              
-              <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                  <td style="padding: 10px; background: #FAFAFA; font-weight: bold; width: 150px;">Name:</td>
-                  <td style="padding: 10px; background: #FAFAFA;">${sanitizedName}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px; background: #FFFFFF; font-weight: bold;">Email:</td>
-                  <td style="padding: 10px; background: #FFFFFF;">
-                    <a href="mailto:${sanitizedEmail}" style="color: #121212;">${sanitizedEmail}</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px; background: #FAFAFA; font-weight: bold;">Phone:</td>
-                  <td style="padding: 10px; background: #FAFAFA;">
-                    <a href="tel:${sanitizedPhone}" style="color: #121212;">${sanitizedPhone}</a>
-                  </td>
-                </tr>
-                ${sanitizedBusinessName ? `
-                <tr>
-                  <td style="padding: 10px; background: #FFFFFF; font-weight: bold;">Business:</td>
-                  <td style="padding: 10px; background: #FFFFFF;">${sanitizedBusinessName}</td>
-                </tr>
-                ` : ''}
-                <tr>
-                  <td style="padding: 10px; background: ${sanitizedBusinessName ? '#FAFAFA' : '#FFFFFF'}; font-weight: bold;">Reason:</td>
-                  <td style="padding: 10px; background: ${sanitizedBusinessName ? '#FAFAFA' : '#FFFFFF'};">${sanitizedReason}</td>
-                </tr>
-              </table>
-            </div>
-            
-            ${sanitizedMessage ? `
-            <div style="margin: 20px 0;">
-              <h3 style="color: #545454; font-size: 16px; margin-bottom: 10px;">Message:</h3>
-              <div style="padding: 15px; background: #FAFAFA; border-left: 3px solid #121212; white-space: pre-wrap;">
-                ${sanitizedMessage}
-              </div>
-            </div>
-            ` : ''}
-            
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0; color: #888888; font-size: 12px;">
-              <p>Submission ID: ${submission.id}</p>
-              <p>Submitted: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} EST</p>
-            </div>
-          </div>
-        `;
-
-        await resend.emails.send({
-          from: 'Strength Over Struggle <notifications@strength-over-struggle.com>',
-          to: ['contact@strength-over-struggle.com'],
-          subject: `New Contact: ${sanitizedReason} - ${sanitizedName}`,
-          html: emailHtml,
+        // Create or update subscriber in ConvertKit
+        const kitResponse = await fetch('https://api.convertkit.com/v4/subscribers', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${convertKitApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email_address: sanitizedEmail,
+            first_name: sanitizedName.split(' ')[0],
+            state: 'active',
+            fields: {
+              reason: sanitizedReason,
+              message: sanitizedMessage || '',
+              phone: sanitizedPhone,
+              business_name: sanitizedBusinessName || '',
+            },
+          }),
         });
 
-        console.log('Email notification sent successfully');
-      } catch (emailError) {
-        console.error('Email notification failed:', emailError);
-        // Don't fail the submission if email fails
+        if (kitResponse.ok) {
+          const kitData = await kitResponse.json();
+          console.log('ConvertKit subscriber created/updated:', kitData.subscriber?.id);
+          
+          // Note: Tag and automation would be configured in ConvertKit dashboard
+          // The automation can be triggered when a subscriber is added or based on specific criteria
+        } else {
+          const errorText = await kitResponse.text();
+          console.error('ConvertKit API error:', errorText);
+          // Don't fail the submission if ConvertKit fails
+        }
+      } catch (kitError) {
+        console.error('ConvertKit integration error:', kitError);
+        // Don't fail the submission if ConvertKit fails
       }
     } else {
-      console.warn('RESEND_API_KEY not configured - skipping email notification');
+      console.warn('CONVERTKIT_API_KEY not configured');
     }
 
     // 7. Return success

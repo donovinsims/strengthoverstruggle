@@ -64,41 +64,23 @@ export default function Contact() {
     setIsSubmitting(true);
     setBanner({ type: null, message: '' });
 
+    // Time-based validation (bot protection)
+    const submissionTime = Date.now();
+    const timeDiff = (submissionTime - formRenderTime) / 1000;
+    
+    if (timeDiff < 3) {
+      setIsSubmitting(false);
+      return; // Silent rejection for suspected bot
+    }
+
     try {
-      const submissionTime = Date.now();
+      // TODO: Replace with Lovable Cloud edge function
+      console.log('Contact form submission:', data);
       
-      const response = await fetch(
-        'https://zahpunaaierytbbaixrh.supabase.co/functions/v1/submit-contact-form',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...data,
-            form_render_time: formRenderTime,
-            submission_time: submissionTime,
-          }),
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 429) {
-          setBanner({
-            type: 'rate-limit',
-            message: 'You\'ve submitted too many requests. Please try again in 1 hour.'
-          });
-        } else {
-          throw new Error(result.error || 'Submission failed');
-        }
-        return;
-      }
-
+      // Temporary success message
       setBanner({
         type: 'success',
-        message: result.message || "Thank you! We've received your message and will respond within 24-48 hours.",
+        message: "Thank you! Your message has been received. (Backend integration pending)",
       });
       form.reset();
       setMessageLength(0);
@@ -107,7 +89,7 @@ export default function Contact() {
       console.error('Contact form submission error:', error);
       setBanner({
         type: 'error',
-        message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
+        message: "Something went wrong. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
