@@ -13,6 +13,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+// ConvertKit API Configuration
+const CONVERTKIT_API_KEY = "5qhRShC1VPSMmKrk53oi4Q";
+const CONVERTKIT_FORM_ID = "8554123";
+
 const contactSchema = z.object({
   name: z.string()
     .trim()
@@ -74,13 +78,33 @@ export default function Contact() {
     }
 
     try {
-      // TODO: Replace with Lovable Cloud edge function
-      console.log('Contact form submission:', data);
-      
-      // Temporary success message
+      // Submit to ConvertKit
+      const response = await fetch(`https://api.convertkit.com/v3/forms/${CONVERTKIT_FORM_ID}/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          api_key: CONVERTKIT_API_KEY,
+          email: data.email,
+          first_name: data.name,
+          fields: {
+            business_name: data.business_name || '',
+            phone: data.phone,
+            reason: data.reason,
+            message: data.message || '',
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`ConvertKit API error: ${response.status}`);
+      }
+
+      // Success
       setBanner({
         type: 'success',
-        message: "Thank you! Your message has been received. (Backend integration pending)",
+        message: "Thank you! We've received your message and will respond within 24-48 hours.",
       });
       form.reset();
       setMessageLength(0);
@@ -89,7 +113,7 @@ export default function Contact() {
       console.error('Contact form submission error:', error);
       setBanner({
         type: 'error',
-        message: "Something went wrong. Please try again later.",
+        message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
       });
     } finally {
       setIsSubmitting(false);
