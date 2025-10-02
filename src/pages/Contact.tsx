@@ -78,8 +78,12 @@ export default function Contact() {
       const { data: result, error } = await supabase.functions.invoke('submit-contact', {
         body: {
           name: data.name,
+          business_name: data.business_name || '',
+          phone: data.phone,
           email: data.email,
+          reason: data.reason,
           message: data.message || '',
+          website_url: data.website_url || '',
         },
       });
 
