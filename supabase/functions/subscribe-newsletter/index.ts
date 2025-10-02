@@ -7,6 +7,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+const VERIFIED_SENDER = 'Strength Over Struggle <contact@strength-over-struggle.com>';
+
 interface SubscribeData {
   email: string;
 }
@@ -21,7 +23,6 @@ serve(async (req) => {
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
     const siteUrl = Deno.env.get('SITE_URL');
-    const senderEmail = 'Strength Over Struggle <contact@strength-over-struggle.com>';
 
     if (!supabaseUrl) {
       console.error('Missing SUPABASE_URL environment variable');
@@ -117,7 +118,7 @@ serve(async (req) => {
     
     try {
       const emailResult = await resend.emails.send({
-        from: senderEmail,
+        from: VERIFIED_SENDER,
         to: [sanitizedEmail],
         subject: 'Confirm your newsletter subscription',
         html: `
