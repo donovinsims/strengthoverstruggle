@@ -110,7 +110,7 @@ export default function Contact() {
       } else {
         setBanner({
           type: 'error',
-          message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
+          message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.com.",
         });
       }
     } finally {
