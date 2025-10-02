@@ -67,10 +67,30 @@ serve(async (req) => {
     try {
       const audienceId = Deno.env.get('RESEND_AUDIENCE_ID');
       if (audienceId) {
-        await resend.contacts.create({
+        const { data: contactData, error: contactError } = await resend.contacts.create({
           email: subscriber.email,
           audienceId: audienceId,
         });
+
+        if (contactError) {
+          throw contactError;
+        }
+
+        if (contactData?.id) {
+          const { error: contactIdUpdateError } = await supabaseClient
+            .from('newsletter_subscribers')
+            .update({ resend_contact_id: contactData.id })
+            .eq('id', subscriber.id);
+
+          if (contactIdUpdateError) {
+            console.error('Error storing Resend contact ID:', contactIdUpdateError);
+          } else {
+            console.log('Stored Resend contact ID:', contactData.id);
+          }
+        } else {
+          console.warn('No contact ID returned from Resend for:', subscriber.email);
+        }
+
         console.log('Added to Resend audience:', subscriber.email);
       }
     } catch (resendError) {
