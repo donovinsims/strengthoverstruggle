@@ -13,10 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-// ConvertKit API Configuration
-const CONVERTKIT_API_KEY = "5qhRShC1VPSMmKrk53oi4Q";
-const CONVERTKIT_FORM_ID = "8554123";
-
 const contactSchema = z.object({
   name: z.string()
     .trim()
@@ -78,27 +74,31 @@ export default function Contact() {
     }
 
     try {
-      // Submit to ConvertKit
-      const response = await fetch(`https://api.convertkit.com/v3/forms/${CONVERTKIT_FORM_ID}/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          api_key: CONVERTKIT_API_KEY,
-          email: data.email,
-          first_name: data.name,
-          fields: {
+      // Submit to Supabase Edge Function (handles ConvertKit + database storage)
+      const response = await fetch(
+        'https://ywkrozcdrwbzojxxhuxu.supabase.co/functions/v1/submit-contact-form',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: data.name,
             business_name: data.business_name || '',
             phone: data.phone,
+            email: data.email,
             reason: data.reason,
             message: data.message || '',
-          },
-        }),
-      });
+            website_url: data.website_url || '', // honeypot
+            form_render_time: formRenderTime,
+            submission_time: Date.now(),
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`ConvertKit API error: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Server error: ${response.status}`);
       }
 
       // Success
