@@ -154,50 +154,7 @@ serve(async (req) => {
 
     console.log('Contact submission saved:', submission.id);
 
-    // 6. ConvertKit API v4 Integration
-    const convertKitApiKey = Deno.env.get('CONVERTKIT_API_KEY');
-    if (convertKitApiKey) {
-      try {
-        // Create or update subscriber in ConvertKit
-        const kitResponse = await fetch('https://api.convertkit.com/v4/subscribers', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${convertKitApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email_address: sanitizedEmail,
-            first_name: sanitizedName.split(' ')[0],
-            state: 'active',
-            fields: {
-              reason: sanitizedReason,
-              message: sanitizedMessage || '',
-              phone: sanitizedPhone,
-              business_name: sanitizedBusinessName || '',
-            },
-          }),
-        });
-
-        if (kitResponse.ok) {
-          const kitData = await kitResponse.json();
-          console.log('ConvertKit subscriber created/updated:', kitData.subscriber?.id);
-          
-          // Note: Tag and automation would be configured in ConvertKit dashboard
-          // The automation can be triggered when a subscriber is added or based on specific criteria
-        } else {
-          const errorText = await kitResponse.text();
-          console.error('ConvertKit API error:', errorText);
-          // Don't fail the submission if ConvertKit fails
-        }
-      } catch (kitError) {
-        console.error('ConvertKit integration error:', kitError);
-        // Don't fail the submission if ConvertKit fails
-      }
-    } else {
-      console.warn('CONVERTKIT_API_KEY not configured');
-    }
-
-    // 7. Return success
+    // 6. Return success
     return new Response(
       JSON.stringify({ 
         success: true, 
