@@ -25,7 +25,9 @@ serve(async (req) => {
     const resend = new Resend(Deno.env.get('RESEND_API_KEY') ?? '');
     const data: SubscribeData = await req.json();
     
-    console.log('Newsletter subscription request:', { email: data.email });
+    console.log('=== NEWSLETTER SUBSCRIPTION START ===');
+    console.log('Raw request body:', JSON.stringify(data, null, 2));
+    console.log('Email received:', data.email);
 
     // Validate email
     const sanitizedEmail = data.email.trim().toLowerCase();
@@ -86,9 +88,12 @@ serve(async (req) => {
     // Send double opt-in confirmation email
     const confirmationUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/confirm-newsletter?token=${confirmationToken}`;
     
+    console.log('Confirmation URL:', confirmationUrl);
+    console.log('Sending confirmation email...');
+    
     try {
       const emailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <onboarding@resend.dev>',
+        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
         to: [sanitizedEmail],
         subject: 'Confirm your newsletter subscription',
         html: `
@@ -113,12 +118,13 @@ serve(async (req) => {
           </div>
         `,
       });
-      console.log('Confirmation email sent:', emailResult);
+      console.log('✅ Confirmation email sent successfully:', JSON.stringify(emailResult, null, 2));
     } catch (emailError: any) {
-      console.error('Error sending confirmation email:', {
+      console.error('❌ FAILED to send confirmation email:', {
         error: emailError.message,
-        details: emailError.response?.body || emailError,
-        statusCode: emailError.statusCode
+        name: emailError.name,
+        statusCode: emailError.statusCode,
+        details: JSON.stringify(emailError.response?.body || emailError, null, 2)
       });
       return new Response(
         JSON.stringify({ error: 'Failed to send confirmation email. Please try again or contact support.' }),
@@ -126,6 +132,7 @@ serve(async (req) => {
       );
     }
 
+    console.log('=== NEWSLETTER SUBSCRIPTION SUCCESS ===');
     return new Response(
       JSON.stringify({ 
         success: true, 
@@ -135,7 +142,13 @@ serve(async (req) => {
     );
 
   } catch (error: any) {
-    console.error('Newsletter subscription error:', error);
+    console.error('=== NEWSLETTER SUBSCRIPTION ERROR ===');
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+      full: JSON.stringify(error, null, 2)
+    });
     return new Response(
       JSON.stringify({ error: error.message || 'An unexpected error occurred' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

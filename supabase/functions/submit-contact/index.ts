@@ -31,13 +31,16 @@ serve(async (req) => {
     const resend = new Resend(Deno.env.get('RESEND_API_KEY') ?? '');
     const data: ContactFormData = await req.json();
     
-    console.log('Contact form submission received:', { 
+    console.log('=== CONTACT FORM SUBMISSION START ===');
+    console.log('Raw request body:', JSON.stringify(data, null, 2));
+    console.log('Fields received:', { 
       name: data.name, 
       email: data.email, 
       phone: data.phone,
       reason: data.reason,
-      hasBusinessName: !!data.business_name,
-      hasMessage: !!data.message
+      business_name: data.business_name,
+      message: data.message,
+      website_url: data.website_url
     });
 
     // Check honeypot field (bot detection)
@@ -101,8 +104,9 @@ serve(async (req) => {
 
     // Send confirmation email to user
     try {
+      console.log('Sending confirmation email to user...');
       const userEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <onboarding@resend.dev>',
+        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
         to: [sanitizedEmail],
         subject: 'We received your message!',
         html: `
@@ -125,20 +129,23 @@ serve(async (req) => {
           </div>
         `,
       });
-      console.log('Confirmation email sent to user:', userEmailResult);
+      console.log('✅ Confirmation email sent to user successfully:', JSON.stringify(userEmailResult, null, 2));
     } catch (emailError: any) {
-      console.error('Error sending confirmation email:', {
+      console.error('❌ FAILED to send confirmation email:', {
         error: emailError.message,
-        details: emailError.response?.body || emailError
+        name: emailError.name,
+        statusCode: emailError.statusCode,
+        details: JSON.stringify(emailError.response?.body || emailError, null, 2)
       });
       // Don't fail the submission if email fails
     }
 
     // Send notification email to admin
     try {
+      console.log('Sending admin notification email...');
       const adminEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <onboarding@resend.dev>',
-        to: ['admin@strengthoverstruggle.org'], // Replace with actual admin email
+        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
+        to: ['contact@strength-over-struggle.com'],
         subject: `New Contact Form Submission from ${sanitizedName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -163,15 +170,18 @@ serve(async (req) => {
           </div>
         `,
       });
-      console.log('Admin notification email sent:', adminEmailResult);
+      console.log('✅ Admin notification email sent successfully:', JSON.stringify(adminEmailResult, null, 2));
     } catch (emailError: any) {
-      console.error('Error sending admin notification:', {
+      console.error('❌ FAILED to send admin notification:', {
         error: emailError.message,
-        details: emailError.response?.body || emailError
+        name: emailError.name,
+        statusCode: emailError.statusCode,
+        details: JSON.stringify(emailError.response?.body || emailError, null, 2)
       });
       // Don't fail the submission if email fails
     }
 
+    console.log('=== CONTACT FORM SUBMISSION SUCCESS ===');
     return new Response(
       JSON.stringify({ 
         success: true, 
@@ -181,7 +191,13 @@ serve(async (req) => {
     );
 
   } catch (error: any) {
-    console.error('Contact form submission error:', error);
+    console.error('=== CONTACT FORM SUBMISSION ERROR ===');
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+      full: JSON.stringify(error, null, 2)
+    });
     return new Response(
       JSON.stringify({ error: error.message || 'An unexpected error occurred' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
