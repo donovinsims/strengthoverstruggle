@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
   name: z.string()
@@ -75,40 +74,23 @@ export default function Contact() {
     }
 
     try {
-      const { data: result, error } = await supabase.functions.invoke('submit-contact-form', {
-        body: {
-          ...data,
-          form_render_time: formRenderTime,
-          submission_time: submissionTime,
-        },
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      // Success
+      // TODO: Replace with Lovable Cloud edge function
+      console.log('Contact form submission:', data);
+      
+      // Temporary success message
       setBanner({
         type: 'success',
-        message: "Thank you! We've received your message and will respond within 24-48 hours.",
+        message: "Thank you! Your message has been received. (Backend integration pending)",
       });
       form.reset();
       setMessageLength(0);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error: any) {
       console.error('Contact form submission error:', error);
-
-      if (error.message?.includes('429') || error.message?.includes('rate limit')) {
-        setBanner({
-          type: 'rate-limit',
-          message: "You've submitted too many requests. Please try again in 1 hour.",
-        });
-      } else {
-        setBanner({
-          type: 'error',
-          message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
-        });
-      }
+      setBanner({
+        type: 'error',
+        message: "Something went wrong. Please try again later.",
+      });
     } finally {
       setIsSubmitting(false);
     }
