@@ -17,12 +17,34 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    const siteUrl = Deno.env.get('SITE_URL');
 
-    const resend = new Resend(Deno.env.get('RESEND_API_KEY') ?? '');
+    if (!supabaseUrl) {
+      console.error('Missing SUPABASE_URL environment variable');
+      throw new Error('Server configuration is incomplete. Please contact support.');
+    }
+
+    if (!serviceRoleKey) {
+      console.error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
+      throw new Error('Server configuration is incomplete. Please contact support.');
+    }
+
+    if (!resendApiKey) {
+      console.error('Missing RESEND_API_KEY environment variable');
+      throw new Error('Email service configuration is missing. Please contact support.');
+    }
+
+    if (!siteUrl) {
+      console.error('Missing SITE_URL environment variable');
+      throw new Error('Site URL is not configured. Please contact support.');
+    }
+
+    const supabaseClient = createClient(supabaseUrl, serviceRoleKey);
+
+    const resend = new Resend(resendApiKey);
     const data: SubscribeData = await req.json();
     
     console.log('=== NEWSLETTER SUBSCRIPTION START ===');
@@ -86,7 +108,7 @@ serve(async (req) => {
     console.log('Newsletter subscriber created:', subscriber.id);
 
     // Send double opt-in confirmation email
-    const confirmationUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/confirm-newsletter?token=${confirmationToken}`;
+    const confirmationUrl = `${siteUrl.replace(/\/$/, '')}/functions/v1/confirm-newsletter?token=${confirmationToken}`;
     
     console.log('Confirmation URL:', confirmationUrl);
     console.log('Sending confirmation email...');
