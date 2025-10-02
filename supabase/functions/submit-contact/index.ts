@@ -26,6 +26,7 @@ serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    const senderEmail = 'Strength Over Struggle <contact@strength-over-struggle.com>';
 
     if (!supabaseUrl) {
       console.error('Missing SUPABASE_URL environment variable');
@@ -122,7 +123,7 @@ serve(async (req) => {
     try {
       console.log('Sending confirmation email to user...');
       const userEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
+        from: senderEmail,
         to: [sanitizedEmail],
         subject: 'We received your message!',
         html: `
@@ -160,7 +161,7 @@ serve(async (req) => {
     try {
       console.log('Sending admin notification email...');
       const adminEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
+        from: senderEmail,
         to: ['contact@strength-over-struggle.com'],
         subject: `New Contact Form Submission from ${sanitizedName}`,
         html: `

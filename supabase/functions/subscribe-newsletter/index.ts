@@ -21,6 +21,7 @@ serve(async (req) => {
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
     const siteUrl = Deno.env.get('SITE_URL');
+    const senderEmail = 'Strength Over Struggle <contact@strength-over-struggle.com>';
 
     if (!supabaseUrl) {
       console.error('Missing SUPABASE_URL environment variable');
@@ -108,14 +109,15 @@ serve(async (req) => {
     console.log('Newsletter subscriber created:', subscriber.id);
 
     // Send double opt-in confirmation email
-    const confirmationUrl = `${siteUrl.replace(/\/$/, '')}/functions/v1/confirm-newsletter?token=${confirmationToken}`;
+    const normalizedSiteUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+    const confirmationUrl = `${normalizedSiteUrl}/functions/v1/confirm-newsletter?token=${confirmationToken}`;
     
     console.log('Confirmation URL:', confirmationUrl);
     console.log('Sending confirmation email...');
     
     try {
       const emailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <contact@strength-over-struggle.com>',
+        from: senderEmail,
         to: [sanitizedEmail],
         subject: 'Confirm your newsletter subscription',
         html: `
