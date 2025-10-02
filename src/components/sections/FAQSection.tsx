@@ -56,7 +56,7 @@ const faqData: FAQItem[] = [
     id: "08",
     number: "08",
     question: "Where are you located and who do you serve?",
-    answer: "We're based in the United States and primarily serve youth and young adults in underserved communities. We partner with local schools, community centers, and organizations to reach those who can benefit most from our programs."
+    answer: "We're based in Beloit, Wisconsin and primarily serve youth and young adults in underserved communities. We partner with local schools, community centers, and organizations to reach those who can benefit most from our programs."
   }
 ];
 
@@ -82,7 +82,7 @@ export const FAQSection = () => {
           <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-primary">
             Got questions? We've got answers.
           </h2>
-          <p className="text-base md:text-lg max-w-3xl mx-auto text-muted-foreground">
+          <p className="text-base md:text-lg max-w-3xl text-muted-foreground">
             Everything you need to know about supporting our mission
           </p>
         </div>

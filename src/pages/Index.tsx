@@ -50,6 +50,9 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      
+      {/* Main Content Container */}
+      <div className="max-w-[1920px] mx-auto">
 
       {/* Hero Section */}
       <section 
@@ -375,8 +378,9 @@ const Index = () => {
 
       {/* Exit Intent Popup */}
       <ExitIntentPopup />
-
-     </div>
+      </div>
+      {/* End Main Content Container */}
+    </div>
   );
 };
 
