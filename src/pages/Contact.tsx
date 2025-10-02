@@ -74,37 +74,13 @@ export default function Contact() {
     }
 
     try {
-      // Submit to Supabase Edge Function (handles ConvertKit + database storage)
-      const response = await fetch(
-        'https://ywkrozcdrwbzojxxhuxu.supabase.co/functions/v1/submit-contact-form',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: data.name,
-            business_name: data.business_name || '',
-            phone: data.phone,
-            email: data.email,
-            reason: data.reason,
-            message: data.message || '',
-            website_url: data.website_url || '', // honeypot
-            form_render_time: formRenderTime,
-            submission_time: Date.now(),
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server error: ${response.status}`);
-      }
-
-      // Success
+      // TODO: Replace with Lovable Cloud edge function
+      console.log('Contact form submission:', data);
+      
+      // Temporary success message
       setBanner({
         type: 'success',
-        message: "Thank you! We've received your message and will respond within 24-48 hours.",
+        message: "Thank you! Your message has been received. (Backend integration pending)",
       });
       form.reset();
       setMessageLength(0);
@@ -113,7 +89,7 @@ export default function Contact() {
       console.error('Contact form submission error:', error);
       setBanner({
         type: 'error',
-        message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
+        message: "Something went wrong. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
