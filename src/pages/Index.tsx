@@ -94,22 +94,22 @@ const Index = () => {
       {/* Impact Section */}
       <section id="impact" className="py-16 md:py-20 px-6 bg-background">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
             Our Impact
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">540+</div>
-              <div className="body-text font-medium text-lg">Months of Gym Memberships Donated</div>
+              <div className="text-sm md:text-base font-medium text-muted-foreground">Months of Gym Memberships Donated</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">4</div>
-              <div className="body-text font-medium text-lg">Community Partners</div>
+              <div className="text-sm md:text-base font-medium text-muted-foreground">Community Partners</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-primary mb-2">Growing</div>
-              <div className="body-text font-medium text-lg">Lives Transformed</div>
+              <div className="text-sm md:text-base font-medium text-muted-foreground">Lives Transformed</div>
             </div>
           </div>
         </div>
@@ -118,10 +118,10 @@ const Index = () => {
       {/* Mission Section */}
       <section id="mission" className="py-24 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
             Our Story
           </h2>
-          <div className="body-text leading-relaxed max-w-4xl mx-auto mb-8">
+          <div className="text-base leading-relaxed max-w-4xl mx-auto mb-8 text-muted-foreground">
             <p>
               SOS Empowers individuals to overcome life's challenges through resilience, fitness, and community support. We are dedicated to turning adversity into strength by providing resources, education, and opportunities that inspire personal growth and healthier lifestyles.
             </p>
@@ -138,10 +138,10 @@ const Index = () => {
       <section id="programs" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
               Our Programs
             </h2>
-            <p className="subtitle max-w-3xl mx-auto">
+            <p className="text-base md:text-lg max-w-3xl mx-auto text-muted-foreground">
               Comprehensive wellness programs designed to strengthen mind, body, and financial security.
             </p>
           </div>
@@ -170,8 +170,8 @@ const Index = () => {
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-[12px] bg-[hsl(var(--icon-container))] hover:bg-[hsl(var(--icon-container-hover))] transition-colors duration-200 mb-4 md:mb-6">
                     <program.icon className="w-6 h-6 text-[hsl(var(--icon-color))] group-hover:text-[hsl(var(--icon-color-hover))] transition-colors duration-200" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 md:mb-4 text-primary">{program.title}</h3>
-                  <p className="body-text">{program.description}</p>
+                  <h3 className="text-2xl font-semibold mb-3 md:mb-4 text-primary">{program.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{program.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -183,10 +183,10 @@ const Index = () => {
       <section id="testimonials" className="py-24 md:py-28 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
               Real Impact Stories
             </h2>
-            <p className="subtitle max-w-3xl mx-auto">
+            <p className="text-base md:text-lg max-w-3xl mx-auto text-muted-foreground">
               See how access to fitness and mentorship is transforming lives in our communities
             </p>
           </div>
@@ -231,12 +231,12 @@ const Index = () => {
                       className="w-14 h-14 rounded-full object-cover mr-4"
                     />
                     <div>
-                      <h3 className="font-semibold text-primary">{testimonial.name}</h3>
-                      <p className="caption">{testimonial.role}</p>
+                      <h3 className="text-lg font-semibold text-primary">{testimonial.name}</h3>
+                      <p className="text-xs text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
-                  <p className="body-text italic">"{testimonial.quote}"</p>
-                  <button className="mt-4 md:mt-6 story-link text-primary font-medium">
+                  <p className="text-sm leading-relaxed text-muted-foreground italic">"{testimonial.quote}"</p>
+                  <button className="mt-4 md:mt-6 story-link text-primary font-medium text-sm">
                     Read Full Story
                   </button>
                 </CardContent>
@@ -250,10 +250,10 @@ const Index = () => {
       <section id="founders" className="py-20 md:py-24 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
               Meet Our Founders
             </h2>
-            <p className="subtitle max-w-3xl mx-auto">
+            <p className="text-base md:text-lg max-w-3xl mx-auto text-muted-foreground">
               Driven by personal experience and a shared vision of empowerment through fitness and community support.
             </p>
           </div>
@@ -299,10 +299,10 @@ const Index = () => {
                     alt={founder.name}
                     className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                   />
-                  <h3 className="text-xl font-semibold mb-2 text-primary">{founder.name}</h3>
-                  <p className="caption mb-4">{founder.role}</p>
-                  <p className="body-text mb-6">"{founder.bio}"</p>
-                  <button className="story-link text-primary font-medium">
+                  <h3 className="text-2xl font-semibold mb-2 text-primary">{founder.name}</h3>
+                  <p className="text-xs text-muted-foreground mb-4">{founder.role}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground mb-6">"{founder.bio}"</p>
+                  <button className="story-link text-primary font-medium text-sm">
                     Read Full Biography
                   </button>
                 </CardContent>
@@ -318,10 +318,10 @@ const Index = () => {
       {/* Donate Section */}
       <section id="donate" className="py-20 md:py-28 px-6">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-primary">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
             Make a Difference Today.
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
             Your donation directly funds gym memberships, equipment, and programs that transform young lives. Every dollar makes an impact.
           </p>
           

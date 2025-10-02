@@ -79,10 +79,10 @@ export const FAQSection = () => {
       <div className="container mx-auto max-w-[900px]">
         {/* Header */}
         <div className="mb-12 md:mb-16">
-          <h2 className="font-manrope font-extrabold text-[48px] sm:text-[40px] leading-[1.1] tracking-[-2.5px] sm:tracking-[-2px] text-[hsl(var(--text-primary))] mb-4">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-primary">
             Got questions? We've got answers.
           </h2>
-          <p className="font-inter font-medium text-[16px] leading-[1.5] text-[hsl(var(--text-secondary))]">
+          <p className="text-base md:text-lg max-w-3xl mx-auto text-muted-foreground">
             Everything you need to know about supporting our mission
           </p>
         </div>

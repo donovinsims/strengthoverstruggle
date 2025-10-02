@@ -202,7 +202,7 @@
   .subtitle {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: 18px;
     line-height: 1.5;
     color: hsl(var(--text-secondary));
   }
@@ -210,14 +210,14 @@
   .body-text {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     color: hsl(var(--text-secondary));
   }
 
   @media (min-width: 1200px) {
     .body-text {
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 
