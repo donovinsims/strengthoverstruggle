@@ -14,112 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
-      contacts: {
+      contact_submissions: {
         Row: {
           business_name: string | null
           created_at: string
           email: string
           id: string
-          message: string
+          ip_address: string | null
+          message: string | null
+          metadata: Json | null
           name: string
-          phone: string | null
-          reason: string | null
+          phone: string
+          reason: string
           status: string | null
-          updated_at: string
         }
         Insert: {
           business_name?: string | null
           created_at?: string
           email: string
           id?: string
-          message: string
+          ip_address?: string | null
+          message?: string | null
+          metadata?: Json | null
           name: string
-          phone?: string | null
-          reason?: string | null
+          phone: string
+          reason: string
           status?: string | null
-          updated_at?: string
         }
         Update: {
           business_name?: string | null
           created_at?: string
           email?: string
           id?: string
-          message?: string
+          ip_address?: string | null
+          message?: string | null
+          metadata?: Json | null
           name?: string
-          phone?: string | null
-          reason?: string | null
+          phone?: string
+          reason?: string
           status?: string | null
-          updated_at?: string
         }
         Relationships: []
-      }
-      newsletter_subscribers: {
-        Row: {
-          confirmation_token: string | null
-          confirmed_at: string | null
-          created_at: string
-          email: string
-          id: string
-          resend_contact_id: string | null
-          status: string | null
-          updated_at: string
-        }
-        Insert: {
-          confirmation_token?: string | null
-          confirmed_at?: string | null
-          created_at?: string
-          email: string
-          id?: string
-          resend_contact_id?: string | null
-          status?: string | null
-          updated_at?: string
-        }
-        Update: {
-          confirmation_token?: string | null
-          confirmed_at?: string | null
-          created_at?: string
-          email?: string
-          id?: string
-          resend_contact_id?: string | null
-          status?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      sent_emails: {
-        Row: {
-          body: string
-          contact_id: string | null
-          id: string
-          sent_at: string
-          sent_by: string | null
-          subject: string
-        }
-        Insert: {
-          body: string
-          contact_id?: string | null
-          id?: string
-          sent_at?: string
-          sent_by?: string | null
-          subject: string
-        }
-        Update: {
-          body?: string
-          contact_id?: string | null
-          id?: string
-          sent_at?: string
-          sent_by?: string | null
-          subject?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "sent_emails_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       user_roles: {
         Row: {

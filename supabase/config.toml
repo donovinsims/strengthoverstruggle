@@ -1,13 +1,4 @@
-project_id = "ywkrozcdrwbzojxxhuxu"
+project_id = "sqsucvzertpieohbxogk"
 
-[functions.submit-contact]
+[functions.submit-contact-form]
 verify_jwt = false
-
-[functions.subscribe-newsletter]
-verify_jwt = false
-
-[functions.confirm-newsletter]
-verify_jwt = false
-
-[functions.send-admin-reply]
-verify_jwt = true

@@ -75,15 +75,11 @@ export default function Contact() {
     }
 
     try {
-      const { data: result, error } = await supabase.functions.invoke('submit-contact', {
+      const { data: result, error } = await supabase.functions.invoke('submit-contact-form', {
         body: {
-          name: data.name,
-          business_name: data.business_name || '',
-          phone: data.phone,
-          email: data.email,
-          reason: data.reason,
-          message: data.message || '',
-          website_url: data.website_url || '',
+          ...data,
+          form_render_time: formRenderTime,
+          submission_time: submissionTime,
         },
       });
 
@@ -110,7 +106,7 @@ export default function Contact() {
       } else {
         setBanner({
           type: 'error',
-          message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.com.",
+          message: "Something went wrong. Please try again or email us directly at contact@strengthoverstruggle.org.",
         });
       }
     } finally {

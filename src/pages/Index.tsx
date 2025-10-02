@@ -8,7 +8,6 @@ import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { NewsletterSignup } from "@/components/sections/NewsletterSignup";
 
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
@@ -318,9 +317,6 @@ const Index = () => {
 
       {/* FAQ Section */}
       <FAQSection />
-
-      {/* Newsletter Section */}
-      <NewsletterSignup />
 
       {/* Donate Section */}
       <section id="donate" className="py-20 md:py-28 px-6">
