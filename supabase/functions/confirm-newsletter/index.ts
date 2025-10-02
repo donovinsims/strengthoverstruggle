@@ -81,7 +81,7 @@ serve(async (req) => {
     // Send welcome email
     try {
       await resend.emails.send({
-        from: 'Strength Over Struggle <noreply@strengthoverstruggle.org>',
+        from: 'Strength Over Struggle <onboarding@resend.dev>',
         to: [subscriber.email],
         subject: 'Welcome to our newsletter!',
         html: `
@@ -109,8 +109,11 @@ serve(async (req) => {
         `,
       });
       console.log('Welcome email sent');
-    } catch (emailError) {
-      console.error('Error sending welcome email:', emailError);
+    } catch (emailError: any) {
+      console.error('Error sending welcome email:', {
+        error: emailError.message,
+        details: emailError.response?.body || emailError
+      });
     }
 
     // Redirect to success page

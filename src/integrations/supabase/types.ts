@@ -16,29 +16,38 @@ export type Database = {
     Tables: {
       contacts: {
         Row: {
+          business_name: string | null
           created_at: string
           email: string
           id: string
           message: string
           name: string
+          phone: string | null
+          reason: string | null
           status: string | null
           updated_at: string
         }
         Insert: {
+          business_name?: string | null
           created_at?: string
           email: string
           id?: string
           message: string
           name: string
+          phone?: string | null
+          reason?: string | null
           status?: string | null
           updated_at?: string
         }
         Update: {
+          business_name?: string | null
           created_at?: string
           email?: string
           id?: string
           message?: string
           name?: string
+          phone?: string | null
+          reason?: string | null
           status?: string | null
           updated_at?: string
         }

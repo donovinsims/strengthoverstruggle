@@ -88,7 +88,7 @@ serve(async (req) => {
     
     try {
       const emailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <noreply@strengthoverstruggle.org>',
+        from: 'Strength Over Struggle <onboarding@resend.dev>',
         to: [sanitizedEmail],
         subject: 'Confirm your newsletter subscription',
         html: `
@@ -114,10 +114,14 @@ serve(async (req) => {
         `,
       });
       console.log('Confirmation email sent:', emailResult);
-    } catch (emailError) {
-      console.error('Error sending confirmation email:', emailError);
+    } catch (emailError: any) {
+      console.error('Error sending confirmation email:', {
+        error: emailError.message,
+        details: emailError.response?.body || emailError,
+        statusCode: emailError.statusCode
+      });
       return new Response(
-        JSON.stringify({ error: 'Failed to send confirmation email. Please try again.' }),
+        JSON.stringify({ error: 'Failed to send confirmation email. Please try again or contact support.' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }

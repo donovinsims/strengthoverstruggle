@@ -9,8 +9,12 @@ const corsHeaders = {
 
 interface ContactFormData {
   name: string;
+  business_name?: string;
+  phone: string;
   email: string;
-  message: string;
+  reason: string;
+  message?: string;
+  website_url?: string; // Honeypot field
 }
 
 serve(async (req) => {
@@ -27,20 +31,39 @@ serve(async (req) => {
     const resend = new Resend(Deno.env.get('RESEND_API_KEY') ?? '');
     const data: ContactFormData = await req.json();
     
-    console.log('Contact form submission received:', { name: data.name, email: data.email });
+    console.log('Contact form submission received:', { 
+      name: data.name, 
+      email: data.email, 
+      phone: data.phone,
+      reason: data.reason,
+      hasBusinessName: !!data.business_name,
+      hasMessage: !!data.message
+    });
+
+    // Check honeypot field (bot detection)
+    if (data.website_url && data.website_url.trim() !== '') {
+      console.log('Honeypot triggered - potential bot submission');
+      return new Response(
+        JSON.stringify({ error: 'Invalid submission' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Validate required fields
-    if (!data.name || !data.email || !data.message) {
+    if (!data.name || !data.email || !data.phone || !data.reason) {
       return new Response(
-        JSON.stringify({ error: 'Name, email, and message are required' }),
+        JSON.stringify({ error: 'Name, email, phone, and reason are required' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     // Sanitize inputs
     const sanitizedName = data.name.trim().slice(0, 100);
+    const sanitizedBusinessName = data.business_name?.trim().slice(0, 150) || null;
+    const sanitizedPhone = data.phone.trim().slice(0, 20);
     const sanitizedEmail = data.email.trim().toLowerCase().slice(0, 255);
-    const sanitizedMessage = data.message.trim().slice(0, 2000);
+    const sanitizedReason = data.reason.trim().slice(0, 100);
+    const sanitizedMessage = data.message?.trim().slice(0, 1000) || null;
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,7 +79,10 @@ serve(async (req) => {
       .from('contacts')
       .insert({
         name: sanitizedName,
+        business_name: sanitizedBusinessName,
+        phone: sanitizedPhone,
         email: sanitizedEmail,
+        reason: sanitizedReason,
         message: sanitizedMessage,
         status: 'new',
       })
@@ -76,7 +102,7 @@ serve(async (req) => {
     // Send confirmation email to user
     try {
       const userEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <noreply@strengthoverstruggle.org>',
+        from: 'Strength Over Struggle <onboarding@resend.dev>',
         to: [sanitizedEmail],
         subject: 'We received your message!',
         html: `
@@ -86,8 +112,11 @@ serve(async (req) => {
               We have received your message and will get back to you within 24-48 hours.
             </p>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <p style="margin: 0; color: #888; font-size: 14px;"><strong>Your message:</strong></p>
-              <p style="color: #333; margin-top: 10px;">${sanitizedMessage}</p>
+              <p style="margin: 0; color: #888; font-size: 14px;"><strong>Your inquiry:</strong></p>
+              <p style="color: #333; margin-top: 5px;"><strong>Reason:</strong> ${sanitizedReason}</p>
+              ${sanitizedBusinessName ? `<p style="color: #333; margin-top: 5px;"><strong>Business:</strong> ${sanitizedBusinessName}</p>` : ''}
+              <p style="color: #333; margin-top: 5px;"><strong>Phone:</strong> ${sanitizedPhone}</p>
+              ${sanitizedMessage ? `<p style="color: #333; margin-top: 10px;"><strong>Message:</strong><br>${sanitizedMessage}</p>` : ''}
             </div>
             <p style="color: #666; line-height: 1.6;">
               Best regards,<br>
@@ -97,27 +126,33 @@ serve(async (req) => {
         `,
       });
       console.log('Confirmation email sent to user:', userEmailResult);
-    } catch (emailError) {
-      console.error('Error sending confirmation email:', emailError);
+    } catch (emailError: any) {
+      console.error('Error sending confirmation email:', {
+        error: emailError.message,
+        details: emailError.response?.body || emailError
+      });
       // Don't fail the submission if email fails
     }
 
     // Send notification email to admin
     try {
       const adminEmailResult = await resend.emails.send({
-        from: 'Strength Over Struggle <noreply@strengthoverstruggle.org>',
+        from: 'Strength Over Struggle <onboarding@resend.dev>',
         to: ['admin@strengthoverstruggle.org'], // Replace with actual admin email
         subject: `New Contact Form Submission from ${sanitizedName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h1 style="color: #333;">New Contact Form Submission</h1>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-              <p style="margin: 0; color: #888; font-size: 14px;"><strong>From:</strong></p>
-              <p style="color: #333; margin: 5px 0;">${sanitizedName}</p>
-              <p style="color: #333; margin: 5px 0;">${sanitizedEmail}</p>
+              <p style="margin: 0; color: #888; font-size: 14px;"><strong>Contact Details:</strong></p>
+              <p style="color: #333; margin: 5px 0;"><strong>Name:</strong> ${sanitizedName}</p>
+              ${sanitizedBusinessName ? `<p style="color: #333; margin: 5px 0;"><strong>Business:</strong> ${sanitizedBusinessName}</p>` : ''}
+              <p style="color: #333; margin: 5px 0;"><strong>Email:</strong> ${sanitizedEmail}</p>
+              <p style="color: #333; margin: 5px 0;"><strong>Phone:</strong> ${sanitizedPhone}</p>
+              <p style="color: #333; margin: 5px 0;"><strong>Reason:</strong> ${sanitizedReason}</p>
               
-              <p style="margin: 20px 0 0 0; color: #888; font-size: 14px;"><strong>Message:</strong></p>
-              <p style="color: #333; margin-top: 10px;">${sanitizedMessage}</p>
+              ${sanitizedMessage ? `<p style="margin: 20px 0 0 0; color: #888; font-size: 14px;"><strong>Message:</strong></p>
+              <p style="color: #333; margin-top: 10px;">${sanitizedMessage}</p>` : '<p style="color: #888; margin: 10px 0 0 0; font-style: italic;">No additional message provided</p>'}
             </div>
             <p style="color: #666; font-size: 14px;">
               <a href="https://ywkrozcdrwbzojxxhuxu.supabase.co/project/ywkrozcdrwbzojxxhuxu/editor" 
@@ -129,8 +164,11 @@ serve(async (req) => {
         `,
       });
       console.log('Admin notification email sent:', adminEmailResult);
-    } catch (emailError) {
-      console.error('Error sending admin notification:', emailError);
+    } catch (emailError: any) {
+      console.error('Error sending admin notification:', {
+        error: emailError.message,
+        details: emailError.response?.body || emailError
+      });
       // Don't fail the submission if email fails
     }
 
