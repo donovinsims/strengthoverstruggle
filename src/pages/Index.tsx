@@ -1,45 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Zap } from "lucide-react";
-import { useState, useEffect } from "react";
 import { TestimonialModal } from "@/components/common/TestimonialModal";
 import { FounderModal } from "@/components/common/FounderModal";
 import { ExitIntentPopup } from "@/components/common/ExitIntentPopup";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { FAQSection } from "@/components/sections/FAQSection";
-
 import { Link } from "react-router-dom";
+import { useModalState } from "@/hooks/useModalState";
+import { testimonials, Testimonial } from "@/data/testimonials";
+import { founders, Founder } from "@/data/founders";
+import { programs } from "@/data/programs";
+import { APP_CONFIG } from "@/config/app.config";
 import heroImage from "@/assets/hero-image.jpg";
-import dylannFounderImage from "@/assets/dylann-founder-new.jpg";
-import alexFounderImage from "@/assets/alex-founder.jpg";
-import vanessaFounderImage from "@/assets/vanessa-founder.jpg";
-import markhiThompsonImage from "@/assets/markhi-thompson.png";
-import elenaHenryImage from "@/assets/elena-henry.png";
-import ivanHernandezImage from "@/assets/ivan-hernandez.png";
 
 const Index = () => {
-  const [selectedTestimonial, setSelectedTestimonial] = useState<any>(null);
-  const [selectedFounder, setSelectedFounder] = useState<any>(null);
-  const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
-  const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
-
-  const openTestimonialModal = (testimonial: any) => {
-    setSelectedTestimonial(testimonial);
-    setIsTestimonialModalOpen(true);
-  };
-
-  const openFounderModal = (founder: any) => {
-    setSelectedFounder(founder);
-    setIsFounderModalOpen(true);
-  };
+  const testimonialModal = useModalState<Testimonial>();
+  const founderModal = useModalState<Founder>();
 
   // Smooth scroll function with offset for sticky header
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Account for sticky header
-      const elementPosition = element.offsetTop - offset;
+      const elementPosition = element.offsetTop - APP_CONFIG.ui.headerOffset;
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
@@ -72,7 +55,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="px-8 py-6 text-lg font-semibold"
-              onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open(APP_CONFIG.externalUrls.donationStripe, '_blank', 'noopener,noreferrer')}
             >
               Donate Now
             </Button>
@@ -103,15 +86,15 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">540+</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{APP_CONFIG.impact.gymMemberships}</div>
               <div className="text-sm md:text-base font-medium text-muted-foreground">Months of Gym Memberships Donated</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">4</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{APP_CONFIG.impact.communityPartners}</div>
               <div className="text-sm md:text-base font-medium text-muted-foreground">Community Partners</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">Growing</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{APP_CONFIG.impact.livesTransformed}</div>
               <div className="text-sm md:text-base font-medium text-muted-foreground">Lives Transformed</div>
             </div>
           </div>
@@ -151,23 +134,7 @@ const Index = () => {
 
           {/* Programs grid: Intentionally 2-column on desktop to match testimonial card width and visual weight */}
           <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                icon: Users,
-                title: "Physical Wellness",
-                description: "Providing access to quality gym facilities and fitness programs that promote health, strength, and physical confidence."
-              },
-              {
-                icon: Heart,
-                title: "Community Building",
-                description: "Creating supportive environments where youth can connect, build friendships, and develop positive peer relationships."
-              },
-              {
-                icon: Zap,
-                title: "Life Skills",
-                description: "Teaching discipline, goal-setting, perseverance, and self-confidence through structured fitness programs and mentorship."
-              }
-            ].map((program, index) => (
+            {programs.map((program, index) => (
               <Card key={index} className="bg-card text-left">
                 <CardContent className="p-6 md:p-8">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-[12px] bg-[hsl(var(--icon-container))] hover:bg-[hsl(var(--icon-container-hover))] transition-colors duration-200 mb-4 md:mb-6">
@@ -195,36 +162,11 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[
-               {
-                 id: "ivan",
-                 name: "Ivan Hernandez",
-                 role: "NCAA Powerlifter - Greenville University, 2025 graduate and gym membership recipient Beloit Fresh Start",
-                 quote: "Through the Beloit Fresh Start program, I connected with Detective Limberg and many other awesome officers. The program taught me responsibility, accountability and collaboration...",
-                 fullQuote: "Through the Beloit Fresh Start program, I connected with Detective Limberg and many other awesome officers. The program taught me responsibility, accountability and collaboration through the fun task and events we had with these officers.\n\nWhen it came to my down time, I found comfort in the gym and sports. Growing up I was inside a lot as I was bullied for being a bigger kid. I picked up a football when I was 9 and the rest turned into history because I excelled as an athlete and did everything I could to make myself better, so I started lifting.\n\nThe gym is like an escape from reality for me. I fall into depressive states here and there to the point where I just feel like laying in bed and throwing my day away. The gym has helped me pushed through those times and my new passion of powerlifting.\n\nI was blessed to receive a free membership from the help of Detective Limberg and the kind souls at ICONIQ. The local YMCA was my original stomping grounds when I first started lifting and that's when I found out what powerlifting was, so it was nostalgic and fun to be able to go back.\n\nUltimately, the gym is truly a treasure for those who want to better themselves. Many of us young adults and youth need more outlets for our anger, fear, and frustration as society bombards us from all directions. If it weren't for the gym then there's no telling what events could have led me to be a top Collegiate Powerlifter in the nation.",
-                 image: ivanHernandezImage
-               },
-               {
-                 id: "markhi",
-                 name: "Markhi Thompson",
-                 role: "2024 Class President and Gym Membership Recipient, Beloit Fresh Start",
-                 quote: "I would say it made a big impact in all areas of students' lives. I was seeing kids I never had seen outside of school at the gym, allowing students to bond more and get work in at the same time...",
-                 fullQuote: "I would say it made a big impact in all areas of students' lives. I was seeing kids I never had seen outside of school at the gym, allowing students to bond more and get work in at the same time. I personally was doing boxing and in the gym prior to receiving the donated memberships but found that it can get expensive… very expensive.\n\nIt would be amazing if this could be an ongoing thing for all kids in Beloit instead of just Beloit Fresh Start students. It would make a big impact. I've seen it personally, and I think it will motivate the youth to take care of themselves and build themselves.\n\nThe gym teaches discipline, character, consistency, confidence, and many more things. That was one of the best experiences I had with boxing, teaching kids combat the right way and how to keep themselves safe.\n\nIt's not just a free membership it's a new way of living and meeting new people with the same mindset. …",
-                  image: markhiThompsonImage
-               },
-               {
-                 id: "elena",
-                 name: "Elena Henry",
-                 role: "Youth Development Program Manager, Beloit Fresh Start", 
-                 quote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space...",
-                 fullQuote: "As an educator, I've seen how Alex Limberg and Dylann Rauch's nonprofit gym memberships transformed my students. About 60 joined over the last couple years and loved the safe, structured space to exercise, relieve stress, and build confidence.\n\nFor many, it was their first gym experience—opening their eyes to healthy routines. This program fills a crucial gap for students without resources or support and deserves strong backing for youth health and community engagement.",
-                 image: elenaHenryImage
-               }
-            ].map((testimonial) => (
+            {testimonials.map((testimonial) => (
               <Card 
                 key={testimonial.id} 
                 className="bg-card cursor-pointer hover-scale min-h-[280px]"
-                onClick={() => openTestimonialModal(testimonial)}
+                onClick={() => testimonialModal.openModal(testimonial)}
               >
                 <CardContent className="p-6 md:p-8">
                   <div className="flex items-center mb-4 md:mb-6">
@@ -262,39 +204,11 @@ const Index = () => {
           </div>
 
           <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                id: "alex",
-                name: "Alex Limberg",
-                role: "Founder/President",
-                bio: "Detective, Swat Operator, and Fitness Fanatic. Alex Limberg is an athlete and law enforcement officer.",
-                fullBio: "Detective, Swat Operator, and Fitness Fanatic. Alex Limberg is an athlete and law enforcement officer. Through personal and professional experiences, Alex understands the impact and need for youth and young-adults to have positive support systems and healthy coping opportunities. He founded SOS to promote physical and mental health in deserving and opportunistic youth.",
-                instagram: "https://www.instagram.com/alex__limberg/",
-                image: alexFounderImage
-              },
-              {
-                id: "vanessa",
-                name: "Vanessa Tellez",
-                role: "Co-Founder/Treasurer",
-                bio: "Registered Nurse, athlete, and youth wellness advocate pursuing a Doctorate of Nursing Practice.",
-                fullBio: "Vanessa Tellez, a Registered Nurse, athlete, and youth wellness advocate, is an experienced emergency room nurse pursuing a Doctorate of Nursing Practice to become a Nurse Practitioner. With a strong background in clinical care and community service, she emphasizes the vital link between physical health, mental wellness, and accessible support.\n\nFitness has been transformative in Vanessa's life, inspiring her to run local 5Ks and participate in community events that support homeless youth and raise awareness for meaningful causes. Her passion for health extends beyond the hospital, as she works to create opportunities for young people to thrive physically, mentally, and emotionally.",
-                instagram: "https://www.instagram.com/vanessa49x/",
-                image: vanessaFounderImage
-              },
-              {
-                id: "dylann",
-                name: "Dylann Rauch",
-                role: "Co-Founder/Vice President",
-                bio: "Prior Professional Athlete, Child Maltreatment investigator, and Community Activist.",
-                fullBio: "Prior Professional Athlete, Child Maltreatment investigator, and Community Activist. Dylann Rauch is a prior professional quarterback, barber, and now Child Maltreatment Investigator. Dylann Rauch has multiple years of experience serving underserved youth and partnering with local schools, providing new opportunities for opportunistic youth. These activities include but are not limited to holiday community events, and sports like ice skating, self-defense classes, weight lifting, and football.",
-                instagram: "",
-                image: dylannFounderImage
-              }
-            ].map((founder) => (
+            {founders.map((founder) => (
               <Card 
                 key={founder.id} 
                 className="bg-card cursor-pointer hover-scale text-center"
-                onClick={() => openFounderModal(founder)}
+                onClick={() => founderModal.openModal(founder)}
               >
                 <CardContent className="p-8">
                   <img 
@@ -365,15 +279,15 @@ const Index = () => {
        
        {/* Modals */}
       <TestimonialModal 
-        isOpen={isTestimonialModalOpen} 
-        onClose={() => setIsTestimonialModalOpen(false)}
-        testimonial={selectedTestimonial}
+        isOpen={testimonialModal.isOpen} 
+        onClose={testimonialModal.closeModal}
+        testimonial={testimonialModal.selectedItem}
       />
       
       <FounderModal 
-        isOpen={isFounderModalOpen} 
-        onClose={() => setIsFounderModalOpen(false)}
-        founder={selectedFounder}
+        isOpen={founderModal.isOpen} 
+        onClose={founderModal.closeModal}
+        founder={founderModal.selectedItem}
       />
 
       {/* Exit Intent Popup */}

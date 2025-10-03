@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import InputMask from "react-input-mask";
 import { AlertCircle, CheckCircle, Loader2, X } from "lucide-react";
 import { Header } from "@/components/common/Header";
@@ -12,29 +11,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-const contactSchema = z.object({
-  name: z.string()
-    .trim()
-    .min(2, { message: "Name must be at least 2 characters" })
-    .max(100, { message: "Name must be less than 100 characters" })
-    .regex(/^[a-zA-Z\s'-]+$/, { message: "Name can only contain letters, spaces, hyphens, and apostrophes" }),
-  business_name: z.string().trim().max(150, { message: "Business name must be less than 150 characters" }).optional(),
-  phone: z.string()
-    .regex(/^\(\d{3}\) \d{3}-\d{4}$/, { message: "Please enter a valid US phone number" }),
-  email: z.string()
-    .trim()
-    .email({ message: "Please enter a valid email address" })
-    .max(255, { message: "Email must be less than 255 characters" })
-    .transform(val => val.toLowerCase()),
-  reason: z.enum(["Donation Inquiry", "Gym Partnership", "Corporate Sponsorship", "Payment/Technical Issues", "General Questions", "Other"], {
-    required_error: "Please select a reason for contact",
-  }),
-  message: z.string().trim().max(1000, { message: "Message must be less than 1000 characters" }).optional(),
-  website_url: z.string().max(0, { message: "This field should be empty" }).optional(),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { contactSchema, ContactFormData } from "@/schemas/contactSchema";
+import { APP_CONFIG } from "@/config/app.config";
 
 type BannerState = {
   type: 'success' | 'error' | 'rate-limit' | null;
@@ -68,7 +46,7 @@ export default function Contact() {
     const submissionTime = Date.now();
     const timeDiff = (submissionTime - formRenderTime) / 1000;
     
-    if (timeDiff < 3) {
+    if (timeDiff < APP_CONFIG.validation.formSubmitMinTime) {
       setIsSubmitting(false);
       return; // Silent rejection for suspected bot
     }

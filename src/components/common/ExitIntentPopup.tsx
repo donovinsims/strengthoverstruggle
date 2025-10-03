@@ -1,78 +1,14 @@
-import { useState, useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalTitle, ModalDescription } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useExitIntent } from "@/hooks/useExitIntent";
+import { APP_CONFIG } from "@/config/app.config";
 
 export const ExitIntentPopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [hasShown, setHasShown] = useState(false);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (hasShown) return;
-
-    // Desktop: Mouse leave detection
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 5 && !hasShown) {
-        setIsOpen(true);
-        setHasShown(true);
-      }
-    };
-
-    // Mobile: Scroll and time-based triggers
-    let scrollTimeout: NodeJS.Timeout;
-    let timeTimeout: NodeJS.Timeout;
-    let lastScrollY = 0;
-
-    const handleMobileExitIntent = () => {
-      if (!hasShown && isMobile) {
-        setIsOpen(true);
-        setHasShown(true);
-      }
-    };
-
-    const handleScroll = () => {
-      if (!isMobile) return;
-      
-      const currentScrollY = window.scrollY;
-      const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (currentScrollY / documentHeight) * 100;
-      
-      // Trigger if user scrolls up rapidly after being 50% down the page
-      if (scrollDirection === 'up' && scrollPercent > 50 && currentScrollY < lastScrollY - 50) {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(handleMobileExitIntent, 500);
-      }
-      
-      // Trigger when user reaches bottom 20% of page
-      if (scrollPercent >= 80) {
-        handleMobileExitIntent();
-      }
-      
-      lastScrollY = currentScrollY;
-    };
-
-    if (isMobile) {
-      // Mobile triggers
-      document.addEventListener('scroll', handleScroll, { passive: true });
-      timeTimeout = setTimeout(handleMobileExitIntent, 30000); // 30 seconds
-    } else {
-      // Desktop trigger
-      document.addEventListener('mouseleave', handleMouseLeave);
-    }
-
-    return () => {
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-      clearTimeout(timeTimeout);
-    };
-  }, [hasShown, isMobile]);
+  const { isOpen, setIsOpen } = useExitIntent();
 
   const handleDonate = () => {
-    window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer');
+    window.open(APP_CONFIG.externalUrls.donationStripe, '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   };
 
