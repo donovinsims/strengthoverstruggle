@@ -49,7 +49,7 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
         aria-describedby="founder-content"
       >
         {/* Close Button - Sticky Header on Mobile, More Prominent */}
-        <div className="sticky top-0 z-20 -mx-4 -mt-4 sm:mx-0 sm:mt-0 sm:absolute sm:top-4 sm:right-4 flex justify-end p-4 sm:p-0 bg-card sm:bg-transparent">
+        <div className="sticky top-0 z-[120] -mx-4 -mt-4 sm:mx-0 sm:mt-0 sm:absolute sm:top-4 sm:right-4 flex justify-end p-4 sm:p-0 bg-card sm:bg-transparent">
           <button
             onClick={onClose}
             className="rounded-full w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center bg-muted hover:bg-muted-foreground/20 text-muted-foreground hover:text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"

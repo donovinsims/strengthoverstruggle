@@ -165,7 +165,7 @@ const Index = () => {
             {testimonials.map((testimonial) => (
               <Card 
                 key={testimonial.id} 
-                className="bg-card cursor-pointer hover-scale min-h-[280px]"
+                className="bg-card cursor-pointer transition-transform hover:scale-105 min-h-[280px]"
                 onClick={() => testimonialModal.openModal(testimonial)}
               >
                 <CardContent className="p-6 md:p-8">
@@ -207,7 +207,7 @@ const Index = () => {
             {founders.map((founder) => (
               <Card 
                 key={founder.id} 
-                className="bg-card cursor-pointer hover-scale text-center"
+                className="bg-card cursor-pointer transition-transform hover:scale-105 text-center"
                 onClick={() => founderModal.openModal(founder)}
               >
                 <CardContent className="p-8">
