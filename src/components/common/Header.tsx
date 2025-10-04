@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
+import TallyModal from "./TallyModal";
 
 interface HeaderProps {
   showDonateButton?: boolean;
@@ -53,12 +54,12 @@ export const Header = ({
             >
               Shop
             </Link>
-            <Link 
-              to="/contact"
-              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-            >
-              Contact
-            </Link>
+            <TallyModal 
+              formId="n9bWWE"
+              buttonText="Contact"
+              buttonVariant="secondary"
+              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 !bg-transparent !border-0 !p-0"
+            />
             <ThemeToggle />
             {showDonateButton && (
               <Button 
@@ -98,13 +99,14 @@ export const Header = ({
               >
                 Shop
               </Link>
-              <Link 
-                to="/contact"
-                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
+              <div onClick={() => setIsMenuOpen(false)}>
+                <TallyModal 
+                  formId="n9bWWE"
+                  buttonText="Contact"
+                  buttonVariant="secondary"
+                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 !bg-transparent !border-0 !p-0 w-full"
+                />
+              </div>
               <div className="flex items-center justify-between">
                 <span className="text-secondary-foreground">Theme</span>
                 <ThemeToggle />
