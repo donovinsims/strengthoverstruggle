@@ -93,9 +93,6 @@ export default function TallyModal({
 
     if (existingScript) {
       startTransition(() => setScriptLoaded(true));
-      if (window.Tally) {
-        window.Tally.loadEmbeds();
-      }
       return;
     }
 
@@ -104,9 +101,6 @@ export default function TallyModal({
     script.async = true;
     script.onload = () => {
       startTransition(() => setScriptLoaded(true));
-      if (window.Tally) {
-        window.Tally.loadEmbeds();
-      }
     };
 
     document.body.appendChild(script);
@@ -117,6 +111,15 @@ export default function TallyModal({
       }
     };
   }, []);
+
+  // Load Tally embeds only when modal is open
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    
+    if (isOpen && scriptLoaded && window.Tally) {
+      window.Tally.loadEmbeds();
+    }
+  }, [isOpen, scriptLoaded]);
 
   // Focus management
   useEffect(() => {
@@ -249,7 +252,7 @@ export default function TallyModal({
             alignItems: "center",
             justifyContent: "center",
             zIndex: 9999,
-            padding: isSmallScreen ? "12px" : "24px",
+            padding: isSmallScreen ? "16px" : "24px",
             opacity: isOpen ? 1 : 0,
             transition: "opacity 200ms ease",
           }}
@@ -265,12 +268,13 @@ export default function TallyModal({
               width: "100%",
               maxWidth: modalWidth,
               maxHeight: "90vh",
-              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
               borderRadius: "16px",
               position: "relative",
               backgroundColor: colors.modalBg,
               border: `1.5px solid ${colors.modalBorder}`,
-              padding: isSmallScreen ? "16px" : "32px",
+              padding: isSmallScreen ? "20px" : "32px",
               boxShadow: isDarkMode
                 ? "0 20px 60px rgba(0, 0, 0, 0.5)"
                 : "0 20px 60px rgba(0, 0, 0, 0.15)",
@@ -323,13 +327,14 @@ export default function TallyModal({
               <iframe
                 data-tally-src={`https://tally.so/r/${formId}?transparentBackground=1`}
                 width="100%"
-                height="500"
+                height={isSmallScreen ? "70vh" : "min(80vh, 640px)"}
                 frameBorder="0"
                 marginHeight={0}
                 marginWidth={0}
                 title={`${buttonText} Form`}
                 style={{
                   border: "none",
+                  flex: "1 1 auto",
                 }}
               />
             )}
