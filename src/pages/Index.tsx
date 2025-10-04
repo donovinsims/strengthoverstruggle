@@ -43,7 +43,8 @@ const Index = () => {
         className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden pb-32 md:pb-40 bg-background"
       >
         
-        <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in pt-20">
+    
+        <div className="container relative z-10 text-center animate-fade-in pt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="gradient-text">
               Strength Over Struggle
