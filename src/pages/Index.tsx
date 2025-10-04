@@ -81,7 +81,7 @@ const Index = () => {
       {/* Impact Section */}
       <section id="impact" className="py-16 md:py-20 px-6 bg-background">
         <div className="container mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 md:mb-8 text-primary">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-10 md:mb-12 text-primary">
             Our Impact
           </h2>
           
