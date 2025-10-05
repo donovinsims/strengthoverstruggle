@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
-import TallyModal from "./TallyModal";
+import TallyPopupButton from "./TallyPopupButton";
 
 interface HeaderProps {
   showDonateButton?: boolean;
@@ -54,7 +54,7 @@ export const Header = ({
             >
               Shop
             </Link>
-            <TallyModal
+            <TallyPopupButton
               formId="n9bWWE"
               buttonText="Contact"
               buttonVariant="secondary"
@@ -100,17 +100,12 @@ export const Header = ({
               >
                 Shop
               </Link>
-              <TallyModal
+              <TallyPopupButton
                 formId="n9bWWE"
                 buttonText="Contact"
                 buttonVariant="secondary"
                 className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 w-full"
                 unstyled
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setIsMenuOpen(false);
-                  }
-                }}
               />
               <div className="flex items-center justify-between">
                 <span className="text-secondary-foreground">Theme</span>
