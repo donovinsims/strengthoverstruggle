@@ -1,4 +1,18 @@
-import { useState, useEffect, useRef, startTransition } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { Loader2, X } from "lucide-react";
+
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 declare global {
   interface Window {
@@ -12,335 +26,162 @@ declare global {
 interface TallyModalProps {
   formId?: string;
   buttonText?: string;
-  modalWidth?: number;
-  overlayDim?: number;
-  enterAnimation?: "scaleFadeIn" | "slideUp";
-  exitAnimation?: "scaleFadeOut" | "slideDown";
   buttonVariant?: "primary" | "secondary";
   className?: string;
+  unstyled?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 export default function TallyModal({
   formId = "n9bWWE",
   buttonText = "Open Form",
-  modalWidth = 768,
-  overlayDim = 0.6,
-  enterAnimation = "scaleFadeIn",
-  exitAnimation = "scaleFadeOut",
   buttonVariant = "primary",
   className = "",
+  unstyled = false,
+  onOpenChange,
 }: TallyModalProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const triggerButtonRef = useRef<HTMLButtonElement>(null);
-  const previousActiveElement = useRef<HTMLElement | null>(null);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
-  // Detect color scheme preference
+  // Ensure the Tally embed script is available once on the page.
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    startTransition(() => setIsDarkMode(mediaQuery.matches));
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      startTransition(() => setIsDarkMode(e.matches));
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  // Detect small screen
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const smallScreenQuery = window.matchMedia("(max-width: 480px)");
-
-    const handleScreenChange = (event: MediaQueryListEvent | MediaQueryList) => {
-      startTransition(() => setIsSmallScreen(event.matches));
-    };
-
-    handleScreenChange(smallScreenQuery);
-
-    const listener = (event: MediaQueryListEvent) => handleScreenChange(event);
-
-    if (typeof smallScreenQuery.addEventListener === "function") {
-      smallScreenQuery.addEventListener("change", listener);
-    } else if (typeof smallScreenQuery.addListener === "function") {
-      smallScreenQuery.addListener(listener);
-    }
-
-    return () => {
-      if (typeof smallScreenQuery.removeEventListener === "function") {
-        smallScreenQuery.removeEventListener("change", listener);
-      } else if (typeof smallScreenQuery.removeListener === "function") {
-        smallScreenQuery.removeListener(listener);
-      }
-    };
-  }, []);
-
-  // Load Tally widget script
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const existingScript = document.querySelector(
+    const existingScript = document.querySelector<HTMLScriptElement>(
       'script[src="https://tally.so/widgets/embed.js"]'
     );
 
     if (existingScript) {
-      startTransition(() => setScriptLoaded(true));
+      setScriptLoaded(true);
       return;
     }
 
     const script = document.createElement("script");
     script.src = "https://tally.so/widgets/embed.js";
     script.async = true;
-    script.onload = () => {
-      startTransition(() => setScriptLoaded(true));
-    };
+    script.onload = () => setScriptLoaded(true);
 
     document.body.appendChild(script);
 
     return () => {
-      if (script.parentNode) {
+      if (!scriptLoaded && script.parentNode) {
         script.parentNode.removeChild(script);
       }
     };
-  }, []);
+  }, [scriptLoaded]);
 
-  // Load Tally embeds only when modal is open
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    if (isOpen && scriptLoaded && window.Tally) {
-      window.Tally.loadEmbeds();
-    }
+    if (!isOpen || !scriptLoaded) return;
+    window.Tally?.loadEmbeds();
   }, [isOpen, scriptLoaded]);
 
-  // Focus management
   useEffect(() => {
-    if (isOpen) {
-      previousActiveElement.current = document.activeElement as HTMLElement;
-      closeButtonRef.current?.focus();
-    } else {
-      if (previousActiveElement.current) {
-        previousActiveElement.current.focus();
-      }
+    if (!isOpen) {
+      setIframeLoaded(false);
     }
   }, [isOpen]);
 
-  // Keyboard escape handler
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        handleClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [isOpen]);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  const handleOpen = () => {
-    setIsOpen(true);
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    onOpenChange?.(open);
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const tallyUrl = useMemo(
+    () =>
+      `https://tally.so/embed/${formId}?transparentBackground=1&hideTitle=1&hideFooter=1&alignLeft=1`,
+    [formId]
+  );
 
-  const colors = {
-    modalBg: isDarkMode ? "#121212" : "#FFFFFF",
-    modalBorder: isDarkMode ? "#262626" : "#E0E0E0",
-    textColor: isDarkMode ? "#FFFFFF" : "#000000",
-    buttonPrimaryBg: isDarkMode ? "#FFFFFF" : "#121212",
-    buttonPrimaryText: isDarkMode ? "#121212" : "#FFFFFF",
-    buttonSecondaryBg: isDarkMode ? "#171717" : "#FFFFFF",
-    buttonSecondaryText: isDarkMode ? "#FFFFFF" : "#121212",
-    buttonSecondaryBorder: isDarkMode ? "#262626" : "#DBDBDB",
-  };
-
-  const getAnimationStyle = (isEntering: boolean) => {
-    const animation = isEntering ? enterAnimation : exitAnimation;
-    
-    if (animation === "scaleFadeIn" || animation === "scaleFadeOut") {
-      return {
-        transform: isEntering ? "scale(1)" : "scale(0.95)",
-        transition: "transform 300ms ease, opacity 300ms ease",
-      };
-    } else {
-      return {
-        transform: isEntering ? "translateY(0)" : "translateY(20px)",
-        transition: "transform 300ms ease, opacity 300ms ease",
-      };
-    }
-  };
-
-  const buttonStyles = {
-    fontFamily: "Manrope, sans-serif",
-    fontWeight: 700,
-    fontSize: "15px",
-    lineHeight: 1.5,
-    padding: "12px 24px",
-    borderRadius: "10px",
-    border: "1px solid",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    backgroundColor: buttonVariant === "primary" ? colors.buttonPrimaryBg : colors.buttonSecondaryBg,
-    color: buttonVariant === "primary" ? colors.buttonPrimaryText : colors.buttonSecondaryText,
-    borderColor: buttonVariant === "primary" ? colors.buttonPrimaryBg : colors.buttonSecondaryBorder,
-  };
-
-  const closeButtonStyles = {
-    position: "absolute" as const,
-    top: "16px",
-    right: "16px",
-    background: "transparent",
-    border: "none",
-    fontSize: "24px",
-    cursor: "pointer",
-    color: colors.textColor,
-    padding: "4px 8px",
-    lineHeight: 1,
-  };
+  const triggerClassName = unstyled
+    ? className
+    : cn(
+        buttonVariants({
+          variant: buttonVariant === "primary" ? "default" : "secondary",
+          size: "lg",
+        }),
+        "transition-opacity hover:opacity-90",
+        className
+      );
 
   return (
-    <>
-      <button
-        ref={triggerButtonRef}
-        onClick={handleOpen}
-        aria-haspopup="dialog"
-        aria-expanded={isOpen}
-        className={`tally-modal-button ${className}`}
-        style={buttonStyles}
-      >
-        {buttonText}
-      </button>
-
-      {isOpen && (
-        <div
-          onClick={handleClose}
-          role="presentation"
-          aria-hidden="true"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: `rgba(0, 0, 0, ${overlayDim})`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-            padding: isSmallScreen ? "16px" : "24px",
-            opacity: isOpen ? 1 : 0,
-            transition: "opacity 200ms ease",
-          }}
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          className={cn(
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            unstyled ? "bg-transparent p-0" : "inline-flex items-center gap-2 font-medium",
+            triggerClassName
+          )}
         >
-          <div
-            ref={modalRef}
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            aria-describedby="modal-description"
-            style={{
-              width: "100%",
-              maxWidth: modalWidth,
-              maxHeight: "90vh",
-              display: "flex",
-              flexDirection: "column",
-              borderRadius: "16px",
-              position: "relative",
-              backgroundColor: colors.modalBg,
-              border: `1.5px solid ${colors.modalBorder}`,
-              padding: isSmallScreen ? "20px" : "32px",
-              boxShadow: isDarkMode
-                ? "0 20px 60px rgba(0, 0, 0, 0.5)"
-                : "0 20px 60px rgba(0, 0, 0, 0.15)",
-              ...getAnimationStyle(true),
-            }}
+          {buttonText}
+        </button>
+      </DialogTrigger>
+
+      <DialogContent
+        className={cn(
+          "w-[95vw] max-w-[420px] sm:max-w-2xl lg:max-w-3xl mx-auto max-h-[94vh] sm:max-h-[90vh] overflow-hidden border border-border bg-card shadow-[0_18px_40px_rgba(0,0,0,0.35)] dark:shadow-[0_22px_54px_rgba(0,0,0,0.65)]",
+          "grid grid-rows-[auto_1fr] rounded-[18px] p-0"
+        )}
+        aria-labelledby="tally-modal-title"
+        aria-describedby="tally-modal-description"
+      >
+        <DialogHeader className="px-6 py-5 sm:py-6 pr-20 border-b border-border">
+          <DialogTitle
+            id="tally-modal-title"
+            className="text-[1.35rem] sm:text-[1.65rem] font-semibold text-foreground"
           >
-            <div
-              id="modal-title"
-              style={{
-                position: "absolute",
-                width: 1,
-                height: 1,
-                padding: 0,
-                margin: -1,
-                overflow: "hidden",
-                clip: "rect(0, 0, 0, 0)",
-                whiteSpace: "nowrap",
-                border: 0,
-              }}
-            >
-              {buttonText} Form
-            </div>
-            <div
-              id="modal-description"
-              style={{
-                position: "absolute",
-                width: 1,
-                height: 1,
-                padding: 0,
-                margin: -1,
-                overflow: "hidden",
-                clip: "rect(0, 0, 0, 0)",
-                whiteSpace: "nowrap",
-                border: 0,
-              }}
-            >
-              Fill out the form below
-            </div>
+            Contact Strength Over Struggle
+          </DialogTitle>
+          <DialogDescription
+            id="tally-modal-description"
+            className="text-sm text-muted-foreground"
+          >
+            Share your information below and our team will reach out shortly.
+          </DialogDescription>
+        </DialogHeader>
 
-            <button
-              ref={closeButtonRef}
-              onClick={handleClose}
-              aria-label="Close modal"
-              style={closeButtonStyles}
-            >
-              ×
-            </button>
+        <div className="relative h-full bg-background">
+          {!iframeLoaded && (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-sm text-muted-foreground">
+              <Loader2 className="h-6 w-6 animate-spin" aria-hidden="true" />
+              <span>Loading contact form…</span>
+            </div>
+          )}
 
-            {scriptLoaded && (
-              <iframe
-                data-tally-src={`https://tally.so/r/${formId}?transparentBackground=1`}
-                width="100%"
-                height={isSmallScreen ? "70vh" : "min(80vh, 640px)"}
-                frameBorder="0"
-                marginHeight={0}
-                marginWidth={0}
-                title={`${buttonText} Form`}
-                style={{
-                  border: "none",
-                  flex: "1 1 auto",
-                }}
-              />
-            )}
-          </div>
+          {isOpen && (
+            <iframe
+              key={tallyUrl}
+              src={tallyUrl}
+              data-tally-src={tallyUrl}
+              className={cn(
+                "h-full w-full border-0 transition-opacity duration-300",
+                !iframeLoaded && "opacity-0"
+              )}
+              style={{
+                minHeight: "70vh",
+                background: "transparent",
+              }}
+              title={`${buttonText} Form`}
+              loading="lazy"
+              allow="fullscreen; encrypted-media"
+              onLoad={() => setIframeLoaded(true)}
+            />
+          )}
+
+          <DialogClose
+            type="button"
+            className="absolute right-4 top-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-sm transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Close contact form"
+          >
+            <X className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Close</span>
+          </DialogClose>
         </div>
-      )}
-    </>
+      </DialogContent>
+    </Dialog>
   );
 }
