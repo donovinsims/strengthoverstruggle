@@ -16,7 +16,7 @@ const Shop = () => {
       <Header />
 
       {/* Main Content */}
-      <main className="py-24 md:py-28 px-6">
+      <main id="main-content" className="py-24 md:py-28 px-6">
         <div className="container mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-16 animate-fade-in">
@@ -33,9 +33,13 @@ const Shop = () => {
             <Card className="bg-card max-w-lg w-full hover-scale">
               <CardContent className="p-6">
                 <div className="aspect-[4/3] mb-4 bg-muted rounded-lg overflow-hidden">
-                  <img 
-                    src={wristbandImage} 
+                  <img
+                    src={wristbandImage}
                     alt="SOS Wristband - White silicone wristband with 'I GET TO' text"
+                    width={1200}
+                    height={900}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
