@@ -133,7 +133,7 @@ export default function TallyModal({
         )}
         aria-label="Contact form"
       >
-        <div className="relative h-full bg-background flex-1 p-4 sm:p-6">
+        <div className="relative h-full bg-background flex-1 p-2 sm:p-3">
           {!iframeLoaded && (
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 px-6">
               <Loader2 className="h-7 w-7 animate-spin text-primary" aria-hidden="true" />
