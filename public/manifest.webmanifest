@@ -1,0 +1,16 @@
+{
+  "name": "Strength Over Struggle",
+  "short_name": "SOS",
+  "description": "Strength Over Struggle empowers communities through mental, physical, and financial wellness programs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

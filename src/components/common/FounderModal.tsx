@@ -63,9 +63,13 @@ export const FounderModal = ({ isOpen, onClose, founder }: FounderModalProps) =>
           <div className="space-y-6 sm:space-y-8 pb-4">
             {/* Avatar Section - Centered, Responsive Size */}
             <div className="flex flex-col items-center text-center space-y-4 sm:space-y-4 pt-0 sm:pt-0">
-              <img 
-                src={founder.image} 
+              <img
+                src={founder.image}
                 alt={founder.name}
+                width={160}
+                height={160}
+                loading="lazy"
+                decoding="async"
                 className="w-[110px] h-[110px] sm:w-40 sm:h-40 rounded-full object-cover border-4 border-background shadow-lg"
               />
               

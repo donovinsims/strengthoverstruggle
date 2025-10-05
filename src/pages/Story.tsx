@@ -16,7 +16,7 @@ const Story = () => {
       <Header showDonateButton={false} />
 
       {/* Main content */}
-      <main className="py-24 md:py-28 px-6">
+      <main id="main-content" className="py-24 md:py-28 px-6">
         <div className="container mx-auto max-w-4xl animate-fade-in">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
