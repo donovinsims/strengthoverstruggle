@@ -22,17 +22,17 @@ export function useExitIntent(): UseExitIntentReturn {
     if (hasShown) return;
 
     // Desktop: Mouse leave detection
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= exitIntent.desktopMouseLeaveY && !hasShown) {
+    const handleMouseLeave = (event: MouseEvent) => {
+      if (event.clientY <= exitIntent.desktopMouseLeaveY && !hasShown) {
         setIsOpen(true);
         setHasShown(true);
       }
     };
 
     // Mobile: Scroll and time-based triggers
-    let scrollTimeout: NodeJS.Timeout;
-    let timeTimeout: NodeJS.Timeout;
-    let lastScrollY = 0;
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+    let timeTimeout: ReturnType<typeof setTimeout> | null = null;
+    let lastScrollY = window.scrollY;
 
     const handleMobileExitIntent = () => {
       if (!hasShown && isMobile) {
@@ -46,7 +46,8 @@ export function useExitIntent(): UseExitIntentReturn {
 
       const currentScrollY = window.scrollY;
       const scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const rawDocumentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const documentHeight = Math.max(rawDocumentHeight, 1);
       const scrollPercent = (currentScrollY / documentHeight) * 100;
 
       // Trigger if user scrolls up rapidly after being threshold% down the page
@@ -55,7 +56,9 @@ export function useExitIntent(): UseExitIntentReturn {
         scrollPercent > exitIntent.mobileScrollThreshold &&
         currentScrollY < lastScrollY - 50
       ) {
-        clearTimeout(scrollTimeout);
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
         scrollTimeout = setTimeout(handleMobileExitIntent, 500);
       }
 
@@ -79,8 +82,12 @@ export function useExitIntent(): UseExitIntentReturn {
     return () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
-      clearTimeout(timeTimeout);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      if (timeTimeout) {
+        clearTimeout(timeTimeout);
+      }
     };
   }, [hasShown, isMobile, exitIntent]);
 
