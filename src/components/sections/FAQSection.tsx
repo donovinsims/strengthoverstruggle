@@ -83,7 +83,7 @@ export const FAQSection = () => {
                   )}
                 >
                   <div className="px-6 pb-5 pt-0">
-                    <div className="pl-14">
+                    <div className="pl-4 md:pl-6">
                       <p className="font-inter font-medium text-[15px] md:text-[16px] leading-[1.6] text-[hsl(var(--text-secondary))]">
                         {faq.answer}
                       </p>

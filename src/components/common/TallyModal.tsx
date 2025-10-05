@@ -124,27 +124,11 @@ export default function TallyModal({
       <DialogContent
         className={cn(
           "w-[95vw] max-w-[420px] sm:max-w-2xl lg:max-w-3xl mx-auto max-h-[94vh] sm:max-h-[90vh] overflow-hidden border border-border bg-card shadow-[0_18px_40px_rgba(0,0,0,0.35)] dark:shadow-[0_22px_54px_rgba(0,0,0,0.65)]",
-          "grid grid-rows-[auto_1fr] rounded-[18px] p-0"
+          "flex flex-col rounded-[18px] p-0"
         )}
-        aria-labelledby="tally-modal-title"
-        aria-describedby="tally-modal-description"
+        aria-label="Contact form"
       >
-        <DialogHeader className="px-6 py-5 sm:py-6 pr-20 border-b border-border">
-          <DialogTitle
-            id="tally-modal-title"
-            className="text-[1.35rem] sm:text-[1.65rem] font-semibold text-foreground"
-          >
-            Contact Strength Over Struggle
-          </DialogTitle>
-          <DialogDescription
-            id="tally-modal-description"
-            className="text-sm text-muted-foreground"
-          >
-            Share your information below and our team will reach out shortly.
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="relative h-full bg-background">
+        <div className="relative h-full bg-background flex-1">
           {!iframeLoaded && (
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-sm text-muted-foreground">
               <Loader2 className="h-6 w-6 animate-spin" aria-hidden="true" />
