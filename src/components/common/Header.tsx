@@ -54,11 +54,12 @@ export const Header = ({
             >
               Shop
             </Link>
-            <TallyModal 
+            <TallyModal
               formId="n9bWWE"
               buttonText="Contact"
               buttonVariant="secondary"
-              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 !bg-transparent !border-0 !p-0"
+              className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+              unstyled
             />
             <ThemeToggle />
             {showDonateButton && (
@@ -99,14 +100,18 @@ export const Header = ({
               >
                 Shop
               </Link>
-              <div onClick={() => setIsMenuOpen(false)}>
-                <TallyModal 
-                  formId="n9bWWE"
-                  buttonText="Contact"
-                  buttonVariant="secondary"
-                  className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 !bg-transparent !border-0 !p-0 w-full"
-                />
-              </div>
+              <TallyModal
+                formId="n9bWWE"
+                buttonText="Contact"
+                buttonVariant="secondary"
+                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 w-full"
+                unstyled
+                onOpenChange={(open) => {
+                  if (!open) {
+                    setIsMenuOpen(false);
+                  }
+                }}
+              />
               <div className="flex items-center justify-between">
                 <span className="text-secondary-foreground">Theme</span>
                 <ThemeToggle />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface UseModalStateReturn<T> {
   selectedItem: T | null;
@@ -14,8 +14,13 @@ interface UseModalStateReturn<T> {
 export function useModalState<T>(): UseModalStateReturn<T> {
   const [selectedItem, setSelectedItem] = useState<T | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const cleanupTimeoutRef = useRef<number | null>(null);
 
   const openModal = (item: T) => {
+    if (cleanupTimeoutRef.current) {
+      window.clearTimeout(cleanupTimeoutRef.current);
+      cleanupTimeoutRef.current = null;
+    }
     setSelectedItem(item);
     setIsOpen(true);
   };
@@ -23,8 +28,19 @@ export function useModalState<T>(): UseModalStateReturn<T> {
   const closeModal = () => {
     setIsOpen(false);
     // Delay clearing the item to allow exit animation
-    setTimeout(() => setSelectedItem(null), 300);
+    cleanupTimeoutRef.current = window.setTimeout(() => {
+      setSelectedItem(null);
+      cleanupTimeoutRef.current = null;
+    }, 300);
   };
+
+  useEffect(() => {
+    return () => {
+      if (cleanupTimeoutRef.current) {
+        window.clearTimeout(cleanupTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     selectedItem,
