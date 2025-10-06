@@ -11,7 +11,7 @@ interface UseExitIntentReturn {
  * Custom hook for exit intent detection
  * Handles both desktop (mouse leave) and mobile (scroll/time) triggers
  */
-export function useExitIntent(enabled = true): UseExitIntentReturn {
+export function useExitIntent(): UseExitIntentReturn {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const isMobile = useIsMobile();
@@ -19,14 +19,7 @@ export function useExitIntent(enabled = true): UseExitIntentReturn {
   const { exitIntent } = APP_CONFIG.ui;
 
   useEffect(() => {
-    if (!enabled) {
-      setIsOpen(false);
-      setHasShown(false);
-    }
-  }, [enabled]);
-
-  useEffect(() => {
-    if (hasShown || !enabled) return;
+    if (hasShown) return;
 
     // Desktop: Mouse leave detection
     const handleMouseLeave = (e: MouseEvent) => {
@@ -84,7 +77,7 @@ export function useExitIntent(enabled = true): UseExitIntentReturn {
       clearTimeout(scrollTimeout);
       clearTimeout(timeTimeout);
     };
-  }, [enabled, hasShown, isMobile, exitIntent]);
+  }, [hasShown, isMobile, exitIntent]);
 
   return { isOpen, setIsOpen };
 }

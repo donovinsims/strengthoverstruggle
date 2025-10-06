@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { hasDonationUrl, openDonationLink } from "@/lib/donations";
 
 const Story = () => {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const donationAvailable = hasDonationUrl();
 
   return (
     <div className="min-h-screen bg-background">
@@ -76,19 +73,13 @@ const Story = () => {
               <div className="text-center space-y-6">
                 <h3 className="text-3xl md:text-4xl font-bold text-primary">One-Time Donation</h3>
                 <p className="text-base md:text-lg text-muted-foreground">Custom amount for immediate impact</p>
-                {donationAvailable ? (
-                  <Button
-                    size="lg"
-                    className="rounded-[10px] w-full md:w-auto md:px-12 text-base md:text-lg"
-                    onClick={() => openDonationLink()}
-                  >
-                    Donate Now
-                  </Button>
-                ) : (
-                  <p className="text-base text-muted-foreground">
-                    Donation link coming soon. Check back after configuring your remix.
-                  </p>
-                )}
+                <Button
+                  size="lg"
+                  className="rounded-[10px] w-full md:w-auto md:px-12 text-base md:text-lg" 
+                  onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
+                >
+                  Donate Now
+                </Button>
               </div>
             </Card>
             

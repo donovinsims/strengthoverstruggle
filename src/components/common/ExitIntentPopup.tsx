@@ -2,21 +2,14 @@ import { Modal, ModalContent, ModalHeader, ModalTitle, ModalDescription } from "
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useExitIntent } from "@/hooks/useExitIntent";
-import { getDonationUrl, openDonationLink } from "@/lib/donations";
+import { APP_CONFIG } from "@/config/app.config";
 
 export const ExitIntentPopup = () => {
-  const donationUrl = getDonationUrl();
-  const donationAvailable = Boolean(donationUrl);
-  const { isOpen, setIsOpen } = useExitIntent(donationAvailable);
-
-  if (!donationAvailable) {
-    return null;
-  }
+  const { isOpen, setIsOpen } = useExitIntent();
 
   const handleDonate = () => {
-    if (openDonationLink()) {
-      setIsOpen(false);
-    }
+    window.open(APP_CONFIG.externalUrls.donationStripe, '_blank', 'noopener,noreferrer');
+    setIsOpen(false);
   };
 
   return (

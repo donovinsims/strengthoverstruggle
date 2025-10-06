@@ -1,5 +1,3 @@
-import { ENV } from "./env";
-
 /**
  * Application Configuration
  * Centralized configuration for routes, external URLs, and app constants
@@ -10,8 +8,7 @@ export const APP_CONFIG = {
   app: {
     name: "Strength Over Struggle",
     tagline: "Empowering Resilience. Overcoming Adversity.",
-    description:
-      "Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.",
+    description: "Building stronger communities through mental, physical, and financial wellness programs that transform challenges into opportunities.",
   },
 
   // Routes
@@ -24,17 +21,8 @@ export const APP_CONFIG = {
 
   // External URLs
   externalUrls: {
-    donationStripe: ENV.donationUrl,
+    donationStripe: "https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00",
     instagramMain: "https://www.instagram.com/strengthoverstruggle",
-  },
-
-  // Analytics configuration
-  analytics: {
-    datafast: {
-      websiteId: ENV.datafastWebsiteId,
-      domain: ENV.datafastDomain ?? "strength-over-struggle.com",
-      scriptSrc: "https://datafa.st/js/script.js",
-    },
   },
 
   // Contact Info
