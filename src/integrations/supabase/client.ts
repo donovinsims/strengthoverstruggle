@@ -6,15 +6,17 @@ import type { Database } from './types';
 const supabaseUrl = ENV.supabase.url;
 const supabaseKey = ENV.supabase.publishableKey;
 
+const missingEnvVars: string[] = [];
 if (!supabaseUrl) {
-  throw new Error(
-    'Missing Supabase configuration: VITE_SUPABASE_URL is not defined.'
-  );
+  missingEnvVars.push('VITE_SUPABASE_URL');
+}
+if (!supabaseKey) {
+  missingEnvVars.push('VITE_SUPABASE_PUBLISHABLE_KEY');
 }
 
-if (!supabaseKey) {
+if (missingEnvVars.length > 0) {
   throw new Error(
-    'Missing Supabase configuration: VITE_SUPABASE_PUBLISHABLE_KEY is not defined.'
+    `Missing Supabase configuration: ${missingEnvVars.join(', ')} ${missingEnvVars.length > 1 ? 'are' : 'is'} not defined.`
   );
 }
 
