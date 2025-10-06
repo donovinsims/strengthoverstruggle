@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SkipNavLink } from "@/components/common/SkipNavLink";
+import { DataFastAnalytics } from "@/components/common/DataFastAnalytics";
 import Index from "./pages/Index";
 
 const Shop = lazy(() => import("./pages/Shop"));
@@ -22,6 +23,7 @@ const RouteFallback = () => (
 
 const App = () => (
   <TooltipProvider>
+    <DataFastAnalytics />
     <Toaster />
     <Sonner />
     <BrowserRouter>

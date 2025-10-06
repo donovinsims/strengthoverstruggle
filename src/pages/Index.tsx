@@ -10,6 +10,7 @@ import { testimonials, Testimonial } from "@/data/testimonials";
 import { founders, Founder } from "@/data/founders";
 import { programs } from "@/data/programs";
 import { APP_CONFIG } from "@/config/app.config";
+import { hasDonationUrl, openDonationLink } from "@/lib/donations";
 
 const TestimonialModal = lazy(async () => ({
   default: (await import("@/components/common/TestimonialModal")).TestimonialModal
@@ -27,6 +28,7 @@ const Index = () => {
   const testimonialModal = useModalState<Testimonial>();
   const founderModal = useModalState<Founder>();
   const [shouldRenderExitIntent, setShouldRenderExitIntent] = useState(false);
+  const donationAvailable = hasDonationUrl();
 
   // Smooth scroll function with offset for sticky header
   const scrollToSection = (sectionId: string) => {
@@ -41,6 +43,11 @@ const Index = () => {
   };
 
   useEffect(() => {
+    if (!donationAvailable) {
+      setShouldRenderExitIntent(false);
+      return;
+    }
+
     if (shouldRenderExitIntent) return;
 
     const win = window as typeof window & {
@@ -61,7 +68,7 @@ const Index = () => {
       }
       window.clearTimeout(timeoutHandle);
     };
-  }, [shouldRenderExitIntent]);
+  }, [donationAvailable, shouldRenderExitIntent]);
 
   return (
     <div className="min-h-screen">
@@ -83,12 +90,14 @@ const Index = () => {
               into opportunities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="px-8 py-6 text-lg font-semibold"
-                onClick={() => window.open(APP_CONFIG.externalUrls.donationStripe, '_blank', 'noopener,noreferrer')}
-              >
-                Donate Now
-              </Button>
+              {donationAvailable && (
+                <Button
+                  className="px-8 py-6 text-lg font-semibold"
+                  onClick={() => openDonationLink()}
+                >
+                  Donate Now
+                </Button>
+              )}
               <Button
                 variant="secondary"
                 className="px-8 py-6 text-lg"
@@ -297,16 +306,24 @@ const Index = () => {
                   <p className="font-inter font-normal text-[18px] leading-[1.5] text-[#545454] dark:text-[#888888] mb-6">
                     Custom amount for immediate impact
                   </p>
-                  <Button
-                    size="lg"
-                    className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold mb-3"
-                    onClick={() => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')}
-                  >
-                    Donate Now
-                  </Button>
-                  <p className="font-inter font-normal text-[13px] leading-[1.5] text-[#888888] dark:text-[#666666]">
-                    Secure checkout powered by Stripe
-                  </p>
+                  {donationAvailable ? (
+                    <>
+                      <Button
+                        size="lg"
+                        className="w-[200px] h-[52px] rounded-[16px] text-[16px] font-semibold mb-3"
+                        onClick={() => openDonationLink()}
+                      >
+                        Donate Now
+                      </Button>
+                      <p className="font-inter font-normal text-[13px] leading-[1.5] text-[#888888] dark:text-[#666666]">
+                        Secure checkout powered by Stripe
+                      </p>
+                    </>
+                  ) : (
+                    <p className="font-inter font-normal text-[15px] leading-[1.5] text-[#666666] dark:text-[#888888] text-center">
+                      Donation link coming soon. Update your environment configuration after remixing to enable online gifts.
+                    </p>
+                  )}
                 </div>
               </Card>
             </div>
@@ -344,7 +361,7 @@ const Index = () => {
       </Suspense>
 
       {/* Exit Intent Popup */}
-      {shouldRenderExitIntent && (
+      {shouldRenderExitIntent && donationAvailable && (
         <Suspense fallback={null}>
           <ExitIntentPopup />
         </Suspense>
