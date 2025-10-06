@@ -64,6 +64,16 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/aed96f9b-485c-4ea5-b6f9-5fc2e8ef1dd5) and click on Share -> Publish.
 
+## Environment configuration
+
+This project ships without any third-party credentials, so it can be remixed safely. If you want to restore optional services, set the following environment variables in a local `.env` file (Lovable keeps it outside of source control):
+
+- `VITE_DONATION_URL` – Stripe (or other) donation checkout URL. When omitted, donation buttons are hidden or replaced with placeholder messaging.
+- `VITE_DATAFAST_WEBSITE_ID` – DataFast analytics site identifier. Analytics are disabled unless this is provided.
+- `VITE_DATAFAST_DOMAIN` – Optional domain hint for DataFast analytics. Defaults to `strength-over-struggle.com` when not set.
+
+All of these values are optional; leave them blank to keep the project free of secrets.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
