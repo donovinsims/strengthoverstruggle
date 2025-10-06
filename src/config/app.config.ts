@@ -48,8 +48,8 @@ export const APP_CONFIG = {
       slow: 500,
     },
     exitIntent: {
-      mobileScrollThreshold: 50, // % of page scroll before trigger
-      mobileTimeThreshold: 30000, // 30 seconds
+      mobileScrollThreshold: 75, // % of page scroll before trigger
+      mobileTimeThreshold: 90000, // 90 seconds
       desktopMouseLeaveY: 5, // pixels from top
     },
   },

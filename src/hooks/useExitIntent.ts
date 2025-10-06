@@ -53,15 +53,10 @@ export function useExitIntent(): UseExitIntentReturn {
       if (
         scrollDirection === "up" &&
         scrollPercent > exitIntent.mobileScrollThreshold &&
-        currentScrollY < lastScrollY - 50
+        currentScrollY < lastScrollY - 100
       ) {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(handleMobileExitIntent, 500);
-      }
-
-      // Trigger when user reaches bottom 20% of page
-      if (scrollPercent >= 80) {
-        handleMobileExitIntent();
+        scrollTimeout = setTimeout(handleMobileExitIntent, 800);
       }
 
       lastScrollY = currentScrollY;
