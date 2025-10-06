@@ -4,18 +4,21 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import TallyPopupButton from "./TallyPopupButton";
+import { hasDonationUrl, openDonationLink } from "@/lib/donations";
 
 interface HeaderProps {
   showDonateButton?: boolean;
   onDonateClick?: () => void;
 }
 
-export const Header = ({ 
-  showDonateButton = true, 
-  onDonateClick = () => window.open('https://buy.stripe.com/dRm8wPdPX6lW48F0Esfbq00', '_blank', 'noopener,noreferrer')
-}: HeaderProps) => {
+export const Header = ({ showDonateButton = true, onDonateClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const donationAvailable = hasDonationUrl();
+  const shouldShowDonate = showDonateButton && donationAvailable;
+  const handleDonate = onDonateClick ?? (() => {
+    openDonationLink();
+  });
 
   // Track scroll position
   useEffect(() => {
@@ -62,9 +65,9 @@ export const Header = ({
               unstyled
             />
             <ThemeToggle />
-            {showDonateButton && (
-              <Button 
-                onClick={onDonateClick}
+            {shouldShowDonate && (
+              <Button
+                onClick={handleDonate}
                 className="rounded-md px-6"
               >
                 Donate Now
@@ -111,10 +114,10 @@ export const Header = ({
                 <span className="text-secondary-foreground">Theme</span>
                 <ThemeToggle />
               </div>
-              {showDonateButton && (
-                <Button 
+              {shouldShowDonate && (
+                <Button
                   onClick={() => {
-                    onDonateClick();
+                    handleDonate();
                     setIsMenuOpen(false);
                   }}
                   className="rounded-md px-6 w-full"
