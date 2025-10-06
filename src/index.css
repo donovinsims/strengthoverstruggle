@@ -313,6 +313,35 @@
   to { opacity: 0; transform: scale(0.96) translateY(-8px); }
 }
 
+/* Tally Popup Modal - Match Founder Cards/Modals */
+.tally-popup {
+  /* Background - matches founder cards/modals */
+  background: hsl(var(--card)) !important;
+  
+  /* Border - 1.5px solid matching card-border token */
+  border: 1.5px solid hsl(var(--card-border)) !important;
+  
+  /* Radius - 16px for modals (larger than cards' 12px) */
+  border-radius: 16px !important;
+  
+  /* Shadow - Large elevation for modal hierarchy */
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.18) !important;
+  
+  /* Padding - Consistent spacing */
+  padding: 24px !important;
+}
+
+/* Dark mode shadow adjustment */
+.dark .tally-popup {
+  box-shadow: 0px 8px 32px rgba(0,0,0,0.4) !important;
+}
+
+/* Backdrop blur for depth */
+.tally-popup-overlay {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
 /* Accessibility: Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
