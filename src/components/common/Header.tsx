@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
-import TallyPopupButton from "./TallyPopupButton";
+import { ContactFormModal } from "./ContactFormModal";
 
 interface HeaderProps {
   showDonateButton?: boolean;
@@ -16,6 +16,7 @@ export const Header = ({
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   // Track scroll position
   useEffect(() => {
@@ -54,13 +55,12 @@ export const Header = ({
             >
               Shop
             </Link>
-            <TallyPopupButton
-              formId="n9bWWE"
-              buttonText="Contact"
-              buttonVariant="secondary"
+            <button
+              onClick={() => setIsContactOpen(true)}
               className="text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
-              unstyled
-            />
+            >
+              Contact
+            </button>
             <ThemeToggle />
             {showDonateButton && (
               <Button 
@@ -100,13 +100,15 @@ export const Header = ({
               >
                 Shop
               </Link>
-              <TallyPopupButton
-                formId="n9bWWE"
-                buttonText="Contact"
-                buttonVariant="secondary"
-                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90 w-full"
-                unstyled
-              />
+              <button
+                onClick={() => {
+                  setIsContactOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="text-left text-secondary-foreground hover:text-primary transition-opacity hover:opacity-90"
+              >
+                Contact
+              </button>
               <div className="flex items-center justify-between">
                 <span className="text-secondary-foreground">Theme</span>
                 <ThemeToggle />
@@ -126,6 +128,11 @@ export const Header = ({
           </div>
         )}
       </nav>
+      
+      <ContactFormModal 
+        isOpen={isContactOpen} 
+        onClose={() => setIsContactOpen(false)} 
+      />
     </header>
   );
 };
