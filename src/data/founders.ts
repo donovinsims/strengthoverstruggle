@@ -47,7 +47,7 @@ export const founders: Founder[] = [
     role: "Board Member",
     bio: "Former Division I Athlete, Digital Product Manager, and Mental Health Advocate.",
     fullBio: "Former Division I Athlete, Digital Product Manager, and Mental Health Advocate. From a baseball scholarship at Northern Illinois University to leading large-scale projects at Uber and Walgreens, Donovin's career spans operations, digital innovation, and leadership.\n\nGrowing up in a single-parent household and moving from Rockford, IL to Rockton, IL in middle school, Donovin witnessed firsthand how access to resources and quality relationships can shape a young person's trajectory. This experience taught him that positive environments and strong support systems are critical factors in determining success.\n\nThrough athletics, Donovin developed a deep appreciation for resilience and the transformative power of structured discipline. As a board member of Strength Over Struggle, he assists with organizational growth and community awareness while ensuring the nonprofit maximizes its impact and reaches every young person who needs support.",
-    instagram: "",
+    instagram: "https://www.instagram.com/itsdonovin",
     image: donovinFounderImage,
   },
 ];
