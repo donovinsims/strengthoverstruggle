@@ -6,10 +6,9 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Simple in-memory rate limiting (resets on function restart)
-const submissionTracker = new Map<string, { count: number; resetTime: number }>();
+// Rate limiting configuration
 const RATE_LIMIT = 5; // Max submissions per hour
-const RATE_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+const RATE_WINDOW_MINUTES = 60; // 1 hour in minutes
 
 interface ContactFormData {
   fullName: string;
@@ -24,21 +23,27 @@ function getClientIP(req: Request): string {
          'unknown';
 }
 
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const tracker = submissionTracker.get(ip);
-  
-  if (!tracker || now > tracker.resetTime) {
-    submissionTracker.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+async function checkRateLimit(ip: string, supabaseClient: any): Promise<boolean> {
+  try {
+    const { data, error } = await supabaseClient.rpc('check_and_increment_rate_limit', {
+      _ip: ip,
+      _endpoint: 'contact-form',
+      _limit: RATE_LIMIT,
+      _window_minutes: RATE_WINDOW_MINUTES
+    });
+
+    if (error) {
+      console.error('Rate limit check error:', error);
+      // Fail open - allow request if rate limit check fails
+      return true;
+    }
+
+    return data?.allowed ?? true;
+  } catch (error) {
+    console.error('Rate limit check exception:', error);
+    // Fail open - allow request if rate limit check fails
     return true;
   }
-  
-  if (tracker.count >= RATE_LIMIT) {
-    return false;
-  }
-  
-  tracker.count++;
-  return true;
 }
 
 function sanitizeInput(input: string): string {
@@ -61,9 +66,16 @@ serve(async (req) => {
   }
 
   try {
-    // Check rate limit
+    // Initialize Supabase client for rate limiting
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Check rate limit with persistent storage
     const clientIP = getClientIP(req);
-    if (!checkRateLimit(clientIP)) {
+    const rateLimitAllowed = await checkRateLimit(clientIP, supabase);
+    
+    if (!rateLimitAllowed) {
       console.log(`Rate limit exceeded for IP: ${clientIP}`);
       return new Response(
         JSON.stringify({ 
@@ -135,10 +147,6 @@ serve(async (req) => {
 
     // Store submission record in Supabase (if contact_submissions table exists)
     try {
-      const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-      const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-      const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
       await supabase.from('contact_submissions').insert({
         full_name: sanitizedData.fullName,
         email: sanitizedData.email,
