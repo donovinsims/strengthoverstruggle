@@ -11,14 +11,12 @@ import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "@/components
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
 import { contactFormSchema, type ContactFormValues, contactReasons } from "@/schemas/contactFormSchema";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactFormModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-const KIT_API_KEY = import.meta.env.VITE_KIT_API_KEY;
-const KIT_FORM_ID = import.meta.env.VITE_KIT_FORM_ID;
 
 export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,38 +36,31 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch(`https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          api_key: KIT_API_KEY,
+      const { data, error } = await supabase.functions.invoke('submit-contact-form', {
+        body: {
+          fullName: values.fullName,
           email: values.email,
-          first_name: values.fullName,
-          fields: {
-            reason: values.reason,
-            message: values.message || ""
-          }
-        })
+          reason: values.reason,
+          message: values.message || ""
+        }
       });
 
-      if (response.ok) {
-        toast.success("Message sent successfully!", {
-          description: "We'll get back to you within 24-48 hours."
-        });
-        form.reset();
-        setCharCount(0);
-        
-        // Auto-close modal after 1.5s to give user time to read confirmation
-        setTimeout(() => {
-          onClose();
-        }, 1500);
-      } else {
-        throw new Error("Failed to subscribe");
+      if (error) {
+        throw error;
       }
+
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you within 24-48 hours."
+      });
+      form.reset();
+      setCharCount(0);
+      
+      // Auto-close modal after 1.5s to give user time to read confirmation
+      setTimeout(() => {
+        onClose();
+      }, 1500);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Form submission failed");
       toast.error("Failed to send message", {
         description: "Please try again or email us directly at contact@strengthoverstruggle.org"
       });
